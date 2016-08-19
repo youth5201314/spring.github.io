@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android文件和base64互转 | Spring&#39;s Blog</title>
+  <title>Glide使用详解（个人整理） | Spring&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="王兴春">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android文件和base64互转">
-<meta property="og:url" content="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/index.html">
+<meta property="og:title" content="Glide使用详解（个人整理）">
+<meta property="og:url" content="https://youth5201314.github.io/2016/05/19/Glide使用详解（个人整理）/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
-<meta property="og:updated_time" content="2016-08-18T07:51:05.685Z">
+<meta property="og:updated_time" content="2016-08-19T08:04:26.528Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android文件和base64互转">
+<meta name="twitter:title" content="Glide使用详解（个人整理）">
 <meta name="twitter:description" content="王兴春">
   
     <link rel="alternate" href="/atom.xml" title="Spring&#39;s Blog" type="application/atom+xml">
@@ -73,17 +73,17 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Android文件和base64互转" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Glide使用详解（个人整理）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/08/18/Android文件和base64互转/" class="article-date">
-  <time datetime="2016-08-18T07:42:13.000Z" itemprop="datePublished">2016-08-18</time>
+<a href="/2016/05/19/Glide使用详解（个人整理）/" class="article-date">
+  <time datetime="2016-05-19T02:30:19.000Z" itemprop="datePublished">2016-05-19</time>
 </a>
 
 
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
+    <a class="article-category-link" href="/categories/第三方框架使用/">第三方框架使用</a>
   </div>
 
   </div>
@@ -94,7 +94,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Android文件和base64互转
+      Glide使用详解（个人整理）
     </h1>
   
 
@@ -106,11 +106,22 @@
 		<div id="toc" class="toc-article">
 			<h2 class="toc-title"><span>文章目录</span></h2>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Glide简单使用"><span class="toc-number">1.</span> <span class="toc-text">Glide简单使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Glide3-0新特性"><span class="toc-number">2.</span> <span class="toc-text">Glide3.0新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#动态的GIF图片加载"><span class="toc-number">2.1.</span> <span class="toc-text">动态的GIF图片加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地视频快照"><span class="toc-number">2.2.</span> <span class="toc-text">本地视频快照</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对缩略图的支持"><span class="toc-number">2.3.</span> <span class="toc-text">对缩略图的支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生命周期集成"><span class="toc-number">2.4.</span> <span class="toc-text">生命周期集成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转码"><span class="toc-number">2.5.</span> <span class="toc-text">转码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动画：加入了cross-fades和View的属性动画的支持"><span class="toc-number">2.6.</span> <span class="toc-text">动画：加入了cross fades和View的属性动画的支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网络模块可以选择OkHttp或者Volley的支持"><span class="toc-number">2.7.</span> <span class="toc-text">网络模块可以选择OkHttp或者Volley的支持</span></a></li></ol></li></ol>
 		
 		</div>
 		
-        <p>在项目中需要用到文件传输入，有时需要将文件转成base64字串，再将base64字串转成字节流保存在文件了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* 将文件转成base64 字符串</div><div class="line">* <span class="doctag">@param</span> path 文件路径</div><div class="line">* <span class="doctag">@return</span></div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encodeBase64File</span><span class="params">(String path)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	File  file = <span class="keyword">new</span> File(path);</div><div class="line">	FileInputStream inputFile = <span class="keyword">new</span> FileInputStream(file);</div><div class="line">	<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[(<span class="keyword">int</span>)file.length()];</div><div class="line">	inputFile.read(buffer);</div><div class="line">	inputFile.close();</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> BASE64Encoder().encode(buffer);</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">* 将base64字符解码保存文件</div><div class="line">* <span class="doctag">@param</span> base64Code</div><div class="line">* <span class="doctag">@param</span> targetPath</div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decoderBase64File</span><span class="params">(String base64Code,String targetPath)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> BASE64Decoder().decodeBuffer(base64Code);</div><div class="line">	FileOutputStream out = <span class="keyword">new</span> FileOutputStream(targetPath);</div><div class="line">	out.write(buffer);</div><div class="line">	out.close();</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">* 将base64字符保存文本文件</div><div class="line">* <span class="doctag">@param</span> base64Code</div><div class="line">* <span class="doctag">@param</span> targetPath</div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">toFile</span><span class="params">(String base64Code,String targetPath)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	<span class="keyword">byte</span>[] buffer = base64Code.getBytes();</div><div class="line">	FileOutputStream out = <span class="keyword">new</span> FileOutputStream(targetPath);</div><div class="line">	out.write(buffer);</div><div class="line">	out.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+        <h3 id="Glide简单使用"><a href="#Glide简单使用" class="headerlink" title="Glide简单使用"></a>Glide简单使用</h3><h3 id="Glide3-0新特性"><a href="#Glide3-0新特性" class="headerlink" title="Glide3.0新特性"></a>Glide3.0新特性</h3><h4 id="动态的GIF图片加载"><a href="#动态的GIF图片加载" class="headerlink" title="动态的GIF图片加载"></a>动态的GIF图片加载</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Glide.with(context).load(...).asBitmap() <span class="comment">//显示gif静态图片</span></div><div class="line">Glide.with(context).load(...).asGif() <span class="comment">//显示gif动态图片</span></div></pre></td></tr></table></figure>
+<h4 id="本地视频快照"><a href="#本地视频快照" class="headerlink" title="本地视频快照"></a>本地视频快照</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Glide.with(context).load(<span class="string">"视频路径"</span>)</div></pre></td></tr></table></figure>
+<h4 id="对缩略图的支持"><a href="#对缩略图的支持" class="headerlink" title="对缩略图的支持"></a>对缩略图的支持</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//加载yourView1/10尺寸的缩略图，然后加载全图</span></div><div class="line">Glide.with(yourFragment).load(yourUrl).thumbnail(<span class="number">0.1f</span>).into(yourView)</div></pre></td></tr></table></figure>
+<h4 id="生命周期集成"><a href="#生命周期集成" class="headerlink" title="生命周期集成"></a>生命周期集成</h4><p>同时将Activity/Fragment作为with()参数的好处是：图片加载会和Activity/Fragment的生命周期保持一致，</p>
+<ul>
+<li>请求会在onStop的时候自动暂停，</li>
+<li>在onStart的时候重新启动,gif的动画也会在onStop的时候停止，以免在后台消耗电量，<h4 id="转码"><a href="#转码" class="headerlink" title="转码"></a>转码</h4>Glide的.toBytes()和.transcode()方法允许在后台获取、解码和转换一个图片，你可以将一张图片转换成更多有用的图片格式，比如，上传一张250*250的图片</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">    .load(<span class="string">"path"</span>)</div><div class="line">    .asBitmap()</div><div class="line">    .toBytes()</div><div class="line">    .centerCrop()</div><div class="line">    .into(<span class="keyword">new</span> SimpleTarget&lt;<span class="keyword">byte</span>[]&gt;(<span class="number">250</span>, <span class="number">250</span>) &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResourceReady</span><span class="params">(<span class="keyword">byte</span>[] data, GlideAnimation anim)</span> </span>&#123;</div><div class="line">            <span class="comment">// Post your bytes to a background thread and upload them here.</span></div><div class="line">        &#125;</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h4 id="动画：加入了cross-fades和View的属性动画的支持"><a href="#动画：加入了cross-fades和View的属性动画的支持" class="headerlink" title="动画：加入了cross fades和View的属性动画的支持"></a>动画：加入了cross fades和View的属性动画的支持</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(.animate(ViewPropertyAnimation.Animator)),</div></pre></td></tr></table></figure>
+<h4 id="网络模块可以选择OkHttp或者Volley的支持"><a href="#网络模块可以选择OkHttp或者Volley的支持" class="headerlink" title="网络模块可以选择OkHttp或者Volley的支持"></a>网络模块可以选择OkHttp或者Volley的支持</h4><p>Volley和OkHttp可以在gradle文件当中添加依赖，注册相应的ModelLoaderFactory</p>
+<p>### </p>
 
       
     </div>
@@ -121,11 +132,11 @@
 	  <!-- 百度分享 End -->
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Base64/">Base64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/File/">File</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件/">文件</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Glide/">Glide</a></li></ul>
 
 	  
 <span>
-更新日期:<time datetime="2016-08-18T07:51:05.685Z" itemprop="dateModified">2016-08-18</time>
+更新日期:<time datetime="2016-08-19T08:04:26.528Z" itemprop="dateModified">2016-08-19</time>
 </span>
 
 
@@ -135,19 +146,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/08/18/Android Webview和js交互/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/08/09/Glide加载圆形图和圆角图/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Android Webview和js交互
+          Glide加载圆形图和圆角图
         
       </div>
     </a>
   
   
-    <a href="/2016/08/09/Glide加载圆形图和圆角图/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/04/13/Banner开源框架-Android轮播控件/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Glide加载圆形图和圆角图</div>
+      <div class="article-nav-title">Banner开源框架[Android轮播控件]</div>
     </a>
   
 </nav>
@@ -160,7 +171,7 @@
 
 <!-- 多说评论框 start -->
 <section id="comments">
-  <div class="ds-thread"  data-thread-key="/2016/08/18/Android文件和base64互转/" data-title="Android文件和base64互转" data-url="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/" id="ds_thread">
+  <div class="ds-thread"  data-thread-key="/2016/05/19/Glide使用详解（个人整理）/" data-title="Glide使用详解（个人整理）" data-url="https://youth5201314.github.io/2016/05/19/Glide使用详解（个人整理）/" id="ds_thread">
     <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
   </div>
 </section>
@@ -172,7 +183,7 @@
   <div id="toc" class="toc-aside">
   <h2 class="toc-title">文章目录</h2>
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Glide简单使用"><span class="toc-number">1.</span> <span class="toc-text">Glide简单使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Glide3-0新特性"><span class="toc-number">2.</span> <span class="toc-text">Glide3.0新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#动态的GIF图片加载"><span class="toc-number">2.1.</span> <span class="toc-text">动态的GIF图片加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地视频快照"><span class="toc-number">2.2.</span> <span class="toc-text">本地视频快照</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对缩略图的支持"><span class="toc-number">2.3.</span> <span class="toc-text">对缩略图的支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生命周期集成"><span class="toc-number">2.4.</span> <span class="toc-text">生命周期集成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转码"><span class="toc-number">2.5.</span> <span class="toc-text">转码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动画：加入了cross-fades和View的属性动画的支持"><span class="toc-number">2.6.</span> <span class="toc-text">动画：加入了cross fades和View的属性动画的支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网络模块可以选择OkHttp或者Volley的支持"><span class="toc-number">2.7.</span> <span class="toc-text">网络模块可以选择OkHttp或者Volley的支持</span></a></li></ol></li></ol>
     
   </div>
 
