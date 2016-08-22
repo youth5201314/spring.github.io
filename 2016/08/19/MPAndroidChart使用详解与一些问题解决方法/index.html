@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>MPAndroidChart使用详解与一些问题解决方法 | Spring&#39;s Blog</title>
+  <title>MPAndroidChart的一些问题解决方法 | Spring&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="王兴春">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MPAndroidChart使用详解与一些问题解决方法">
+<meta property="og:title" content="MPAndroidChart的一些问题解决方法">
 <meta property="og:url" content="https://youth5201314.github.io/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
-<meta property="og:updated_time" content="2016-08-19T08:04:32.079Z">
+<meta property="og:updated_time" content="2016-08-22T03:11:54.700Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MPAndroidChart使用详解与一些问题解决方法">
+<meta name="twitter:title" content="MPAndroidChart的一些问题解决方法">
 <meta name="twitter:description" content="王兴春">
   
     <link rel="alternate" href="/atom.xml" title="Spring&#39;s Blog" type="application/atom+xml">
@@ -94,7 +94,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      MPAndroidChart使用详解与一些问题解决方法
+      MPAndroidChart的一些问题解决方法
     </h1>
   
 
@@ -106,11 +106,22 @@
 		<div id="toc" class="toc-article">
 			<h2 class="toc-title"><span>文章目录</span></h2>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#折线图高亮坐标线的显示隐藏"><span class="toc-number">1.</span> <span class="toc-text">折线图高亮坐标线的显示隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#X轴坐标线显示不全问题"><span class="toc-number">2.</span> <span class="toc-text">X轴坐标线显示不全问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同一图中，两条折线，根据不同的Y轴坐标画出效果"><span class="toc-number">3.</span> <span class="toc-text">同一图中，两条折线，根据不同的Y轴坐标画出效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制X轴显示格式"><span class="toc-number">4.</span> <span class="toc-text">控制X轴显示格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MarkView的样式自定义"><span class="toc-number">5.</span> <span class="toc-text">MarkView的样式自定义</span></a></li></ol>
 		
 		</div>
 		
-        
+        <p>MPAndroidChart是一款基于Android的开源图表库，MPAndroidChart不仅可以在Android设备上绘制各种统计图表，而且可以对图表进行拖动和缩放操作，应用起来非常灵活。MPAndroidChart同样拥有常用的图表类型：线型图、饼图、柱状图和散点图。</p>
+<blockquote>
+<p><a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="external">https://github.com/PhilJay/MPAndroidChart</a></p>
+</blockquote>
+<p>由于MPAndroidChart网上收到的都是一些常见的方法属性，虽然有api文档，但是找起来也麻烦，为了方便大家我就将我遇到的问题说一下。</p>
+<h3 id="折线图高亮坐标线的显示隐藏"><a href="#折线图高亮坐标线的显示隐藏" class="headerlink" title="折线图高亮坐标线的显示隐藏"></a>折线图高亮坐标线的显示隐藏</h3><p>说实话这个高亮有点丑，当我们想隐藏时肯定会想到[LineChart]应该有方法设置，结果设置方法在[LineDataSet]里；然后我们调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LineDataSet set = <span class="keyword">new</span> LineDataSet(yVals, <span class="string">""</span>);</div><div class="line">set.setHighlightEnabled(<span class="keyword">false</span>)</div></pre></td></tr></table></figure></p>
+<p>结果MarkView和高亮坐标系一起不见了，于是只有另辟捷径将坐标系弄成透明的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LineDataSet set = <span class="keyword">new</span> LineDataSet(yVals, <span class="string">""</span>);</div><div class="line">set.setHighLightColor(Color.TRANSPARENT)</div></pre></td></tr></table></figure></p>
+<h3 id="X轴坐标线显示不全问题"><a href="#X轴坐标线显示不全问题" class="headerlink" title="X轴坐标线显示不全问题"></a>X轴坐标线显示不全问题</h3><p>你在使用中坑的会遇见X轴的数量过多，而屏幕过小又显示不全，而MPAndroidChart直接在最小化默认不显示，怎么办呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">XAxis xl = lineChart.getXAxis();</div><div class="line">xl.setSpaceBetweenLabels(<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
+<h3 id="同一图中，两条折线，根据不同的Y轴坐标画出效果"><a href="#同一图中，两条折线，根据不同的Y轴坐标画出效果" class="headerlink" title="同一图中，两条折线，根据不同的Y轴坐标画出效果"></a>同一图中，两条折线，根据不同的Y轴坐标画出效果</h3><p>两条线，相同的X轴，那么X轴的DATA肯定是相同，不同的Y轴数据，两个LineDataSet。那么关键的一个属性设置来了，它就是让Y轴左右两边显示两级不同的value关键，就是红色框内的setAxisDependency这个方法。默认情况下，两边都显示左边Y轴数据，而方法设置为AxisDependency.RIGHT就把Y轴左右显示不同数据的功能解决了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">LineDataSet left = <span class="keyword">new</span> LineDataSet(yVals1, <span class="string">"左边y轴标注"</span>);</div><div class="line">LineDataSet right = <span class="keyword">new</span> LineDataSet(yVals2, <span class="string">"右边y轴标注"</span>);</div><div class="line">right.setAxisDependency(AxisDependency.RIGHT);</div><div class="line">LineData data = <span class="keyword">new</span> LineData(xVals, dataSets);</div><div class="line">List&lt;ILineDataSet&gt; dataSets =<span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">dataSets.add(left);</div><div class="line">dataSets.add(right);</div><div class="line">LineData data = <span class="keyword">new</span> LineData(<span class="string">"x轴数据"</span>, dataSets);</div></pre></td></tr></table></figure></p>
+<h3 id="控制X轴显示格式"><a href="#控制X轴显示格式" class="headerlink" title="控制X轴显示格式"></a>控制X轴显示格式</h3><p>api没有提供相关的方法，我们只能变相的解决了，比如我们想实现下面显示双数的月份<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ArrayList&lt;String&gt; xVals = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">12</span>; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (i%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">	xVals.add(i+<span class="string">""</span>);</div><div class="line">    <span class="keyword">else</span></div><div class="line">	xVals.add(<span class="string">""</span>);</div><div class="line">&#125;</div><div class="line">LineData data = <span class="keyword">new</span> LineData(xVals, <span class="string">"y轴数据"</span>);</div></pre></td></tr></table></figure></p>
+<h3 id="MarkView的样式自定义"><a href="#MarkView的样式自定义" class="headerlink" title="MarkView的样式自定义"></a>MarkView的样式自定义</h3><p>继承MarkerView，给它一个自定义布局。就OK了</p>
+
       
     </div>
     <footer class="article-footer">
@@ -124,7 +135,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-19T08:04:32.079Z" itemprop="dateModified">2016-08-19</time>
+更新日期:<time datetime="2016-08-22T03:11:54.700Z" itemprop="dateModified">2016-08-22</time>
 </span>
 
 
@@ -150,7 +161,7 @@
 
 <!-- 多说评论框 start -->
 <section id="comments">
-  <div class="ds-thread"  data-thread-key="/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/" data-title="MPAndroidChart使用详解与一些问题解决方法" data-url="https://youth5201314.github.io/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/" id="ds_thread">
+  <div class="ds-thread"  data-thread-key="/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/" data-title="MPAndroidChart的一些问题解决方法" data-url="https://youth5201314.github.io/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/" id="ds_thread">
     <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
   </div>
 </section>
@@ -162,7 +173,7 @@
   <div id="toc" class="toc-aside">
   <h2 class="toc-title">文章目录</h2>
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#折线图高亮坐标线的显示隐藏"><span class="toc-number">1.</span> <span class="toc-text">折线图高亮坐标线的显示隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#X轴坐标线显示不全问题"><span class="toc-number">2.</span> <span class="toc-text">X轴坐标线显示不全问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同一图中，两条折线，根据不同的Y轴坐标画出效果"><span class="toc-number">3.</span> <span class="toc-text">同一图中，两条折线，根据不同的Y轴坐标画出效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制X轴显示格式"><span class="toc-number">4.</span> <span class="toc-text">控制X轴显示格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MarkView的样式自定义"><span class="toc-number">5.</span> <span class="toc-text">MarkView的样式自定义</span></a></li></ol>
     
   </div>
 
@@ -238,7 +249,7 @@
       <ul>
         
           <li>
-            <a href="/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/">MPAndroidChart使用详解与一些问题解决方法</a>
+            <a href="/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/">MPAndroidChart的一些问题解决方法</a>
           </li>
         
           <li>
