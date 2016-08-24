@@ -74,6 +74,79 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ViewPager切换动画PageTransformer使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/24/ViewPager切换动画PageTransformer使用/" class="article-date">
+  <time datetime="2016-08-24T09:01:45.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/24/ViewPager切换动画PageTransformer使用/">ViewPager切换动画PageTransformer使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>文章目录</span></h2>
+		
+			
+		
+		</div>
+		
+        <p>通过实现ViewPager.PageTransformer来做出完全不同的切换动画效果。<br>关键是要理解transformPage(View view, float position)的参数。<br>view理所当然就是滑动中的那个view，<br>position这里是float类型，不是平时理解的int位置，而是当前滑动状态的一个表示，比如当滑动到正全屏时，position是0，而向左滑动，使得右边刚好有一部被进入屏幕时，position是1，如果前一页和下一页基本各在屏幕占一半时，前一页的position是-0.5，后一页的posiotn是0.5，所以根据position的值我们就可以自行设置需要的alpha，x/y信息。</p>
+<p>Google给我们展示了两个动画例子：DepthPageTransformer和ZoomOutPageTransformer</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepthPageTransformer</span> <span class="keyword">implements</span> <span class="title">PageTransformer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> MIN_SCALE = <span class="number">0.75f</span>;</div><div class="line">                         </div><div class="line">    <span class="meta">@SuppressLint</span>(<span class="string">"NewApi"</span>)</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transformPage</span><span class="params">(View view, <span class="keyword">float</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> pageWidth = view.getWidth();</div><div class="line">        <span class="keyword">if</span> (position &lt; -<span class="number">1</span>) &#123; <span class="comment">// [-Infinity,-1)</span></div><div class="line">                                <span class="comment">// This page is way off-screen to the left.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">0</span>) &#123; <span class="comment">// [-1,0]</span></div><div class="line">                                    <span class="comment">// Use the default slide transition when</span></div><div class="line">                                    <span class="comment">// moving to the left page</span></div><div class="line">            view.setAlpha(<span class="number">1</span>);</div><div class="line">            view.setTranslationX(<span class="number">0</span>);</div><div class="line">            view.setScaleX(<span class="number">1</span>);</div><div class="line">            view.setScaleY(<span class="number">1</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">1</span>) &#123; <span class="comment">// (0,1]</span></div><div class="line">                                    <span class="comment">// Fade the page out.</span></div><div class="line">            view.setAlpha(<span class="number">1</span> - position);</div><div class="line">            <span class="comment">// Counteract the default slide transition</span></div><div class="line">            view.setTranslationX(pageWidth * -position);</div><div class="line">            <span class="comment">// Scale the page down (between MIN_SCALE and 1)</span></div><div class="line">            <span class="keyword">float</span> scaleFactor = MIN_SCALE + (<span class="number">1</span> - MIN_SCALE)</div><div class="line">                    * (<span class="number">1</span> - Math.abs(position));</div><div class="line">            view.setScaleX(scaleFactor);</div><div class="line">            view.setScaleY(scaleFactor);</div><div class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// (1,+Infinity]</span></div><div class="line">                    <span class="comment">// This page is way off-screen to the right.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">                         </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">                         </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZoomOutPageTransformer</span> <span class="keyword">implements</span> <span class="title">PageTransformer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> MIN_SCALE = <span class="number">0.85f</span>;</div><div class="line">                 </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> MIN_ALPHA = <span class="number">0.5f</span>;</div><div class="line">                 </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transformPage</span><span class="params">(View view, <span class="keyword">float</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> pageWidth = view.getWidth();</div><div class="line">        <span class="keyword">int</span> pageHeight = view.getHeight();</div><div class="line">                 </div><div class="line">        <span class="keyword">if</span> (position &lt; -<span class="number">1</span>) &#123; <span class="comment">// [-Infinity,-1)</span></div><div class="line">                                <span class="comment">// This page is way off-screen to the left.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">1</span>) &#123; <span class="comment">// [-1,1]</span></div><div class="line">                                    <span class="comment">// Modify the default slide transition to</span></div><div class="line">                                    <span class="comment">// shrink the page as well</span></div><div class="line">            <span class="keyword">float</span> scaleFactor = Math.max(MIN_SCALE, <span class="number">1</span> - Math.abs(position));</div><div class="line">            <span class="keyword">float</span> vertMargin = pageHeight * (<span class="number">1</span> - scaleFactor) / <span class="number">2</span>;</div><div class="line">            <span class="keyword">float</span> horzMargin = pageWidth * (<span class="number">1</span> - scaleFactor) / <span class="number">2</span>;</div><div class="line">            <span class="keyword">if</span> (position &lt; <span class="number">0</span>) &#123;</div><div class="line">                view.setTranslationX(horzMargin - vertMargin / <span class="number">2</span>);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                view.setTranslationX(-horzMargin + vertMargin / <span class="number">2</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// Scale the page down (between MIN_SCALE and 1)</span></div><div class="line">            view.setScaleX(scaleFactor);</div><div class="line">            view.setScaleY(scaleFactor);</div><div class="line">            <span class="comment">// Fade the page relative to its size.</span></div><div class="line">            view.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE)</div><div class="line">                    / (<span class="number">1</span> - MIN_SCALE) * (<span class="number">1</span> - MIN_ALPHA));</div><div class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// (1,+Infinity]</span></div><div class="line">                    <span class="comment">// This page is way off-screen to the right.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后一步设置动画：viewpager.setPageTransformer(true, new DepthPageTransformer());</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/24/ViewPager切换动画PageTransformer使用/" data-id="cis8ogajb000hsc59am6p3ru0" data_title="ViewPager切换动画PageTransformer使用" data_summary="通过实现ViewPager.PageTransform..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/24/ViewPager切换动画PageTransformer使用/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/24/ViewPager切换动画PageTransformer使用/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PageTransformer/">PageTransformer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ViewPager/">ViewPager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-08-24T09:07:04.654Z" itemprop="dateModified">2016-08-24</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="android-Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices" class="article article-type-android" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -111,13 +184,15 @@
 		
 		</div>
 		
-        <p>升级完Android Studio 2.1.3 后编译时出现Error:No service of type Factory available in ProjectScopeServices.<br><img src="http://oceh51kku.bkt.clouddn.com/1649122197105153.png" alt="错误截图"><br>解决方法：<br>修改根目录的build.gradle文件<br><img src="http://oceh51kku.bkt.clouddn.com/16480313463666.png" alt="修改方法"></p>
+        <p>升级完Android Studio 2.1.3 后编译时出现Error:No service of type Factory available in ProjectScopeServices.</p>
+<p><img src="http://oceh51kku.bkt.clouddn.com/1649122197105153.png" alt="错误截图"><br>解决方法：<br>修改根目录的build.gradle文件</p>
+<p><img src="http://oceh51kku.bkt.clouddn.com/16480313463666.png" alt="修改方法"></p>
 
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" data-id="cis8mi2vz00026w59ugo6y8d5" data_title="Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices." data_summary="升级完Android Studio 2.1.3 后编译..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" data-id="cis8ogaib0002sc594359xlhx" data_title="Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices." data_summary="升级完Android Studio 2.1.3 后编译..." class="article-share-link">Share</a>
       
 
       
@@ -129,7 +204,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-24T08:12:57.444Z" itemprop="dateModified">2016-08-24</time>
+更新日期:<time datetime="2016-08-24T08:27:23.373Z" itemprop="dateModified">2016-08-24</time>
 </span>
 
 
@@ -193,7 +268,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/" data-id="cis8mi2vk00006w59m36yx4k3" data_title="Android SDK Manager 更新代理配置" data_summary="关于 Android SDK Manager 的无法更..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/" data-id="cis8ogai60000sc5938051sao" data_title="Android SDK Manager 更新代理配置" data_summary="关于 Android SDK Manager 的无法更..." class="article-share-link">Share</a>
       
 
       
@@ -365,7 +440,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/22/Android代码混淆详解/" data-id="cis8mi2w700066w59nq4rlmts" data_title="Android代码混淆详解" data_summary="proguard 配置
+	  <a data-url="https://youth5201314.github.io/2016/08/22/Android代码混淆详解/" data-id="cis8ogaiw0006sc591md848cz" data_title="Android代码混淆详解" data_summary="proguard 配置
 -keepclasseswit..." class="article-share-link">Share</a>
       
 
@@ -445,7 +520,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/" data-id="cis8mi2wn000j6w59jd9ugluz" data_title="MPAndroidChart的一些问题解决方法" data_summary="MPAndroidChart是一款基于Android的..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/" data-id="cis8ogak3001psc59ta9szje3" data_title="MPAndroidChart的一些问题解决方法" data_summary="MPAndroidChart是一款基于Android的..." class="article-share-link">Share</a>
       
 
       
@@ -525,7 +600,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/" data-id="cis8mi2w400056w59tpnp8snw" data_title="Android Webview和js交互" data_summary="有时我们有这样的需求：需要从app的网页中点击调用软件..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/" data-id="cis8ogait0005sc59756mwr9s" data_title="Android Webview和js交互" data_summary="有时我们有这样的需求：需要从app的网页中点击调用软件..." class="article-share-link">Share</a>
       
 
       
@@ -594,7 +669,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/" data-id="cis8mi2wa00086w5980p45die" data_title="Android文件和base64互转" data_summary="在项目中需要用到文件传输入，有时需要将文件转成base..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/" data-id="cis8ogaj5000bsc59dft4wbj8" data_title="Android文件和base64互转" data_summary="在项目中需要用到文件传输入，有时需要将文件转成base..." class="article-share-link">Share</a>
       
 
       
@@ -666,7 +741,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/09/Glide加载自定义图形形状/" data-id="cis8mi2wj000d6w59wnrwinfx" data_title="Glide加载自定义图形形状" data_summary="Glide实现图片的自定义主要是集成BitmapTra..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/09/Glide加载自定义图形形状/" data-id="cis8ogaj8000dsc59vgi3ee7t" data_title="Glide加载自定义图形形状" data_summary="Glide实现图片的自定义主要是集成BitmapTra..." class="article-share-link">Share</a>
       
 
       
@@ -787,7 +862,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/05/19/Glide详细使用总结/" data-id="cis8mi2wl000h6w59sxd1kp8d" data_title="Glide详细使用总结" data_summary="Glide 是一个高效、开源、 Android设备上的..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/05/19/Glide详细使用总结/" data-id="cis8ogajc000jsc598g286j08" data_title="Glide详细使用总结" data_summary="Glide 是一个高效、开源、 Android设备上的..." class="article-share-link">Share</a>
       
 
       
@@ -993,7 +1068,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/04/13/Banner开源框架-Android轮播控件/" data-id="cis8mi2we000b6w59rsyea00f" data_title="Banner开源框架[Android轮播控件]" data_summary="描述现在的绝大数App都有banner界面,也就是轮播..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/04/13/Banner开源框架-Android轮播控件/" data-id="cis8ogaiz0008sc59n7nqqf8j" data_title="Banner开源框架[Android轮播控件]" data_summary="描述现在的绝大数App都有banner界面,也就是轮播..." class="article-share-link">Share</a>
       
 
       
@@ -1001,11 +1076,11 @@
       
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/banner/">banner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/viewpager/">viewpager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源框架/">开源框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/轮播控件/">轮播控件</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ViewPager/">ViewPager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/banner/">banner</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源框架/">开源框架</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/轮播控件/">轮播控件</a></li></ul>
 
 	  
 <span>
-更新日期:<time datetime="2016-08-18T03:18:36.889Z" itemprop="dateModified">2016-08-18</time>
+更新日期:<time datetime="2016-08-24T09:03:09.946Z" itemprop="dateModified">2016-08-24</time>
 </span>
 
 
@@ -1046,7 +1121,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -1056,7 +1131,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/viewpager/">viewpager</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageTransformer/">PageTransformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewPager/">ViewPager</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1066,7 +1141,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android-Studio/" style="font-size: 13px; color: #7dc3de">Android Studio</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 20px; color: #1db400">Glide</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/viewpager/" style="font-size: 13px; color: #7dc3de">viewpager</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
+      <a href="/tags/Android-Studio/" style="font-size: 13px; color: #7dc3de">Android Studio</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 20px; color: #1db400">Glide</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/PageTransformer/" style="font-size: 13px; color: #7dc3de">PageTransformer</a> <a href="/tags/ViewPager/" style="font-size: 20px; color: #1db400">ViewPager</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/动画/" style="font-size: 13px; color: #7dc3de">动画</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
     </div>
   </div>
 
@@ -1076,7 +1151,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1096,6 +1171,10 @@
       <ul>
         
           <li>
+            <a href="/2016/08/24/ViewPager切换动画PageTransformer使用/">ViewPager切换动画PageTransformer使用</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/">Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices.</a>
           </li>
         
@@ -1109,10 +1188,6 @@
         
           <li>
             <a href="/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/">MPAndroidChart的一些问题解决方法</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/18/Android Webview和js交互/">Android Webview和js交互</a>
           </li>
         
       </ul>
