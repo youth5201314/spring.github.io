@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://youth5201314.github.io/2016/08/22/Android代码混淆详解/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
-<meta property="og:updated_time" content="2016-08-22T09:23:08.186Z">
+<meta property="og:updated_time" content="2016-08-24T07:04:30.476Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android代码混淆详解">
 <meta name="twitter:description" content="王兴春">
@@ -82,6 +82,10 @@
 
 
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -102,11 +106,115 @@
 		<div id="toc" class="toc-article">
 			<h2 class="toc-title"><span>文章目录</span></h2>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#proguard-配置"><span class="toc-number">1.</span> <span class="toc-text">proguard 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不能混淆的代码"><span class="toc-number">2.</span> <span class="toc-text">不能混淆的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#混淆配置"><span class="toc-number">3.</span> <span class="toc-text">混淆配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#proguard-参数"><span class="toc-number">3.1.</span> <span class="toc-text">proguard 参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#保留选项"><span class="toc-number">3.2.</span> <span class="toc-text">保留选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#压缩"><span class="toc-number">3.3.</span> <span class="toc-text">压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优化"><span class="toc-number">3.4.</span> <span class="toc-text">优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#混淆"><span class="toc-number">3.5.</span> <span class="toc-text">混淆</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proguard-cfg配置项模板"><span class="toc-number">4.</span> <span class="toc-text">proguard.cfg配置项模板</span></a></li></ol>
 		
 		</div>
 		
-        
+        <h3 id="proguard-配置"><a href="#proguard-配置" class="headerlink" title="proguard 配置"></a>proguard 配置</h3><ul>
+<li>-keepclasseswithmembers 指定的类和类成员被保留，假如指定的类成员存在的话。</li>
+<li>-dontwarn 缺省proguard 会检查每一个引用是否正确，但是第三方库里面往往有些不会用到的类，没有正确引用。如果不配置的话，系统就会报错。</li>
+<li>-keep 指定的类和类成员被保留作为 入口 。</li>
+<li>-keepclassmembers 指定的类成员被保留。</li>
+</ul>
+<h3 id="不能混淆的代码"><a href="#不能混淆的代码" class="headerlink" title="不能混淆的代码"></a>不能混淆的代码</h3><ul>
+<li>Android系统组件，系统组件有固定的方法被系统调用。</li>
+<li><p>被Android Resource 文件引用到的。名字已经固定，也不能混淆，比如自定义的View </p>
+</li>
+<li><p>Android Parcelable ，需要使用android 序列化的。</p>
+</li>
+<li><p>Java序列化方法，系统序列化需要固定的方法。</p>
+</li>
+<li><p>枚举 ，系统需要处理枚举的固定方法</p>
+</li>
+<li><p>本地方法，不能修改本地方法名</p>
+</li>
+<li><p>annotations 注释</p>
+</li>
+<li><p>数据库驱动</p>
+</li>
+<li><p>有些resource 文件</p>
+</li>
+<li><p>用到反射的地方</p>
+</li>
+<li><p>其他Anroid 官方建议 不混淆的，如</p>
+</li>
+</ul>
+<p>android.app.backup.BackupAgentHelper</p>
+<p>android.preference.Preference</p>
+<p>com.android.vending.licensing.ILicensingService</p>
+<h3 id="混淆配置"><a href="#混淆配置" class="headerlink" title="混淆配置"></a>混淆配置</h3><h4 id="proguard-参数"><a href="#proguard-参数" class="headerlink" title="proguard 参数"></a>proguard 参数</h4><ul>
+<li><p>-include {filename}    从给定的文件中读取配置参数 </p>
+</li>
+<li><p>-basedirectory {directoryname}    指定基础目录为以后相对的档案名称 </p>
+</li>
+<li><p>-injars {class_path}    指定要处理的应用程序jar,war,ear和目录 </p>
+</li>
+<li><p>-outjars {class_path}    指定处理完后要输出的jar,war,ear和目录的名称 </p>
+</li>
+<li><p>-libraryjars {classpath}    指定要处理的应用程序jar,war,ear和目录所需要的程序库文件 </p>
+</li>
+<li><p>-dontskipnonpubliclibraryclasses    指定不去忽略非公共的库类。 </p>
+</li>
+<li><p>-dontskipnonpubliclibraryclassmembers    指定不去忽略包可见的库类的成员。 </p>
+</li>
+</ul>
+<h4 id="保留选项"><a href="#保留选项" class="headerlink" title="保留选项"></a>保留选项</h4><ul>
+<li><p>-keep {Modifier} {class_specification}    保护指定的类文件和类的成员 </p>
+</li>
+<li><p>-keepclassmembers {modifier} {class_specification}    保护指定类的成员，如果此类受到保护他们会保护的更好</p>
+</li>
+<li><p>-keepclasseswithmembers {class_specification}    保护指定的类和类的成员，但条件是所有指定的类和类成员是要存在。 </p>
+</li>
+<li><p>-keepnames {class_specification}    保护指定的类和类的成员的名称（如果他们不会压缩步骤中删除） </p>
+</li>
+<li><p>-keepclassmembernames {class_specification}    保护指定的类的成员的名称（如果他们不会压缩步骤中删除） </p>
+</li>
+<li><p>-keepclasseswithmembernames {class_specification}    保护指定的类和类的成员的名称，如果所有指定的类成员出席（在压缩步骤之后） </p>
+</li>
+<li><p>-printseeds {filename}    列出类和类的成员-keep选项的清单，标准输出到给定的文件 </p>
+</li>
+</ul>
+<h4 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h4><ul>
+<li><p>-dontshrink    不压缩输入的类文件 </p>
+</li>
+<li><p>-printusage {filename} </p>
+</li>
+<li><p>-whyareyoukeeping {class_specification}    </p>
+</li>
+</ul>
+<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><ul>
+<li><p>-dontoptimize    不优化输入的类文件 </p>
+</li>
+<li><p>-assumenosideeffects {class_specification}    优化时假设指定的方法，没有任何副作用 </p>
+</li>
+<li><p>-allowaccessmodification    优化时允许访问并修改有修饰符的类和类的成员 </p>
+</li>
+</ul>
+<h4 id="混淆"><a href="#混淆" class="headerlink" title="混淆"></a>混淆</h4><ul>
+<li><p>-dontobfuscate    不混淆输入的类文件 </p>
+</li>
+<li><p>-printmapping {filename} </p>
+</li>
+<li><p>-applymapping {filename}    重用映射增加混淆 </p>
+</li>
+<li><p>-obfuscationdictionary {filename}    使用给定文件中的关键字作为要混淆方法的名称 </p>
+</li>
+<li><p>-overloadaggressively    混淆时应用侵入式重载 </p>
+</li>
+<li><p>-useuniqueclassmembernames    确定统一的混淆类的成员名称来增加混淆 </p>
+</li>
+<li><p>-flattenpackagehierarchy {package_name}    重新包装所有重命名的包并放在给定的单一包中 </p>
+</li>
+<li><p>-repackageclass {package_name}    重新包装所有重命名的类文件中放在给定的单一包中 </p>
+</li>
+<li><p>-dontusemixedcaseclassnames    混淆时不会产生形形色色的类名 </p>
+</li>
+<li><p>-keepattributes {attribute_name,…}    保护给定的可选属性，例如LineNumberTable, LocalVariableTable, SourceFile, Deprecated, Synthetic, Signature, and InnerClasses. </p>
+</li>
+<li><p>-renamesourcefileattribute {string}    设置源文件中给定的字符串常量</p>
+</li>
+</ul>
+<h3 id="proguard-cfg配置项模板"><a href="#proguard-cfg配置项模板" class="headerlink" title="proguard.cfg配置项模板"></a>proguard.cfg配置项模板</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div></pre></td><td class="code"><pre><div class="line">#指定代码的压缩级别</div><div class="line">-optimizationpasses 5</div><div class="line"></div><div class="line">#包明不混合大小写</div><div class="line">-dontusemixedcaseclassnames</div><div class="line"></div><div class="line">#不去忽略非公共的库类</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line"></div><div class="line">#优化  不优化输入的类文件</div><div class="line">-dontoptimize</div><div class="line"></div><div class="line">#预校验</div><div class="line">-dontpreverify</div><div class="line"></div><div class="line">#混淆时是否记录日志</div><div class="line">-verbose</div><div class="line"></div><div class="line"># 混淆时所采用的算法</div><div class="line">-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*</div><div class="line"></div><div class="line">#保护注解</div><div class="line">-keepattributes *Annotation*</div><div class="line"></div><div class="line"># 保持哪些类不被混淆</div><div class="line">-keep public class * extends android.app.Fragment</div><div class="line">-keep public class * extends android.app.Activity</div><div class="line">-keep public class * extends android.app.Application</div><div class="line">-keep public class * extends android.app.Service</div><div class="line">-keep public class * extends android.content.BroadcastReceiver</div><div class="line">-keep public class * extends android.content.ContentProvider</div><div class="line">-keep public class * extends android.app.backup.BackupAgentHelper</div><div class="line">-keep public class * extends android.preference.Preference</div><div class="line">-keep public class com.android.vending.licensing.ILicensingService</div><div class="line">#如果有引用v4包可以添加下面这行</div><div class="line">-keep public class * extends android.support.v4.app.Fragment</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">#忽略警告</div><div class="line">-ignorewarning</div><div class="line"></div><div class="line">##记录生成的日志数据,gradle build时在本项目根目录输出##</div><div class="line"></div><div class="line">#apk 包内所有 class 的内部结构</div><div class="line">-dump class_files.txt</div><div class="line">#未混淆的类和成员</div><div class="line">-printseeds seeds.txt</div><div class="line">#列出从 apk 中删除的代码</div><div class="line">-printusage unused.txt</div><div class="line">#混淆前后的映射</div><div class="line">-printmapping mapping.txt</div><div class="line"></div><div class="line">########记录生成的日志数据，gradle build时 在本项目根目录输出-end######</div><div class="line"></div><div class="line"></div><div class="line">#####混淆保护自己项目的部分代码以及引用的第三方jar包library#######</div><div class="line"></div><div class="line">#-libraryjars libs/umeng-analytics-v5.2.4.jar</div><div class="line"></div><div class="line">#三星应用市场需要添加:sdk-v1.0.0.jar,look-v1.0.1.jar</div><div class="line">#-libraryjars libs/sdk-v1.0.0.jar</div><div class="line">#-libraryjars libs/look-v1.0.1.jar</div><div class="line"></div><div class="line">#如果不想混淆 keep 掉</div><div class="line">-keep class com.lippi.recorder.iirfilterdesigner.** &#123;*; &#125;</div><div class="line">#友盟</div><div class="line">-keep class com.umeng.**&#123;*;&#125;</div><div class="line">#项目特殊处理代码</div><div class="line"></div><div class="line">#忽略警告</div><div class="line">-dontwarn com.lippi.recorder.utils**</div><div class="line">#保留一个完整的包</div><div class="line">-keep class com.lippi.recorder.utils.** &#123;</div><div class="line">    *;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">-keep class  com.lippi.recorder.utils.AudioRecorder&#123;*;&#125;</div><div class="line"></div><div class="line"></div><div class="line">#如果引用了v4或者v7包</div><div class="line">-dontwarn android.support.**</div><div class="line"></div><div class="line">####混淆保护自己项目的部分代码以及引用的第三方jar包library-end####</div><div class="line"></div><div class="line">-keep public class * extends android.view.View &#123;</div><div class="line">    public &lt;init&gt;(android.content.Context);</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</div><div class="line">    public void set*(...);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持 native 方法不被混淆</div><div class="line">-keepclasseswithmembernames class * &#123;</div><div class="line">    native &lt;methods&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持自定义控件类不被混淆</div><div class="line">-keepclasseswithmembers class * &#123;</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持自定义控件类不被混淆</div><div class="line">-keepclassmembers class * extends android.app.Activity &#123;</div><div class="line">   public void *(android.view.View);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持 Parcelable 不被混淆</div><div class="line">-keep class * implements android.os.Parcelable &#123;</div><div class="line">  public static final android.os.Parcelable$Creator *;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持 Serializable 不被混淆</div><div class="line">-keepnames class * implements java.io.Serializable</div><div class="line"></div><div class="line">#保持 Serializable 不被混淆并且enum 类也不被混淆</div><div class="line">-keepclassmembers class * implements java.io.Serializable &#123;</div><div class="line">    static final long serialVersionUID;</div><div class="line">    private static final java.io.ObjectStreamField[] serialPersistentFields;</div><div class="line">    !static !transient &lt;fields&gt;;</div><div class="line">    !private &lt;fields&gt;;</div><div class="line">    !private &lt;methods&gt;;</div><div class="line">    private void writeObject(java.io.ObjectOutputStream);</div><div class="line">    private void readObject(java.io.ObjectInputStream);</div><div class="line">    java.lang.Object writeReplace();</div><div class="line">    java.lang.Object readResolve();</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持枚举 enum 类不被混淆 如果混淆报错，建议直接使用上面的 -keepclassmembers class * implements java.io.Serializable即可</div><div class="line">#-keepclassmembers enum * &#123;</div><div class="line">#  public static **[] values();</div><div class="line">#  public static ** valueOf(java.lang.String);</div><div class="line">#&#125;</div><div class="line"></div><div class="line">-keepclassmembers class * &#123;</div><div class="line">    public void *ButtonClicked(android.view.View);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#不混淆资源类</div><div class="line">-keepclassmembers class **.R$* &#123;</div><div class="line">    public static &lt;fields&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#避免混淆泛型 如果混淆报错建议关掉</div><div class="line">#–keepattributes Signature</div><div class="line"></div><div class="line">#移除log 测试了下没有用还是建议自己定义一个开关控制是否输出日志</div><div class="line">#-assumenosideeffects class android.util.Log &#123;</div><div class="line">#    public static boolean isLoggable(java.lang.String, int);</div><div class="line">#    public static int v(...);</div><div class="line">#    public static int i(...);</div><div class="line">#    public static int w(...);</div><div class="line">#    public static int d(...);</div><div class="line">#    public static int e(...);</div><div class="line">#&#125;</div><div class="line"></div><div class="line">#如果用用到Gson解析包的，直接添加下面这几行就能成功混淆，不然会报错。</div><div class="line">#gson</div><div class="line">#-libraryjars libs/gson-2.2.2.jar</div><div class="line">-keepattributes Signature</div><div class="line"># Gson specific classes</div><div class="line">-keep class sun.misc.Unsafe &#123; *; &#125;</div><div class="line"># Application classes that will be serialized/deserialized over Gson</div><div class="line">-keep class com.google.gson.examples.android.model.** &#123; *; &#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
@@ -116,9 +224,11 @@
 	  <!-- 百度分享 End -->
 	  
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/代码混淆/">代码混淆</a></li></ul>
+
 	  
 <span>
-更新日期:<time datetime="2016-08-22T09:23:08.186Z" itemprop="dateModified">2016-08-22</time>
+更新日期:<time datetime="2016-08-24T07:04:30.476Z" itemprop="dateModified">2016-08-24</time>
 </span>
 
 
@@ -165,7 +275,7 @@
   <div id="toc" class="toc-aside">
   <h2 class="toc-title">文章目录</h2>
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#proguard-配置"><span class="toc-number">1.</span> <span class="toc-text">proguard 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不能混淆的代码"><span class="toc-number">2.</span> <span class="toc-text">不能混淆的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#混淆配置"><span class="toc-number">3.</span> <span class="toc-text">混淆配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#proguard-参数"><span class="toc-number">3.1.</span> <span class="toc-text">proguard 参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#保留选项"><span class="toc-number">3.2.</span> <span class="toc-text">保留选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#压缩"><span class="toc-number">3.3.</span> <span class="toc-text">压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优化"><span class="toc-number">3.4.</span> <span class="toc-text">优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#混淆"><span class="toc-number">3.5.</span> <span class="toc-text">混淆</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proguard-cfg配置项模板"><span class="toc-number">4.</span> <span class="toc-text">proguard.cfg配置项模板</span></a></li></ol>
     
   </div>
 
@@ -191,7 +301,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -201,7 +311,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/viewpager/">viewpager</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/viewpager/">viewpager</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -211,7 +321,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android-Studio/" style="font-size: 13px; color: #7dc3de">Android Studio</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 20px; color: #1db400">Glide</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/viewpager/" style="font-size: 13px; color: #7dc3de">viewpager</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
+      <a href="/tags/Android-Studio/" style="font-size: 13px; color: #7dc3de">Android Studio</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 20px; color: #1db400">Glide</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/viewpager/" style="font-size: 13px; color: #7dc3de">viewpager</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
     </div>
   </div>
 
@@ -253,11 +363,11 @@
           </li>
         
           <li>
-            <a href="/2016/08/18/Android Webview和js交互/">Android Webview和js交互</a>
+            <a href="/2016/08/18/Android文件和base64互转/">Android文件和base64互转</a>
           </li>
         
           <li>
-            <a href="/2016/08/18/Android文件和base64互转/">Android文件和base64互转</a>
+            <a href="/2016/08/18/Android Webview和js交互/">Android Webview和js交互</a>
           </li>
         
       </ul>
