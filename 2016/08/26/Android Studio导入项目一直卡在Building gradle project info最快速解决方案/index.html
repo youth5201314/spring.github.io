@@ -3,17 +3,20 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Category: 开源框架 | Spring&#39;s Blog</title>
+  <title>info最快速解决方案 | Spring&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="王兴春">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Spring's Blog">
-<meta property="og:url" content="https://youth5201314.github.io/categories/开源框架/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="info最快速解决方案">
+<meta property="og:url" content="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
+<meta property="og:image" content="http://oceh51kku.bkt.clouddn.com/345309534djtg.png">
+<meta property="og:updated_time" content="2016-08-26T02:57:31.337Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring's Blog">
+<meta name="twitter:title" content="info最快速解决方案">
 <meta name="twitter:description" content="王兴春">
+<meta name="twitter:image" content="http://oceh51kku.bkt.clouddn.com/345309534djtg.png">
   
     <link rel="alternate" href="/atom.xml" title="Spring&#39;s Blog" type="application/atom+xml">
   
@@ -74,48 +77,110 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
+        <section id="main"><article id="Android Studio导入项目一直卡在Building gradle project info最快速解决方案-Android Studio导入项目一直卡在Building gradle project info最快速解决方案" class="article article-type-Android Studio导入项目一直卡在Building gradle project info最快速解决方案" itemscope itemprop="blogPost">
+  <div class="article-meta">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-<a href="/2016/04/13/Banner开源框架-Android轮播控件/" class="archive-article-date">
-  <time datetime="2016-04-13T02:43:40.000Z" itemprop="datePublished">4月 13</time>
+<a href="/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" class="article-date">
+  <time datetime="2016-08-26T02:39:57.000Z" itemprop="datePublished">2016-08-26</time>
 </a>
 
 
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android-Studio/">Android Studio</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/04/13/Banner开源框架-Android轮播控件/">Banner开源框架[Android轮播控件]</a>
+    <h1 class="article-title" itemprop="name">
+      info最快速解决方案
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>文章目录</span></h2>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a></li></ol>
+		
+		</div>
+		
+        <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>Android Studio导入项目一直卡在Building gradle project info，实际上是因为你导入的这个项目使用的gradle与你已经拥有的gradle版本不一致，导致需要下载该项目需要的gradle版本，而下载需要翻墙，所以就一直卡在这：</p>
+<p><img src="http://oceh51kku.bkt.clouddn.com/345309534djtg.png" alt="运行截图"></p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>1.随便找一个你能运行的Android Studio项目</p>
+<p>2.打开gradle-wrapper.properties，文件目录：项目/gradle/wrapper/gradle-wrapper.properties</p>
+<p>3.复制distributionUrl这一整行的内容，eg: distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip</p>
+<p>4.打开你要导入的项目的gradle-wrapper.properties，具体步骤与步骤2相同</p>
+<p>5.把步骤3复制的内容，替换你要导入的项目的gradle-wrapper.properties文件的distributionUrl这一行</p>
+<p>6.再重启Android Studio，导入项目就可以了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" data-id="cisb64x7a0006kw59u18a2d90" data_title="info最快速解决方案" data_summary="描述Android Studio导入项目一直卡在Bui..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-08-26T02:57:31.337Z" itemprop="dateModified">2016-08-26</time>
+</span>
+
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何实现android程序一段时间无操作后的功能自定义</div>
+    </a>
+  
+</nav>
+
+  
 </article>
 
-  
-  
-    </div></section>
-  
 
+
+
+<!-- 多说评论框 start -->
+<section id="comments">
+  <div class="ds-thread"  data-thread-key="/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" data-title="info最快速解决方案" data-url="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" id="ds_thread">
+    <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
+  </div>
+</section>
+<!-- 多说评论框 end -->
 
 </section>
         
           
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">文章目录</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a></li></ol>
+    
+  </div>
+
 <aside id="sidebar">
 
   
@@ -301,6 +366,11 @@
 	<script src="/js/gotop.js"></script>
 	-->
 
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
 
 </div>
 <script src="/js/toc_aside_toggle.js"></script>
