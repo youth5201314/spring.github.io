@@ -76,6 +76,78 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Glide加载自定义图形形状" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/09/Glide加载自定义图形形状/" class="article-date">
+  <time datetime="2016-08-09T02:18:03.000Z" itemprop="datePublished">2016-08-09</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/第三方框架使用/">第三方框架使用</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/09/Glide加载自定义图形形状/">Glide加载自定义图形形状</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>文章目录</span></h2>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方法"><span class="toc-number">1.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#圆角图片GlideRoundTransform"><span class="toc-number">2.</span> <span class="toc-text">圆角图片GlideRoundTransform</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#圆形图片GlideCircleTransform"><span class="toc-number">3.</span> <span class="toc-text">圆形图片GlideCircleTransform</span></a></li></ol>
+		
+		</div>
+		
+        <p>Glide实现图片的自定义主要是集成BitmapTransformation进行修改。<br><a href="https://github.com/wasabeef/glide-transformations" target="_blank"> [ 1、glide-transformations ]<br>一个基于Glide的transformation库，拥有裁剪，着色，模糊，滤镜等多种转换效果，赞的不行不行的~~</a></p>
+<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Glide</div><div class="line">   .with(mContext)</div><div class="line">   .load(url)</div><div class="line">   <span class="comment">//设置圆角图片</span></div><div class="line">   .transform(<span class="keyword">new</span> GlideRoundTransform(mContext, <span class="number">10</span>))</div><div class="line">   <span class="comment">//设置圆形图片</span></div><div class="line">   .transform(<span class="keyword">new</span> GlideCircleTransform(mContext))</div><div class="line">   .crossFade()</div><div class="line">   .into(ImageView);</div></pre></td></tr></table></figure>
+<h3 id="圆角图片GlideRoundTransform"><a href="#圆角图片GlideRoundTransform" class="headerlink" title="圆角图片GlideRoundTransform"></a>圆角图片GlideRoundTransform</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlideRoundTransform</span> <span class="keyword">extends</span> <span class="title">BitmapTransformation</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> radius = <span class="number">0f</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlideRoundTransform</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(context, <span class="number">4</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlideRoundTransform</span><span class="params">(Context context, <span class="keyword">int</span> dp)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">        <span class="keyword">this</span>.radius = Resources.getSystem().getDisplayMetrics().density * dp;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">transform</span><span class="params">(BitmapPool pool, Bitmap toTransform, <span class="keyword">int</span> outWidth, <span class="keyword">int</span> outHeight)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> roundCrop(pool, toTransform);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Bitmap <span class="title">roundCrop</span><span class="params">(BitmapPool pool, Bitmap source)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (source == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);</div><div class="line">        <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</div><div class="line">            result = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);</div><div class="line">        &#125;</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(result);</div><div class="line">        Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">        paint.setShader(<span class="keyword">new</span> BitmapShader(source, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));</div><div class="line">        paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">        RectF rectF = <span class="keyword">new</span> RectF(<span class="number">0f</span>, <span class="number">0f</span>, source.getWidth(), source.getHeight());</div><div class="line">        canvas.drawRoundRect(rectF, radius, radius, paint);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getClass().getName() + Math.round(radius);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="圆形图片GlideCircleTransform"><a href="#圆形图片GlideCircleTransform" class="headerlink" title="圆形图片GlideCircleTransform"></a>圆形图片GlideCircleTransform</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlideCircleTransform</span> <span class="keyword">extends</span> <span class="title">BitmapTransformation</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlideCircleTransform</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">transform</span><span class="params">(BitmapPool pool, Bitmap toTransform, <span class="keyword">int</span> outWidth, <span class="keyword">int</span> outHeight)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> circleCrop(pool, toTransform);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Bitmap <span class="title">circleCrop</span><span class="params">(BitmapPool pool, Bitmap source)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (source == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">int</span> size = Math.min(source.getWidth(), source.getHeight());</div><div class="line">        <span class="keyword">int</span> x = (source.getWidth() - size) / <span class="number">2</span>;</div><div class="line">        <span class="keyword">int</span> y = (source.getHeight() - size) / <span class="number">2</span>;</div><div class="line">        Bitmap squared = Bitmap.createBitmap(source, x, y, size, size);</div><div class="line">        Bitmap result = pool.get(size, size, Bitmap.Config.ARGB_8888);</div><div class="line">        <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</div><div class="line">            result = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);</div><div class="line">        &#125;</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(result);</div><div class="line">        Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">        paint.setShader(<span class="keyword">new</span> BitmapShader(squared, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));</div><div class="line">        paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">        <span class="keyword">float</span> r = size / <span class="number">2f</span>;</div><div class="line">        canvas.drawCircle(r, r, r, paint);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getClass().getName();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/09/Glide加载自定义图形形状/" data-id="cish85t4w000h1w59h241icrx" data_title="Glide加载自定义图形形状" data_summary="Glide实现图片的自定义主要是集成BitmapTra..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/09/Glide加载自定义图形形状/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/09/Glide加载自定义图形形状/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Glide/">Glide</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-08-22T07:34:41.174Z" itemprop="dateModified">2016-08-22</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-Glide详细使用总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -171,7 +243,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/05/19/Glide详细使用总结/" data-id="cisb64x7q000lkw59ihicq4of" data_title="Glide详细使用总结" data_summary="Glide 是一个高效、开源、 Android设备上的..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/05/19/Glide详细使用总结/" data-id="cish85t50000n1w59tedg6mnu" data_title="Glide详细使用总结" data_summary="Glide 是一个高效、开源、 Android设备上的..." class="article-share-link">Share</a>
       
 
       
@@ -268,7 +340,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">dependencies&#123;</div><div class="line">    compile <span class="string">'com.youth.banner:banner:1.2.5'</span>  <span class="comment">//指定版本</span></div><div class="line">    compile <span class="string">'com.youth.banner:banner:+'</span> <span class="comment">//最新版本</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies&#123;</div><div class="line">    compile <span class="string">'com.youth.banner:banner:+'</span> <span class="comment">//最新版本</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>或者引用本地lib<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile project(<span class="string">':banner'</span>)</div></pre></td></tr></table></figure></p>
 <h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><table>
 <thead>
@@ -449,7 +521,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/04/13/Banner开源框架-Android轮播控件/" data-id="cisb64x7q000ekw597eo5sxv1" data_title="Banner开源框架[Android轮播控件]" data_summary="描述现在的绝大数App都有banner界面,也就是轮播..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/04/13/Banner开源框架-Android轮播控件/" data-id="cish85t4s000d1w59bapn5a0a" data_title="Banner开源框架[Android轮播控件]" data_summary="描述现在的绝大数App都有banner界面,也就是轮播..." class="article-share-link">Share</a>
       
 
       
@@ -461,7 +533,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-30T08:31:11.540Z" itemprop="dateModified">2016-08-30</time>
+更新日期:<time datetime="2016-08-30T08:33:09.471Z" itemprop="dateModified">2016-08-30</time>
 </span>
 
 
@@ -507,7 +579,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li></ul>
     </div>
   </div>
 
@@ -517,7 +589,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageTransformer/">PageTransformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewPager/">ViewPager</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageTransformer/">PageTransformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewPager/">ViewPager</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -527,7 +599,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Android-Studio/" style="font-size: 20px; color: #1db400">Android Studio</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 20px; color: #1db400">Glide</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/PageTransformer/" style="font-size: 13px; color: #7dc3de">PageTransformer</a> <a href="/tags/ViewPager/" style="font-size: 20px; color: #1db400">ViewPager</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/动画/" style="font-size: 13px; color: #7dc3de">动画</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
+      <a href="/tags/Android-Studio/" style="font-size: 16.5px; color: #4dbc6f">Android Studio</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 16.5px; color: #4dbc6f">Glide</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/PageTransformer/" style="font-size: 13px; color: #7dc3de">PageTransformer</a> <a href="/tags/ViewPager/" style="font-size: 20px; color: #1db400">ViewPager</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/动画/" style="font-size: 13px; color: #7dc3de">动画</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
     </div>
   </div>
 
@@ -537,7 +609,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -557,6 +629,10 @@
       <ul>
         
           <li>
+            <a href="/2016/08/30/设置ViewPager的切换速度/">设置ViewPager的切换速度</a>
+          </li>
+        
+          <li>
             <a href="/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/">Android Studio导入项目一直卡在Building gradle project info最快速解决方案</a>
           </li>
         
@@ -570,10 +646,6 @@
         
           <li>
             <a href="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/">Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices.</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/24/Android SDK Manager 更新代理配置/">Android SDK Manager 更新代理配置</a>
           </li>
         
       </ul>
