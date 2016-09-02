@@ -3,20 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android SDK Manager 更新代理配置 | Spring&#39;s Blog</title>
+  <title>对话框样式的Activity获得窗口外点击事件 | Spring&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="王兴春">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Android SDK Manager 更新代理配置">
-<meta property="og:url" content="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/index.html">
+<meta property="og:title" content="对话框样式的Activity获得窗口外点击事件">
+<meta property="og:url" content="https://youth5201314.github.io/2016/09/02/对话框样式的Activity获得窗口外点击事件/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
-<meta property="og:image" content="http://oceh51kku.bkt.clouddn.com/AndroidSDKManager.png">
-<meta property="og:updated_time" content="2016-08-26T03:00:07.063Z">
+<meta property="og:updated_time" content="2016-09-02T08:30:14.362Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android SDK Manager 更新代理配置">
+<meta name="twitter:title" content="对话框样式的Activity获得窗口外点击事件">
 <meta name="twitter:description" content="王兴春">
-<meta name="twitter:image" content="http://oceh51kku.bkt.clouddn.com/AndroidSDKManager.png">
   
     <link rel="alternate" href="http://weibo.com/youth0819/home" title="Spring&#39;s Blog" type="application/atom+xml">
   
@@ -77,17 +75,17 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Android SDK Manager 更新代理配置" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-对话框样式的Activity获得窗口外点击事件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2016/08/24/Android SDK Manager 更新代理配置/" class="article-date">
-  <time datetime="2016-08-24T03:34:10.000Z" itemprop="datePublished">2016-08-24</time>
+<a href="/2016/09/02/对话框样式的Activity获得窗口外点击事件/" class="article-date">
+  <time datetime="2016-09-02T08:20:41.000Z" itemprop="datePublished">2016-09-02</time>
 </a>
 
 
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/Android-Studio/">Android Studio</a>
+    <a class="article-category-link" href="/categories/Android/">Android</a>
   </div>
 
   </div>
@@ -98,7 +96,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Android SDK Manager 更新代理配置
+      对话框样式的Activity获得窗口外点击事件
     </h1>
   
 
@@ -110,18 +108,18 @@
 		<div id="toc" class="toc-article">
 			<h2 class="toc-title"><span>文章目录</span></h2>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现Dialog样式的Activity"><span class="toc-number">1.</span> <span class="toc-text">如何实现Dialog样式的Activity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？"><span class="toc-number">2.</span> <span class="toc-text">如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？</span></a></li></ol>
 		
 		</div>
 		
-        <p>关于 Android SDK Manager 的无法更新的设置</p>
-<ul>
-<li><p>启动 Android SDK Manager ，打开主界面，依次选择「Tools」、「Options…」，弹出『Android SDK Manager - Settings』窗口；</p>
-</li>
-<li><p>在『Android SDK Manager - Settings』窗口中，在「HTTP Proxy Server」和「HTTP Proxy Port」输入框内填入 mirrors.neusoft.edu.cn 和 80，并且选中「Force https://… sources to be fetched using <a href="http://...」复选框。设置完成后单击「Close」按钮关闭『Android" target="_blank" rel="external">http://...」复选框。设置完成后单击「Close」按钮关闭『Android</a> SDK Manager - Settings』窗口返回到主界面；</p>
-</li>
-<li>依次选择「Packages」、「Reload」。<br><img src="http://oceh51kku.bkt.clouddn.com/AndroidSDKManager.png" alt="Android SDK Manager"></li>
-</ul>
+        <p>Dialog除了使用Dialog类来实现之外，还可以使用Dialog样式的Activity来实现，只需要在注册Activity时指明theme为adnroid:Theme.Dialog就行，这样的Dialog因为实际上是个Activity而更加丰富灵活。在API11（如果没记错的话）之前的dialog样式Activity是模式的，点击对话框外部对话框不会消失，而API11之后虽然依然是模式的，但点击对话框外部后对话框消失，相当于点击了返回键。</p>
+<h3 id="如何实现Dialog样式的Activity"><a href="#如何实现Dialog样式的Activity" class="headerlink" title="如何实现Dialog样式的Activity"></a>如何实现Dialog样式的Activity</h3><p>values目录下创建一份style.xml文件，内容如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"dialog"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Theme.Dialog"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowFrame"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsFloating"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:backgroundDimEnabled"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在AndroidManifest.xml中，将以对话框形式显示的Activity设置 上面的样式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".DialogActivity"</span> <span class="attr">android:theme</span>=<span class="string">"@style/dialog"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？"><a href="#如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？" class="headerlink" title="如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？"></a>如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？</h3><p>在API11之后添加了setFinishOnTouchOutside()方法，只需要在onCreate()方法中调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.setFinishOnTouchOutside(<span class="keyword">false</span>);</div></pre></td></tr></table></figure></p>
+<p>或者在res\values\styles.xml样式里添加：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span>    </div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"Dialog"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Theme.Holo.DialogWhenLarge"</span>&gt;</span><span class="xml">    </span></div><div class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowCloseOnTouchOutside"</span>&gt;</span>false<span class="tag">&lt;/<span class="name">item</span>&gt;</span>    </div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span>    </div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>就可以设置点击对话框外部是否消失，但API11之前没有这个方法，也就是说API11之前没有现成的方法能够实现点击dialog样式Activity外部对话框消失，所以真正监听这个点击事件才是根本解决方法。</p>
+<p>Stackoverflow上有人给出了一种非常有效的思路。首先在View创建之前设置两个Flag，一个设置窗口为非模式的，这样除窗口外的内容就可以获得touch事件，然后设置窗口外部touch事件发生时的通知。最后重写onTouchEvent，监听窗口外的Touch事件。这样就可以在监听方法中自定义窗口外点击事件的响应，是否关闭窗口或者其他操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line"> <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">    <span class="comment">// Make us non-modal, so that others can receive touch events.</span></div><div class="line">    getWindow().setFlags(LayoutParams.FLAG_NOT_TOUCH_MODAL, LayoutParams.FLAG_NOT_TOUCH_MODAL);</div><div class="line"></div><div class="line">    <span class="comment">// ...but notify us that it happened.</span></div><div class="line">    getWindow().setFlags(LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH, LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);</div><div class="line"></div><div class="line">    <span class="comment">// Note that flag changes must happen *before* the content view is set.</span></div><div class="line">    setContentView(R.layout.my_dialog_view);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">    <span class="comment">// If we've received a touch notification that the user has touched</span></div><div class="line">    <span class="comment">// outside the app, finish the activity.</span></div><div class="line">    <span class="keyword">if</span> (MotionEvent.ACTION_OUTSIDE == event.getAction()) &#123;</div><div class="line">      finish();</div><div class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Delegate everything else to Activity.</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(event);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -132,11 +130,11 @@
 	  <!-- 百度分享 End -->
 	  
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Activity/">Activity</a></li></ul>
 
 	  
 <span>
-更新日期:<time datetime="2016-08-26T03:00:07.063Z" itemprop="dateModified">2016-08-26</time>
+更新日期:<time datetime="2016-09-02T08:30:14.362Z" itemprop="dateModified">2016-09-02</time>
 </span>
 
 
@@ -146,19 +144,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices.
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/08/22/Android代码混淆详解/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/30/设置ViewPager的切换速度/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Android代码混淆详解</div>
+      <div class="article-nav-title">设置ViewPager的切换速度</div>
     </a>
   
 </nav>
@@ -171,7 +160,7 @@
 
 <!-- 多说评论框 start -->
 <section id="comments">
-  <div class="ds-thread"  data-thread-key="/2016/08/24/Android SDK Manager 更新代理配置/" data-title="Android SDK Manager 更新代理配置" data-url="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/" id="ds_thread">
+  <div class="ds-thread"  data-thread-key="/2016/09/02/对话框样式的Activity获得窗口外点击事件/" data-title="对话框样式的Activity获得窗口外点击事件" data-url="https://youth5201314.github.io/2016/09/02/对话框样式的Activity获得窗口外点击事件/" id="ds_thread">
     <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
   </div>
 </section>
@@ -183,7 +172,7 @@
   <div id="toc" class="toc-aside">
   <h2 class="toc-title">文章目录</h2>
     
-        
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现Dialog样式的Activity"><span class="toc-number">1.</span> <span class="toc-text">如何实现Dialog样式的Activity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？"><span class="toc-number">2.</span> <span class="toc-text">如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？</span></a></li></ol>
     
   </div>
 
