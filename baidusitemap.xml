@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://youth5201314.github.io/2016/08/25/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0android%E7%A8%8B%E5%BA%8F%E4%B8%80%E6%AE%B5%E6%97%B6%E9%97%B4%E6%97%A0%E6%93%8D%E4%BD%9C%E5%90%8E%E7%9A%84%E5%8A%9F%E8%83%BD%E8%87%AA%E5%AE%9A%E4%B9%89/</loc>
+    <lastmod>2016-09-02T08:47:27.740Z</lastmod>
+    <data>
+        <display>
+        <title>如何实现android程序一段时间无操作后的功能自定义</title>
+        <pubTime>2016-08-25T03:36:36.000Z</pubTime>
+        
+        <tag>Activity</tag>
+         
+        <tag>Handler</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://youth5201314.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://youth5201314.github.io/2016/09/02/%E5%AF%B9%E8%AF%9D%E6%A1%86%E6%A0%B7%E5%BC%8F%E7%9A%84Activity%E8%8E%B7%E5%BE%97%E7%AA%97%E5%8F%A3%E5%A4%96%E7%82%B9%E5%87%BB%E4%BA%8B%E4%BB%B6/</loc>
     <lastmod>2016-09-02T08:30:14.362Z</lastmod>
     <data>
@@ -124,21 +146,6 @@
              
               <breadCrumb title="Android Studio" url="https://youth5201314.github.io/categories/Android-Studio/"/>
           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://youth5201314.github.io/2016/08/25/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0android%E7%A8%8B%E5%BA%8F%E4%B8%80%E6%AE%B5%E6%97%B6%E9%97%B4%E6%97%A0%E6%93%8D%E4%BD%9C%E5%90%8E%E7%9A%84%E5%8A%9F%E8%83%BD%E8%87%AA%E5%AE%9A%E4%B9%89/</loc>
-    <lastmod>2016-08-25T03:36:36.633Z</lastmod>
-    <data>
-        <display>
-        <title>如何实现android程序一段时间无操作后的功能自定义</title>
-        <pubTime>2016-08-25T03:36:36.000Z</pubTime>
-        
-         
-           
         </display>
     </data>
     </url>
