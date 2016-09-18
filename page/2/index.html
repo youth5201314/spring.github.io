@@ -76,6 +76,86 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android Webview和js交互" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/18/Android Webview和js交互/" class="article-date">
+  <time datetime="2016-08-18T07:42:13.000Z" itemprop="datePublished">2016-08-18</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/Android Webview和js交互/">Android Webview和js交互</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>文章目录</span></h2>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#js代码调用Android中的方法"><span class="toc-number">1.</span> <span class="toc-text">js代码调用Android中的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android代码调用js方法"><span class="toc-number">2.</span> <span class="toc-text">Android代码调用js方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA和JS交互注意事项"><span class="toc-number">3.</span> <span class="toc-text">JAVA和JS交互注意事项</span></a></li></ol>
+		
+		</div>
+		
+        <p>有时我们有这样的需求：需要从app的网页中点击调用软件内部的页面，又或者是软件内部调用网页的js方法。</p>
+<h3 id="js代码调用Android中的方法"><a href="#js代码调用Android中的方法" class="headerlink" title="js代码调用Android中的方法"></a>js代码调用Android中的方法</h3><p>addJavascriptInterface方法有两个参数：<br>第一个参数就是我们一般会实现一个自己的类，类里面提供我们要提供给javascript访问的方法；<br>第二个参数是访问我们在obj中声明的方法时候所用到的js对象；<br>调用模式为window.interfaceName.方法名()或者是javascript: interfaceName.方法名() 。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//启用webview对javascript支持</span></div><div class="line">webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</div><div class="line">webview.addJavascriptInterface(<span class="keyword">new</span> WebAppInterface(<span class="keyword">this</span>), <span class="string">"android"</span>);</div><div class="line"></div><div class="line"><span class="comment">//接口名称自定义</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppInterface</span> </span>&#123;</div><div class="line">	Context mContext;</div><div class="line"></div><div class="line">	WebAppInterface(Context c) &#123;</div><div class="line">	    mContext = c;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//参数名这个自己定义，和网页js传参对应即可</span></div><div class="line">	<span class="meta">@JavascriptInterface</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">	   <span class="comment">//这里就进行软件内部处理了，</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在网页中进行js调用<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">onClick</span>=<span class="string">"window.android.show('传参')"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="Android代码调用js方法"><a href="#Android代码调用js方法" class="headerlink" title="Android代码调用js方法"></a>Android代码调用js方法</h3><p>很简单通过WebView的loadUrl方法去调用的就行、只是改变下参数url的写法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 无参数调用</span></div><div class="line">webView.loadUrl(<span class="string">"javascript:androidtojs()"</span>);</div><div class="line"><span class="comment">// 传递参数调用</span></div><div class="line">webView.loadUrl(<span class="string">"javascript:androidtojsargs("</span>传参<span class="string">")"</span>);</div></pre></td></tr></table></figure></p>
+<p>在网页中创建js方法<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line">function androidtojs()&#123;</div><div class="line">	 //自己实现处理</div><div class="line">&#125;</div><div class="line"></div><div class="line">function androidtojsargs(arg)&#123;</div><div class="line">	//自己实现处理</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="JAVA和JS交互注意事项"><a href="#JAVA和JS交互注意事项" class="headerlink" title="JAVA和JS交互注意事项"></a>JAVA和JS交互注意事项</h3><p>1、尽量用js调用Android方法：</p>
+<ul>
+<li>Android调用js里面的函数的效率远远低于js调用Android</li>
+<li>Android调用js的函数，没有返回值，调用了就控制不到了</li>
+</ul>
+<p>2、Js调用Android的方法，返回值如果是native字符串，必须使用toLocaleString()转成locale的才能正常使用，但是有的耗时<br>3、网页中尽量使用原生的js写业务脚本、以提升加载速度</p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/" data-id="cisli33yv000bgw59og00dw1j" data_title="Android Webview和js交互" data_summary="有时我们有这样的需求：需要从app的网页中点击调用软件..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/18/Android Webview和js交互/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webview/">Webview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-08-18T08:37:28.903Z" itemprop="dateModified">2016-08-18</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-Android文件和base64互转" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -644,7 +724,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -654,7 +734,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Activity/">Activity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageTransformer/">PageTransformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewPager/">ViewPager</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Activity/">Activity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageTransformer/">PageTransformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewPager/">ViewPager</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -664,7 +744,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Activity/" style="font-size: 16.5px; color: #4dbc6f">Activity</a> <a href="/tags/Android-Studio/" style="font-size: 16.5px; color: #4dbc6f">Android Studio</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 16.5px; color: #4dbc6f">Glide</a> <a href="/tags/Handler/" style="font-size: 13px; color: #7dc3de">Handler</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/PageTransformer/" style="font-size: 13px; color: #7dc3de">PageTransformer</a> <a href="/tags/ViewPager/" style="font-size: 20px; color: #1db400">ViewPager</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/动画/" style="font-size: 13px; color: #7dc3de">动画</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
+      <a href="/tags/Activity/" style="font-size: 16.5px; color: #4dbc6f">Activity</a> <a href="/tags/Android/" style="font-size: 13px; color: #7dc3de">Android</a> <a href="/tags/Android-Studio/" style="font-size: 16.5px; color: #4dbc6f">Android Studio</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 16.5px; color: #4dbc6f">Glide</a> <a href="/tags/Handler/" style="font-size: 13px; color: #7dc3de">Handler</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/PageTransformer/" style="font-size: 13px; color: #7dc3de">PageTransformer</a> <a href="/tags/ViewPager/" style="font-size: 20px; color: #1db400">ViewPager</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/动画/" style="font-size: 13px; color: #7dc3de">动画</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/设计/" style="font-size: 13px; color: #7dc3de">设计</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
     </div>
   </div>
 
@@ -674,7 +754,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">11</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -694,6 +774,10 @@
       <ul>
         
           <li>
+            <a href="/2016/09/18/App界面设计经验/">App界面设计经验</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/02/对话框样式的Activity获得窗口外点击事件/">对话框样式的Activity获得窗口外点击事件</a>
           </li>
         
@@ -707,10 +791,6 @@
         
           <li>
             <a href="/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/">如何实现android程序一段时间无操作后的功能自定义</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/24/ViewPager切换动画PageTransformer使用/">ViewPager切换动画PageTransformer使用</a>
           </li>
         
       </ul>
@@ -738,6 +818,10 @@
     <li><a href="https://elelogistics.github.io/" target="_BLANK">饿了么物流技术</a></li>
     
     <li><a href="http://huazhiyuan2008.github.io/" target="_BLANK">Jameson&#39;s Blog</a></li>
+    
+    <li><a href="http://www.gcssloop.com/" target="_BLANK">gcssloop</a></li>
+    
+    <li><a href="http://ryanhoo.github.io/" target="_BLANK">ryanhoo</a></li>
     
   </ul>
 </div>
