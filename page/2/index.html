@@ -76,6 +76,75 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Android文件和base64互转" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/18/Android文件和base64互转/" class="article-date">
+  <time datetime="2016-08-18T07:42:13.000Z" itemprop="datePublished">2016-08-18</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/Android文件和base64互转/">Android文件和base64互转</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>文章目录</span></h2>
+		
+			
+		
+		</div>
+		
+        <p>在项目中需要用到文件传输入，有时需要将文件转成base64字串，再将base64字串转成字节流保存在文件了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* 将文件转成base64 字符串</div><div class="line">* <span class="doctag">@param</span> path 文件路径</div><div class="line">* <span class="doctag">@return</span></div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encodeBase64File</span><span class="params">(String path)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	File  file = <span class="keyword">new</span> File(path);</div><div class="line">	FileInputStream inputFile = <span class="keyword">new</span> FileInputStream(file);</div><div class="line">	<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[(<span class="keyword">int</span>)file.length()];</div><div class="line">	inputFile.read(buffer);</div><div class="line">	inputFile.close();</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> BASE64Encoder().encode(buffer);</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">* 将base64字符解码保存文件</div><div class="line">* <span class="doctag">@param</span> base64Code</div><div class="line">* <span class="doctag">@param</span> targetPath</div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decoderBase64File</span><span class="params">(String base64Code,String targetPath)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> BASE64Decoder().decodeBuffer(base64Code);</div><div class="line">	FileOutputStream out = <span class="keyword">new</span> FileOutputStream(targetPath);</div><div class="line">	out.write(buffer);</div><div class="line">	out.close();</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">* 将base64字符保存文本文件</div><div class="line">* <span class="doctag">@param</span> base64Code</div><div class="line">* <span class="doctag">@param</span> targetPath</div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">toFile</span><span class="params">(String base64Code,String targetPath)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	<span class="keyword">byte</span>[] buffer = base64Code.getBytes();</div><div class="line">	FileOutputStream out = <span class="keyword">new</span> FileOutputStream(targetPath);</div><div class="line">	out.write(buffer);</div><div class="line">	out.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/" data-id="cit8b58by000bwk590a14m3w7" data_title="Android文件和base64互转" data_summary="在项目中需要用到文件传输入，有时需要将文件转成base..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/18/Android文件和base64互转/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Base64/">Base64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/File/">File</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件/">文件</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-08-18T07:51:05.685Z" itemprop="dateModified">2016-08-18</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-Android Webview和js交互" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -130,7 +199,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/" data-id="cisli33yv000bgw59og00dw1j" data_title="Android Webview和js交互" data_summary="有时我们有这样的需求：需要从app的网页中点击调用软件..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/" data-id="cit8b58bn0005wk59pblvejay" data_title="Android Webview和js交互" data_summary="有时我们有这样的需求：需要从app的网页中点击调用软件..." class="article-share-link">Share</a>
       
 
       
@@ -143,75 +212,6 @@
 	  
 <span>
 更新日期:<time datetime="2016-08-18T08:37:28.903Z" itemprop="dateModified">2016-08-18</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-Android文件和base64互转" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/18/Android文件和base64互转/" class="article-date">
-  <time datetime="2016-08-18T07:42:13.000Z" itemprop="datePublished">2016-08-18</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/18/Android文件和base64互转/">Android文件和base64互转</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			
-		
-		</div>
-		
-        <p>在项目中需要用到文件传输入，有时需要将文件转成base64字串，再将base64字串转成字节流保存在文件了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* 将文件转成base64 字符串</div><div class="line">* <span class="doctag">@param</span> path 文件路径</div><div class="line">* <span class="doctag">@return</span></div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encodeBase64File</span><span class="params">(String path)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	File  file = <span class="keyword">new</span> File(path);</div><div class="line">	FileInputStream inputFile = <span class="keyword">new</span> FileInputStream(file);</div><div class="line">	<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[(<span class="keyword">int</span>)file.length()];</div><div class="line">	inputFile.read(buffer);</div><div class="line">	inputFile.close();</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> BASE64Encoder().encode(buffer);</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">* 将base64字符解码保存文件</div><div class="line">* <span class="doctag">@param</span> base64Code</div><div class="line">* <span class="doctag">@param</span> targetPath</div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decoderBase64File</span><span class="params">(String base64Code,String targetPath)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> BASE64Decoder().decodeBuffer(base64Code);</div><div class="line">	FileOutputStream out = <span class="keyword">new</span> FileOutputStream(targetPath);</div><div class="line">	out.write(buffer);</div><div class="line">	out.close();</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">* 将base64字符保存文本文件</div><div class="line">* <span class="doctag">@param</span> base64Code</div><div class="line">* <span class="doctag">@param</span> targetPath</div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">toFile</span><span class="params">(String base64Code,String targetPath)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	<span class="keyword">byte</span>[] buffer = base64Code.getBytes();</div><div class="line">	FileOutputStream out = <span class="keyword">new</span> FileOutputStream(targetPath);</div><div class="line">	out.write(buffer);</div><div class="line">	out.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/" data-id="cisli33ys0008gw59nr7mr1yx" data_title="Android文件和base64互转" data_summary="在项目中需要用到文件传输入，有时需要将文件转成base..." class="article-share-link">Share</a>
-      
-
-      
-        <a href="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/18/Android文件和base64互转/">暂无评论</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Base64/">Base64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/File/">File</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件/">文件</a></li></ul>
-
-	  
-<span>
-更新日期:<time datetime="2016-08-18T07:51:05.685Z" itemprop="dateModified">2016-08-18</time>
 </span>
 
 
@@ -271,7 +271,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/09/Glide加载自定义图形形状/" data-id="cisli33z2000hgw59y992utuj" data_title="Glide加载自定义图形形状" data_summary="Glide实现图片的自定义主要是集成BitmapTra..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/09/Glide加载自定义图形形状/" data-id="cit8b58c5000lwk596jsxo8xh" data_title="Glide加载自定义图形形状" data_summary="Glide实现图片的自定义主要是集成BitmapTra..." class="article-share-link">Share</a>
       
 
       
@@ -392,7 +392,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/05/19/Glide详细使用总结/" data-id="cisli33yy000dgw59dszc3rwe" data_title="Glide详细使用总结" data_summary="Glide 是一个高效、开源、 Android设备上的..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/05/19/Glide详细使用总结/" data-id="cit8b58c8000owk59qrxscq41" data_title="Glide详细使用总结" data_summary="Glide 是一个高效、开源、 Android设备上的..." class="article-share-link">Share</a>
       
 
       
@@ -666,7 +666,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/04/13/Banner开源框架-Android轮播控件/" data-id="cisli33yp0006gw59ol3jdf28" data_title="Banner开源框架[Android轮播控件]" data_summary="描述现在的绝大数App都有banner界面,也就是轮播..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/04/13/Banner开源框架-Android轮播控件/" data-id="cit8b58c3000jwk59vk7bv59w" data_title="Banner开源框架[Android轮播控件]" data_summary="描述现在的绝大数App都有banner界面,也就是轮播..." class="article-share-link">Share</a>
       
 
       
