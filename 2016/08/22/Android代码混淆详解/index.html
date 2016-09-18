@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://youth5201314.github.io/2016/08/22/Android代码混淆详解/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
-<meta property="og:updated_time" content="2016-08-24T07:04:30.476Z">
+<meta property="og:updated_time" content="2016-09-18T08:02:44.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android代码混淆详解">
 <meta name="twitter:description" content="王兴春">
@@ -112,7 +112,8 @@
 		
 		</div>
 		
-        <h3 id="proguard-配置"><a href="#proguard-配置" class="headerlink" title="proguard 配置"></a>proguard 配置</h3><ul>
+        <p>虽然混淆的作用不是特别大，反编译也能看见代码，但是为了增加被人的反编译成本，还是最好混淆了，一般人也不会去看你混淆的代码，当然最好在加固下、监听下渠道也就差不多了。如果C语言很好的话，还是可以考虑把核心算法放到C语言里完成打包成so库等方式更为安全。下面就总结下混淆的配置。<br><a id="more"></a></p>
+<h3 id="proguard-配置"><a href="#proguard-配置" class="headerlink" title="proguard 配置"></a>proguard 配置</h3><ul>
 <li>-keepclasseswithmembers 指定的类和类成员被保留，假如指定的类成员存在的话。</li>
 <li>-dontwarn 缺省proguard 会检查每一个引用是否正确，但是第三方库里面往往有些不会用到的类，没有正确引用。如果不配置的话，系统就会报错。</li>
 <li>-keep 指定的类和类成员被保留作为 入口 。</li>
@@ -230,7 +231,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-24T07:04:30.476Z" itemprop="dateModified">2016-08-24</time>
+更新日期:<time datetime="2016-09-18T08:02:44.644Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 

@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://youth5201314.github.io/2016/09/02/对话框样式的Activity获得窗口外点击事件/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
-<meta property="og:updated_time" content="2016-09-02T08:30:14.362Z">
+<meta property="og:updated_time" content="2016-09-18T07:51:08.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对话框样式的Activity获得窗口外点击事件">
 <meta name="twitter:description" content="王兴春">
@@ -112,7 +112,7 @@
 		
 		</div>
 		
-        <p>Dialog除了使用Dialog类来实现之外，还可以使用Dialog样式的Activity来实现，只需要在注册Activity时指明theme为adnroid:Theme.Dialog就行，这样的Dialog因为实际上是个Activity而更加丰富灵活。在API11（如果没记错的话）之前的dialog样式Activity是模式的，点击对话框外部对话框不会消失，而API11之后虽然依然是模式的，但点击对话框外部后对话框消失，相当于点击了返回键。</p>
+        <p>Dialog除了使用Dialog类来实现之外，还可以使用Dialog样式的Activity来实现，只需要在注册Activity时指明theme为adnroid:Theme.Dialog就行，这样的Dialog因为实际上是个Activity而更加丰富灵活。在API11（如果没记错的话）之前的dialog样式Activity是模式的，点击对话框外部对话框不会消失，而API11之后虽然依然是模式的，但点击对话框外部后对话框消失，相当于点击了返回键。<br><a id="more"></a></p>
 <h3 id="如何实现Dialog样式的Activity"><a href="#如何实现Dialog样式的Activity" class="headerlink" title="如何实现Dialog样式的Activity"></a>如何实现Dialog样式的Activity</h3><p>values目录下创建一份style.xml文件，内容如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"dialog"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Theme.Dialog"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowFrame"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsFloating"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:backgroundDimEnabled"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>在AndroidManifest.xml中，将以对话框形式显示的Activity设置 上面的样式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".DialogActivity"</span> <span class="attr">android:theme</span>=<span class="string">"@style/dialog"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
 <h3 id="如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？"><a href="#如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？" class="headerlink" title="如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？"></a>如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？</h3><p>在API11之后添加了setFinishOnTouchOutside()方法，只需要在onCreate()方法中调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.setFinishOnTouchOutside(<span class="keyword">false</span>);</div></pre></td></tr></table></figure></p>
@@ -134,7 +134,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-09-02T08:30:14.362Z" itemprop="dateModified">2016-09-02</time>
+更新日期:<time datetime="2016-09-18T07:51:08.082Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 

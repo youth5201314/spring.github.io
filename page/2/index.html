@@ -105,21 +105,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			
-		
-		</div>
-		
-        <p>在项目中需要用到文件传输入，有时需要将文件转成base64字串，再将base64字串转成字节流保存在文件了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line">* 将文件转成base64 字符串</div><div class="line">* <span class="doctag">@param</span> path 文件路径</div><div class="line">* <span class="doctag">@return</span></div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">encodeBase64File</span><span class="params">(String path)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	File  file = <span class="keyword">new</span> File(path);</div><div class="line">	FileInputStream inputFile = <span class="keyword">new</span> FileInputStream(file);</div><div class="line">	<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[(<span class="keyword">int</span>)file.length()];</div><div class="line">	inputFile.read(buffer);</div><div class="line">	inputFile.close();</div><div class="line">	<span class="keyword">return</span> <span class="keyword">new</span> BASE64Encoder().encode(buffer);</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">* 将base64字符解码保存文件</div><div class="line">* <span class="doctag">@param</span> base64Code</div><div class="line">* <span class="doctag">@param</span> targetPath</div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">decoderBase64File</span><span class="params">(String base64Code,String targetPath)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	<span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> BASE64Decoder().decodeBuffer(base64Code);</div><div class="line">	FileOutputStream out = <span class="keyword">new</span> FileOutputStream(targetPath);</div><div class="line">	out.write(buffer);</div><div class="line">	out.close();</div><div class="line">&#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">* 将base64字符保存文本文件</div><div class="line">* <span class="doctag">@param</span> base64Code</div><div class="line">* <span class="doctag">@param</span> targetPath</div><div class="line">* <span class="doctag">@throws</span> Exception</div><div class="line">*/</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">toFile</span><span class="params">(String base64Code,String targetPath)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">	<span class="keyword">byte</span>[] buffer = base64Code.getBytes();</div><div class="line">	FileOutputStream out = <span class="keyword">new</span> FileOutputStream(targetPath);</div><div class="line">	out.write(buffer);</div><div class="line">	out.close();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
+        <p>在项目中需要用到文件传输入，有时需要将文件转成base64字串，再将base64字串转成字节流保存在文件了。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/18/Android文件和base64互转/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/" data-id="cit8bnvec000bc859wjde5tqy" data_title="Android文件和base64互转" data_summary="在项目中需要用到文件传输入，有时需要将文件转成base..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/" data-id="cit8c5dqe000bi859uflg6exx" data_title="Android文件和base64互转" data_summary="在项目中需要用到文件传输入，有时需要将文件转成base..." class="article-share-link">Share</a>
       
 
       
@@ -131,7 +127,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-18T07:51:05.685Z" itemprop="dateModified">2016-08-18</time>
+更新日期:<time datetime="2016-09-18T07:53:33.071Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -174,32 +170,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#js代码调用Android中的方法"><span class="toc-number">1.</span> <span class="toc-text">js代码调用Android中的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android代码调用js方法"><span class="toc-number">2.</span> <span class="toc-text">Android代码调用js方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA和JS交互注意事项"><span class="toc-number">3.</span> <span class="toc-text">JAVA和JS交互注意事项</span></a></li></ol>
-		
-		</div>
-		
-        <p>有时我们有这样的需求：需要从app的网页中点击调用软件内部的页面，又或者是软件内部调用网页的js方法。</p>
-<h3 id="js代码调用Android中的方法"><a href="#js代码调用Android中的方法" class="headerlink" title="js代码调用Android中的方法"></a>js代码调用Android中的方法</h3><p>addJavascriptInterface方法有两个参数：<br>第一个参数就是我们一般会实现一个自己的类，类里面提供我们要提供给javascript访问的方法；<br>第二个参数是访问我们在obj中声明的方法时候所用到的js对象；<br>调用模式为window.interfaceName.方法名()或者是javascript: interfaceName.方法名() 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//启用webview对javascript支持</span></div><div class="line">webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</div><div class="line">webview.addJavascriptInterface(<span class="keyword">new</span> WebAppInterface(<span class="keyword">this</span>), <span class="string">"android"</span>);</div><div class="line"></div><div class="line"><span class="comment">//接口名称自定义</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppInterface</span> </span>&#123;</div><div class="line">	Context mContext;</div><div class="line"></div><div class="line">	WebAppInterface(Context c) &#123;</div><div class="line">	    mContext = c;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//参数名这个自己定义，和网页js传参对应即可</span></div><div class="line">	<span class="meta">@JavascriptInterface</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">	   <span class="comment">//这里就进行软件内部处理了，</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在网页中进行js调用<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">onClick</span>=<span class="string">"window.android.show('传参')"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="Android代码调用js方法"><a href="#Android代码调用js方法" class="headerlink" title="Android代码调用js方法"></a>Android代码调用js方法</h3><p>很简单通过WebView的loadUrl方法去调用的就行、只是改变下参数url的写法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 无参数调用</span></div><div class="line">webView.loadUrl(<span class="string">"javascript:androidtojs()"</span>);</div><div class="line"><span class="comment">// 传递参数调用</span></div><div class="line">webView.loadUrl(<span class="string">"javascript:androidtojsargs("</span>传参<span class="string">")"</span>);</div></pre></td></tr></table></figure></p>
-<p>在网页中创建js方法<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line">function androidtojs()&#123;</div><div class="line">	 //自己实现处理</div><div class="line">&#125;</div><div class="line"></div><div class="line">function androidtojsargs(arg)&#123;</div><div class="line">	//自己实现处理</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="JAVA和JS交互注意事项"><a href="#JAVA和JS交互注意事项" class="headerlink" title="JAVA和JS交互注意事项"></a>JAVA和JS交互注意事项</h3><p>1、尽量用js调用Android方法：</p>
-<ul>
-<li>Android调用js里面的函数的效率远远低于js调用Android</li>
-<li>Android调用js的函数，没有返回值，调用了就控制不到了</li>
-</ul>
-<p>2、Js调用Android的方法，返回值如果是native字符串，必须使用toLocaleString()转成locale的才能正常使用，但是有的耗时<br>3、网页中尽量使用原生的js写业务脚本、以提升加载速度</p>
-
+        <p>有时我们有这样的需求：需要从app的网页中点击调用软件内部的页面，又或者是软件内部调用网页的js方法。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/18/Android Webview和js交互/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/" data-id="cit8bnvec0005c859ur4jm388" data_title="Android Webview和js交互" data_summary="有时我们有这样的需求：需要从app的网页中点击调用软件..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/" data-id="cit8c5dq80006i8598plap5v2" data_title="Android Webview和js交互" data_summary="有时我们有这样的需求：需要从app的网页中点击调用软件..." class="article-share-link">Share</a>
       
 
       
@@ -211,7 +192,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-18T08:37:28.903Z" itemprop="dateModified">2016-08-18</time>
+更新日期:<time datetime="2016-09-18T07:53:25.705Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -254,24 +235,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用方法"><span class="toc-number">1.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#圆角图片GlideRoundTransform"><span class="toc-number">2.</span> <span class="toc-text">圆角图片GlideRoundTransform</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#圆形图片GlideCircleTransform"><span class="toc-number">3.</span> <span class="toc-text">圆形图片GlideCircleTransform</span></a></li></ol>
-		
-		</div>
-		
-        <p>Glide实现图片的自定义主要是集成BitmapTransformation进行修改。<br><a href="https://github.com/wasabeef/glide-transformations" target="_blank"> [ 1、glide-transformations ]<br>一个基于Glide的transformation库，拥有裁剪，着色，模糊，滤镜等多种转换效果，赞的不行不行的~~</a></p>
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Glide</div><div class="line">   .with(mContext)</div><div class="line">   .load(url)</div><div class="line">   <span class="comment">//设置圆角图片</span></div><div class="line">   .transform(<span class="keyword">new</span> GlideRoundTransform(mContext, <span class="number">10</span>))</div><div class="line">   <span class="comment">//设置圆形图片</span></div><div class="line">   .transform(<span class="keyword">new</span> GlideCircleTransform(mContext))</div><div class="line">   .crossFade()</div><div class="line">   .into(ImageView);</div></pre></td></tr></table></figure>
-<h3 id="圆角图片GlideRoundTransform"><a href="#圆角图片GlideRoundTransform" class="headerlink" title="圆角图片GlideRoundTransform"></a>圆角图片GlideRoundTransform</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlideRoundTransform</span> <span class="keyword">extends</span> <span class="title">BitmapTransformation</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> radius = <span class="number">0f</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlideRoundTransform</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>(context, <span class="number">4</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlideRoundTransform</span><span class="params">(Context context, <span class="keyword">int</span> dp)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">        <span class="keyword">this</span>.radius = Resources.getSystem().getDisplayMetrics().density * dp;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">transform</span><span class="params">(BitmapPool pool, Bitmap toTransform, <span class="keyword">int</span> outWidth, <span class="keyword">int</span> outHeight)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> roundCrop(pool, toTransform);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Bitmap <span class="title">roundCrop</span><span class="params">(BitmapPool pool, Bitmap source)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (source == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        Bitmap result = pool.get(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);</div><div class="line">        <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</div><div class="line">            result = Bitmap.createBitmap(source.getWidth(), source.getHeight(), Bitmap.Config.ARGB_8888);</div><div class="line">        &#125;</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(result);</div><div class="line">        Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">        paint.setShader(<span class="keyword">new</span> BitmapShader(source, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));</div><div class="line">        paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">        RectF rectF = <span class="keyword">new</span> RectF(<span class="number">0f</span>, <span class="number">0f</span>, source.getWidth(), source.getHeight());</div><div class="line">        canvas.drawRoundRect(rectF, radius, radius, paint);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span> <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getClass().getName() + Math.round(radius);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="圆形图片GlideCircleTransform"><a href="#圆形图片GlideCircleTransform" class="headerlink" title="圆形图片GlideCircleTransform"></a>圆形图片GlideCircleTransform</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlideCircleTransform</span> <span class="keyword">extends</span> <span class="title">BitmapTransformation</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GlideCircleTransform</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Bitmap <span class="title">transform</span><span class="params">(BitmapPool pool, Bitmap toTransform, <span class="keyword">int</span> outWidth, <span class="keyword">int</span> outHeight)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> circleCrop(pool, toTransform);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Bitmap <span class="title">circleCrop</span><span class="params">(BitmapPool pool, Bitmap source)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (source == <span class="keyword">null</span>) <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">int</span> size = Math.min(source.getWidth(), source.getHeight());</div><div class="line">        <span class="keyword">int</span> x = (source.getWidth() - size) / <span class="number">2</span>;</div><div class="line">        <span class="keyword">int</span> y = (source.getHeight() - size) / <span class="number">2</span>;</div><div class="line">        Bitmap squared = Bitmap.createBitmap(source, x, y, size, size);</div><div class="line">        Bitmap result = pool.get(size, size, Bitmap.Config.ARGB_8888);</div><div class="line">        <span class="keyword">if</span> (result == <span class="keyword">null</span>) &#123;</div><div class="line">            result = Bitmap.createBitmap(size, size, Bitmap.Config.ARGB_8888);</div><div class="line">        &#125;</div><div class="line">        Canvas canvas = <span class="keyword">new</span> Canvas(result);</div><div class="line">        Paint paint = <span class="keyword">new</span> Paint();</div><div class="line">        paint.setShader(<span class="keyword">new</span> BitmapShader(squared, BitmapShader.TileMode.CLAMP, BitmapShader.TileMode.CLAMP));</div><div class="line">        paint.setAntiAlias(<span class="keyword">true</span>);</div><div class="line">        <span class="keyword">float</span> r = size / <span class="number">2f</span>;</div><div class="line">        canvas.drawCircle(r, r, r, paint);</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> getClass().getName();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
+        <p>Glide实现图片的自定义主要是集成BitmapTransformation进行修改。<br><a href="https://github.com/wasabeef/glide-transformations" target="_blank"> [ 1、glide-transformations ]<br>一个基于Glide的transformation库，拥有裁剪，着色，模糊，滤镜等多种转换效果，赞的不行不行的~~<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/09/Glide加载自定义图形形状/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/09/Glide加载自定义图形形状/" data-id="cit8bnver000jc85917575d7b" data_title="Glide加载自定义图形形状" data_summary="Glide实现图片的自定义主要是集成BitmapTra..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/09/Glide加载自定义图形形状/" data-id="cit8c5dqn000ji859uobnhzwe" data_title="Glide加载自定义图形形状" data_summary="Glide实现图片的自定义主要是集成BitmapTra..." class="article-share-link">Share</a>
       
 
       
@@ -283,7 +257,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-22T07:34:41.174Z" itemprop="dateModified">2016-08-22</time>
+更新日期:<time datetime="2016-09-18T07:51:41.619Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -326,73 +300,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Glide简单使用"><span class="toc-number">1.</span> <span class="toc-text">Glide简单使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#从其他源加载图片-资源文件、文件、Uri、assets、raw、ContentProvider、sd卡资源"><span class="toc-number">1.1.</span> <span class="toc-text">从其他源加载图片(资源文件、文件、Uri、assets、raw、ContentProvider、sd卡资源)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#占位图，错误图，和淡入淡出效果"><span class="toc-number">1.2.</span> <span class="toc-text">占位图，错误图，和淡入淡出效果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置下载优先级"><span class="toc-number">1.3.</span> <span class="toc-text">设置下载优先级</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置图片大小和缩放形式"><span class="toc-number">1.4.</span> <span class="toc-text">设置图片大小和缩放形式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置动态转换-图片的形状"><span class="toc-number">1.5.</span> <span class="toc-text">设置动态转换,图片的形状</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置监听请求接口"><span class="toc-number">1.6.</span> <span class="toc-text">设置监听请求接口</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Glide优化方法"><span class="toc-number">2.</span> <span class="toc-text">Glide优化方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#清除缓存的方法"><span class="toc-number">2.1.</span> <span class="toc-text">清除缓存的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#清除掉所有的图片加载请求"><span class="toc-number">2.2.</span> <span class="toc-text">清除掉所有的图片加载请求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#滚动加载，不滚动时不加载-提高listview效率"><span class="toc-number">2.3.</span> <span class="toc-text">滚动加载，不滚动时不加载,提高listview效率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#图片列表预加载，提高加载速度"><span class="toc-number">2.4.</span> <span class="toc-text">图片列表预加载，提高加载速度</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Glide3-0新特性"><span class="toc-number">3.</span> <span class="toc-text">Glide3.0新特性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#动态的GIF图片加载"><span class="toc-number">3.1.</span> <span class="toc-text">动态的GIF图片加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地视频快照"><span class="toc-number">3.2.</span> <span class="toc-text">本地视频快照</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#对缩略图的支持"><span class="toc-number">3.3.</span> <span class="toc-text">对缩略图的支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#生命周期集成"><span class="toc-number">3.4.</span> <span class="toc-text">生命周期集成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#转码"><span class="toc-number">3.5.</span> <span class="toc-text">转码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动画：加入了cross-fades和View的属性动画的支持"><span class="toc-number">3.6.</span> <span class="toc-text">动画：加入了cross fades和View的属性动画的支持</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#网络模块可以选择OkHttp或者Volley的支持"><span class="toc-number">3.7.</span> <span class="toc-text">网络模块可以选择OkHttp或者Volley的支持</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#内存缓存"><span class="toc-number">4.</span> <span class="toc-text">内存缓存</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置跳过内存缓存"><span class="toc-number">4.1.</span> <span class="toc-text">设置跳过内存缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#设置缓存策略（磁盘缓存）"><span class="toc-number">4.2.</span> <span class="toc-text">设置缓存策略（磁盘缓存）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在后台线程当中进行加载和缓存"><span class="toc-number">5.</span> <span class="toc-text">在后台线程当中进行加载和缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些基于Glide的优秀库"><span class="toc-number">6.</span> <span class="toc-text">一些基于Glide的优秀库</span></a></li></ol>
-		
-		</div>
-		
-        <p>Glide 是一个高效、开源、 Android设备上的媒体管理框架，它遵循BSD、MIT以及Apache 2.0协议发布。Glide具有获取、解码和展示视频剧照、图片、动画等功能，它还有灵活的API，这些API使开发者能够将Glide应用在几乎任何网络协议栈里。创建Glide的主要目的有两个，一个是实现平滑的图片列表滚动效果，另一个是支持远程图片的获取、大小调整和展示。</p>
-<h3 id="Glide简单使用"><a href="#Glide简单使用" class="headerlink" title="Glide简单使用"></a>Glide简单使用</h3><p>就像 Picasso、Glide 库是使用流接口(fluent interface)。对一个完整的功能请求，Glide 建造者要求最少有三个参数。</p>
-<ul>
-<li>with(Context context) - 上下文环境</li>
-<li>load(String imageUrl) - 需要加载图片的URL.</li>
-<li>into(ImageView imageView) - 图片显示的ImageView.</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Glide.with(context).load(imageUrl).into(imageView);</div></pre></td></tr></table></figure>
-<h4 id="从其他源加载图片-资源文件、文件、Uri、assets、raw、ContentProvider、sd卡资源"><a href="#从其他源加载图片-资源文件、文件、Uri、assets、raw、ContentProvider、sd卡资源" class="headerlink" title="从其他源加载图片(资源文件、文件、Uri、assets、raw、ContentProvider、sd卡资源)"></a>从其他源加载图片(资源文件、文件、Uri、assets、raw、ContentProvider、sd卡资源)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Glide.with(context).load(R.mipmap.ic_launcher).into(imageView);</div><div class="line">Glide.with(context).load(file).into(imageView);</div><div class="line">Uri uri = resourceIdToUri(context, R.mipmap.ic_launcher);</div><div class="line">Glide.with(context).load(<span class="string">"Android.resource://com.frank.glide/raw/raw_1"</span>).into(imageView);</div><div class="line">Glide.with(context).load(<span class="string">"android.resource://com.frank.glide/raw/"</span>+R.raw.raw_1).into(imageView);</div><div class="line">Glide.with(context).load(<span class="string">"content://media/external/images/media/139469"</span>).into(imageView);</div><div class="line">Glide.with(context).load(<span class="string">"file:///android_asset/f003.gif"</span>).into(imageView);</div><div class="line">Glide.with(context).load(<span class="string">"file://"</span>+ Environment.getExternalStorageDirectory().getPath()+<span class="string">"/test.jpg"</span>).into(imageView);</div></pre></td></tr></table></figure>
-<h4 id="占位图，错误图，和淡入淡出效果"><a href="#占位图，错误图，和淡入淡出效果" class="headerlink" title="占位图，错误图，和淡入淡出效果"></a>占位图，错误图，和淡入淡出效果</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Glide</div><div class="line">    .with(context)</div><div class="line">    .load(url)</div><div class="line">    .placeholder(R.mipmap.defalut) <span class="comment">//设置占位图</span></div><div class="line">    .error(R.mipmap.error) <span class="comment">//设置错误图片</span></div><div class="line">    .crossFade() <span class="comment">//设置淡入淡出效果，默认300ms，可以传参</span></div><div class="line">    <span class="comment">//.dontAnimate() //不显示动画效果</span></div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<h4 id="设置下载优先级"><a href="#设置下载优先级" class="headerlink" title="设置下载优先级"></a>设置下载优先级</h4><p>• Priority.LOW<br>• Priority.NORMAL<br>• Priority.HIGH<br>• Priority.IMMEDIATE</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Glide</div><div class="line">    .with(context)</div><div class="line">    .load(url)</div><div class="line">    .priority(Priority.NORMAL)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<h4 id="设置图片大小和缩放形式"><a href="#设置图片大小和缩放形式" class="headerlink" title="设置图片大小和缩放形式"></a>设置图片大小和缩放形式</h4><p>Glide 会根据ImageView的大小，自动限制图片缓存和内存中的大小，当然也可以通过调用override(horizontalSize, verticalSize)限制图片的大小：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Glide</div><div class="line">    .with(context)</div><div class="line">    .load(url)</div><div class="line">    .override(<span class="number">200</span>, <span class="number">200</span>) </div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<p>Glide支持两种图片缩放形式，CenterCrop 和 FitCenter<br>CenterCrop：等比例缩放图片，直到图片的狂高都大于等于ImageView的宽度，然后截取中间的显示。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Glide</div><div class="line">    .with(context)</div><div class="line">    .load(url)</div><div class="line">    .override(<span class="number">200</span>, <span class="number">200</span>) </div><div class="line">    .centerCrop() </div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure></p>
-<p>FitCenter：等比例缩放图片，宽或者是高等于ImageView的宽或者是高。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Glide</div><div class="line">    .with(context)</div><div class="line">    .load(url)</div><div class="line">    .override(<span class="number">200</span>, <span class="number">200</span>)</div><div class="line">    .fitCenter() </div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure></p>
-<h4 id="设置动态转换-图片的形状"><a href="#设置动态转换-图片的形状" class="headerlink" title="设置动态转换,图片的形状"></a>设置动态转换,图片的形状</h4><p><a href="https://youth5201314.github.io/2016/08/09/Glide%E5%8A%A0%E8%BD%BD%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%BE%E5%BD%A2%E5%BD%A2%E7%8A%B6/" target="_blank"> [ 我的另一篇博客传送门 ]</a></p>
-<h4 id="设置监听请求接口"><a href="#设置监听请求接口" class="headerlink" title="设置监听请求接口"></a>设置监听请求接口</h4><p>设置监听的用处 可以用于监控请求发生错误来源，以及图片来源 是内存还是磁盘<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Glide.with(<span class="keyword">this</span>).load(imageUrl).listener(<span class="keyword">new</span> RequestListener&lt;String, GlideDrawable&gt;() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onException</span><span class="params">(Exception e, String model, Target&lt;GlideDrawable&gt; target, <span class="keyword">boolean</span> isFirstResource)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onResourceReady</span><span class="params">(GlideDrawable resource, String model, Target&lt;GlideDrawable&gt; target, <span class="keyword">boolean</span> isFromMemoryCache, <span class="keyword">boolean</span> isFirstResource)</span> </span>&#123;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line">&#125;).into(imageView);</div></pre></td></tr></table></figure></p>
-<h3 id="Glide优化方法"><a href="#Glide优化方法" class="headerlink" title="Glide优化方法"></a>Glide优化方法</h3><h4 id="清除缓存的方法"><a href="#清除缓存的方法" class="headerlink" title="清除缓存的方法"></a>清除缓存的方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Glide.get(<span class="keyword">this</span>).clearDiskCache();<span class="comment">//清理磁盘缓存 需要在子线程中执行</span></div><div class="line">Glide.get(<span class="keyword">this</span>).clearMemory();<span class="comment">//清理内存缓存  可以在UI主线程中进行</span></div></pre></td></tr></table></figure>
-<h4 id="清除掉所有的图片加载请求"><a href="#清除掉所有的图片加载请求" class="headerlink" title="清除掉所有的图片加载请求"></a>清除掉所有的图片加载请求</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Glide.clear()</div></pre></td></tr></table></figure>
-<h4 id="滚动加载，不滚动时不加载-提高listview效率"><a href="#滚动加载，不滚动时不加载-提高listview效率" class="headerlink" title="滚动加载，不滚动时不加载,提高listview效率"></a>滚动加载，不滚动时不加载,提高listview效率</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrollStateChanged</span><span class="params">(AbsListView view, <span class="keyword">int</span> scrollState)</span> </span>&#123;</div><div class="line">    <span class="keyword">switch</span> (scrollState)&#123;</div><div class="line">        <span class="keyword">case</span> SCROLL_STATE_FLING:</div><div class="line">            Log.i(<span class="string">"ListView"</span>,<span class="string">"用户在手指离开屏幕之前，由于滑了一下，视图仍然依靠惯性继续滑动"</span>);</div><div class="line">            Glide.with(getApplicationContext()).pauseRequests();</div><div class="line">            <span class="comment">//刷新</span></div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> SCROLL_STATE_IDLE:</div><div class="line">            Log.i(<span class="string">"ListView"</span>, <span class="string">"视图已经停止滑动"</span>);</div><div class="line">            Glide.with(getApplicationContext()).resumeRequests();</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> SCROLL_STATE_TOUCH_SCROLL:</div><div class="line">            Log.i(<span class="string">"ListView"</span>,<span class="string">"手指没有离开屏幕，视图正在滑动"</span>);</div><div class="line">            Glide.with(getApplicationContext()).resumeRequests();</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="图片列表预加载，提高加载速度"><a href="#图片列表预加载，提高加载速度" class="headerlink" title="图片列表预加载，提高加载速度"></a>图片列表预加载，提高加载速度</h4><p>在图片显示在屏幕上之前就预先取出图片。它提供了一个ListPreloader类， 它被应该事先取出的item数目实例化。然后通过setOnScrollListener(OnScrollListener).被传递给ListView。你想在ListView之外也能预先取出图片吗？没问题，使用前面的builder对象就可以了，只需调用builder.downloadOnly()。</p>
-<h3 id="Glide3-0新特性"><a href="#Glide3-0新特性" class="headerlink" title="Glide3.0新特性"></a>Glide3.0新特性</h3><h4 id="动态的GIF图片加载"><a href="#动态的GIF图片加载" class="headerlink" title="动态的GIF图片加载"></a>动态的GIF图片加载</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Glide.with(context).load(gifUrl).asBitmap().into(imageview); <span class="comment">//显示gif静态图片</span></div><div class="line">Glide.with(context).load(gifUrl).asGif().into(imageview); <span class="comment">//显示gif动态图片</span></div></pre></td></tr></table></figure>
-<h4 id="本地视频快照"><a href="#本地视频快照" class="headerlink" title="本地视频快照"></a>本地视频快照</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Glide.with(context).load(<span class="string">"视频路径/视频文件/本地视频路径"</span>).into(imageview);</div></pre></td></tr></table></figure>
-<h4 id="对缩略图的支持"><a href="#对缩略图的支持" class="headerlink" title="对缩略图的支持"></a>对缩略图的支持</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//加载1/10尺寸的缩略图，然后加载全图</span></div><div class="line">Glide.with(context).load(url).thumbnail(<span class="number">0.1f</span>).into(imageview)</div></pre></td></tr></table></figure>
-<h4 id="生命周期集成"><a href="#生命周期集成" class="headerlink" title="生命周期集成"></a>生命周期集成</h4><p>同时将Activity/Fragment作为with()参数的好处是：图片加载会和Activity/Fragment的生命周期保持一致，</p>
-<ul>
-<li>请求会在onStop的时候自动暂停，</li>
-<li>在onStart的时候重新启动,gif的动画也会在onStop的时候停止，以免在后台消耗电量，</li>
-</ul>
-<h4 id="转码"><a href="#转码" class="headerlink" title="转码"></a>转码</h4><p>Glide的.toBytes()和.transcode()方法允许在后台获取、解码和转换一个图片，你可以将一张图片转换成更多有用的图片格式，比如，上传一张250*250的图片</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">Glide.with(context)</div><div class="line">    .load(<span class="string">"path"</span>)</div><div class="line">    .asBitmap()</div><div class="line">    .toBytes()</div><div class="line">    .centerCrop()</div><div class="line">    .into(<span class="keyword">new</span> SimpleTarget&lt;<span class="keyword">byte</span>[]&gt;(<span class="number">250</span>, <span class="number">250</span>) &#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResourceReady</span><span class="params">(<span class="keyword">byte</span>[] data, GlideAnimation anim)</span> </span>&#123;</div><div class="line">            <span class="comment">// Post your bytes to a background thread and upload them here.</span></div><div class="line">		imageView.setImageDrawable(resource);</div><div class="line">	&#125;</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
-<h4 id="动画：加入了cross-fades和View的属性动画的支持"><a href="#动画：加入了cross-fades和View的属性动画的支持" class="headerlink" title="动画：加入了cross fades和View的属性动画的支持"></a>动画：加入了cross fades和View的属性动画的支持</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Glide  </div><div class="line">    .with( context )</div><div class="line">    .load( url )</div><div class="line">    .animate( android.R.anim.slide_in_left ) </div><div class="line">    .into( imageView );</div></pre></td></tr></table></figure>
-<p>OR<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">ViewPropertyAnimation.Animator animationObject = <span class="keyword">new</span> ViewPropertyAnimation.Animator() &#123;  </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">animate</span><span class="params">(View view)</span> </span>&#123;</div><div class="line">        view.setAlpha( <span class="number">0f</span> );</div><div class="line">        ObjectAnimator fadeAnim = ObjectAnimator.ofFloat( view, <span class="string">"alpha"</span>, <span class="number">0f</span>, <span class="number">1f</span> );</div><div class="line">        fadeAnim.setDuration( <span class="number">2500</span> );</div><div class="line">        fadeAnim.start();</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">Glide  </div><div class="line">    .with( context )</div><div class="line">    .load( url )</div><div class="line">    .animate( animationObject )</div><div class="line">    .into( imageView );</div></pre></td></tr></table></figure></p>
-<h4 id="网络模块可以选择OkHttp或者Volley的支持"><a href="#网络模块可以选择OkHttp或者Volley的支持" class="headerlink" title="网络模块可以选择OkHttp或者Volley的支持"></a>网络模块可以选择OkHttp或者Volley的支持</h4><p>Volley和OkHttp可以在gradle文件当中添加依赖，注册相应的ModelLoaderFactory</p>
-<h3 id="内存缓存"><a href="#内存缓存" class="headerlink" title="内存缓存"></a>内存缓存</h3><h4 id="设置跳过内存缓存"><a href="#设置跳过内存缓存" class="headerlink" title="设置跳过内存缓存"></a>设置跳过内存缓存</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Glide</div><div class="line">    .with(context)</div><div class="line">    .load(url)</div><div class="line">    .skipMemoryCache(<span class="keyword">true</span>)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure>
-<h4 id="设置缓存策略（磁盘缓存）"><a href="#设置缓存策略（磁盘缓存）" class="headerlink" title="设置缓存策略（磁盘缓存）"></a>设置缓存策略（磁盘缓存）</h4><p>策略解说：<br>all:缓存源资源和转换后的资源<br>none:不作任何磁盘缓存<br>source:缓存源资源<br>result：缓存转换后的资源<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Glide</div><div class="line">    .with(context)</div><div class="line">    .load(url)</div><div class="line">    .diskCacheStrategy(DiskCacheStrategy.ALL)</div><div class="line">    .into(imageView);</div></pre></td></tr></table></figure></p>
-<h3 id="在后台线程当中进行加载和缓存"><a href="#在后台线程当中进行加载和缓存" class="headerlink" title="在后台线程当中进行加载和缓存"></a>在后台线程当中进行加载和缓存</h3><p>为了保证Glide在后台线程当中加载资源文件更加容易，Glide除了Glide.with(fragment).load(url).into(view)之外还提供了<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">downloadOnly(<span class="keyword">int</span> width, <span class="keyword">int</span> height)</div><div class="line">downloadOnly(Y target)<span class="comment">// Y extends Target&lt;File&gt;</span></div><div class="line">into(<span class="keyword">int</span> width, <span class="keyword">int</span> height)</div></pre></td></tr></table></figure></p>
-<p>1.downloadOnly</p>
-<p>Glide的downloadOnly()允许开发者将Image的二进制文件下载到硬盘缓存当中，以便在后续使用，</p>
-<p>在UI线程当中异步下载，在异步线程当中则是使用width和height<br>在异步线程当中同步调用下载，在同步线程当中，<br>downloadOnly使用一个target作为参数<br>1、 在后台线程当中下载图片，可以通过如下的方式：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">FutureTarget&lt;File&gt; future = Glide.with(applicationContext)</div><div class="line">    .load(yourUrl)</div><div class="line">    .downloadOnly(<span class="number">500</span>, <span class="number">500</span>);</div><div class="line">File cacheFile = future.get();</div></pre></td></tr></table></figure></p>
-<p>当future返回的时候，image的二进制文件信息就存入了disk缓存了，值得注意的是downloadOnly API只是保证图片个bytes数据在disk当中是有效的。</p>
-<p>2、下载完毕之后如果想要进行显示，可以通过如下方式进行调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Glide.with(yourFragment)</div><div class="line">    .load(yourUrl)</div><div class="line">    .diskCacheStrategy(DiskCacheStrategy.ALL)</div><div class="line">    .into(yourView);</div><div class="line"></div><div class="line">Glide.with(yourFragment)</div><div class="line">    .load(yourUrl)</div><div class="line">    .diskCacheStrategy(DiskCacheStrategy.ALL)</div><div class="line">    .into(yourView);</div></pre></td></tr></table></figure></p>
-<p>通过DiskCacheStrategy.ALL或者DiskCacheStrategy.SOURCE,可以保证程序会去读取缓存文件</p>
-<ol>
-<li>如果想要在后台线程当中获取某个URL对应的Bitmap</li>
-</ol>
-<p>不通过downloadOnly，可以使用into(),会返回一个FutureTarget对象，比如，想要得到一个URL对应的500*500的centerCrop裁剪图片，可以通过如下方式实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Bitmap myBitmap = Glide.with(applicationContext)</div><div class="line">    .load(yourUrl)</div><div class="line">    .asBitmap()</div><div class="line">    .centerCrop()</div><div class="line">    .into(<span class="number">500</span>, <span class="number">500</span>)</div><div class="line">    .get()</div></pre></td></tr></table></figure></p>
-<p>注意：上面的调用只能在异步线程当中，如果在main Thread当中调用.get(),会阻塞主线</p>
-<h3 id="一些基于Glide的优秀库"><a href="#一些基于Glide的优秀库" class="headerlink" title="一些基于Glide的优秀库"></a>一些基于Glide的优秀库</h3><p><a href="https://github.com/wasabeef/glide-transformations" target="_blank"> [ 1、glide-transformations ]</a></p>
-<p>一个基于Glide的transformation库，拥有裁剪，着色，模糊，滤镜等多种转换效果，赞的不行不行的~~</p>
-<p><a href="https://github.com/florent37/GlidePalette" target="_blank"> [ 2.GlidePalette ]</a></p>
-<p>一个可以在Glide加载时很方便使用Palette的库。</p>
-
+        <p>Glide 是一个高效、开源、 Android设备上的媒体管理框架，它遵循BSD、MIT以及Apache 2.0协议发布。Glide具有获取、解码和展示视频剧照、图片、动画等功能，它还有灵活的API，这些API使开发者能够将Glide应用在几乎任何网络协议栈里。创建Glide的主要目的有两个，一个是实现平滑的图片列表滚动效果，另一个是支持远程图片的获取、大小调整和展示。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/05/19/Glide详细使用总结/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/05/19/Glide详细使用总结/" data-id="cit8bnver000pc859elqb8b95" data_title="Glide详细使用总结" data_summary="Glide 是一个高效、开源、 Android设备上的..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/05/19/Glide详细使用总结/" data-id="cit8c5dqq000ni859lq8tn0bj" data_title="Glide详细使用总结" data_summary="Glide 是一个高效、开源、 Android设备上的..." class="article-share-link">Share</a>
       
 
       
@@ -404,7 +322,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-22T07:35:14.777Z" itemprop="dateModified">2016-08-22</time>
+更新日期:<time datetime="2016-09-18T07:52:09.483Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -447,226 +365,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#github传送门"><span class="toc-number">2.</span> <span class="toc-text">github传送门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#效果图"><span class="toc-number">3.</span> <span class="toc-text">效果图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Gradle"><span class="toc-number">4.</span> <span class="toc-text">Gradle</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常量"><span class="toc-number">5.</span> <span class="toc-text">常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动画常量类"><span class="toc-number">6.</span> <span class="toc-text">动画常量类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法"><span class="toc-number">7.</span> <span class="toc-text">方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#点击查看-ViewPager的PageTransformer用法"><span class="toc-number">8.</span> <span class="toc-text"> [ 点击查看 ViewPager的PageTransformer用法 ]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用步骤"><span class="toc-number">9.</span> <span class="toc-text">使用步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#在布局文件中添加Banner"><span class="toc-number">9.1.</span> <span class="toc-text">在布局文件中添加Banner</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#简单使用"><span class="toc-number">9.1.1.</span> <span class="toc-text">简单使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#xml自定义属性"><span class="toc-number">9.1.2.</span> <span class="toc-text">xml自定义属性</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#在Activity或者Fragment中配置Banner"><span class="toc-number">9.2.</span> <span class="toc-text">在Activity或者Fragment中配置Banner</span></a></li></ol></li></ol>
-		
-		</div>
-		
-        <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>现在的绝大数App都有banner界面,也就是轮播控件，主要是实现循环播放多个广告图片和手动滑动循环等功能。因为ViewPager并不支持循环翻页，所以要实现循环还得需要自己去动手，我为了方便就开源了一个轮播控件，希望大家觉得有用。</p>
+        <p>现在的绝大数App都有banner界面,也就是轮播控件，主要是实现循环播放多个广告图片和手动滑动循环等功能。因为ViewPager并不支持循环翻页，所以要实现循环还得需要自己去动手，我为了方便就开源了一个轮播控件，希望大家觉得有用。详细内容可进入github上查看。</p>
 <h3 id="github传送门"><a href="#github传送门" class="headerlink" title="github传送门"></a>github传送门</h3><blockquote>
-<p><a href="https://github.com/youth5201314/banner" target="_blank" rel="external">https://github.com/youth5201314/banner</a> </p>
+<p><a href="https://github.com/youth5201314/banner">https://github.com/youth5201314/banner</a> </p>
 </blockquote>
-<h3 id="效果图"><a href="#效果图" class="headerlink" title="效果图"></a>效果图</h3><table>
-<thead>
-<tr>
-<th style="text-align:center">模式</th>
-<th style="text-align:center">图片</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">指示器模式</td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/youth5201314/banner/master/image/1.png" alt="指示器模式"></td>
-</tr>
-<tr>
-<td style="text-align:center">数字模式</td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/youth5201314/banner/master/image/2.png" alt="数字模式"></td>
-</tr>
-<tr>
-<td style="text-align:center">数字加标题模式</td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/youth5201314/banner/master/image/3.png" alt="数字加标题模式"></td>
-</tr>
-<tr>
-<td style="text-align:center">指示器加标题模式<br>垂直显示</td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/youth5201314/banner/master/image/4.png" alt="指示器加标题模式&lt;br&gt;垂直显示"></td>
-</tr>
-<tr>
-<td style="text-align:center">指示器加标题模式<br>水平显示</td>
-<td style="text-align:center"><img src="https://raw.githubusercontent.com/youth5201314/banner/master/image/5.png" alt="指示器加标题模式&lt;br&gt;水平显示"></td>
-</tr>
-</tbody>
-</table>
-<h3 id="Gradle"><a href="#Gradle" class="headerlink" title="Gradle"></a>Gradle</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">dependencies&#123;</div><div class="line">    compile <span class="string">'com.youth.banner:banner:+'</span> <span class="comment">//最新版本</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>或者引用本地lib<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile project(<span class="string">':banner'</span>)</div></pre></td></tr></table></figure></p>
-<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>BannerConfig.NOT_INDICATOR</td>
-<td>不显示指示器和标题</td>
-</tr>
-<tr>
-<td>BannerConfig.CIRCLE_INDICATOR</td>
-<td>显示圆形指示器</td>
-</tr>
-<tr>
-<td>BannerConfig.NUM_INDICATOR</td>
-<td>显示数字指示器</td>
-</tr>
-<tr>
-<td>BannerConfig.NUM_INDICATOR_TITLE</td>
-<td>显示数字指示器和标题</td>
-</tr>
-<tr>
-<td>BannerConfig.CIRCLE_INDICATOR_TITLE</td>
-<td>显示圆形指示器和标题（垂直显示）</td>
-</tr>
-<tr>
-<td>BannerConfig.CIRCLE_INDICATOR_TITLE_INSIDE</td>
-<td>显示圆形指示器和标题（水平显示）</td>
-</tr>
-<tr>
-<td>BannerConfig.LEFT</td>
-<td>指示器居左</td>
-</tr>
-<tr>
-<td>BannerConfig.CENTER</td>
-<td>指示器居中</td>
-</tr>
-<tr>
-<td>BannerConfig.RIGHT</td>
-<td>指示器居右</td>
-</tr>
-</tbody>
-</table>
-<h3 id="动画常量类"><a href="#动画常量类" class="headerlink" title="动画常量类"></a>动画常量类</h3><table>
-<thead>
-<tr>
-<th>常量类名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Transformer.Default</td>
-</tr>
-<tr>
-<td>Transformer.Accordion</td>
-</tr>
-<tr>
-<td>Transformer.BackgroundToForeground</td>
-</tr>
-<tr>
-<td>Transformer.ForegroundToBackground</td>
-</tr>
-<tr>
-<td>Transformer.CubeIn</td>
-</tr>
-<tr>
-<td>Transformer.CubeOut</td>
-</tr>
-<tr>
-<td>Transformer.DepthPage</td>
-</tr>
-<tr>
-<td>Transformer.FlipHorizontal</td>
-</tr>
-<tr>
-<td>Transformer.FlipVertical</td>
-</tr>
-<tr>
-<td>Transformer.RotateDown</td>
-</tr>
-<tr>
-<td>Transformer.RotateUp</td>
-</tr>
-<tr>
-<td>Transformer.ScaleInOut</td>
-</tr>
-<tr>
-<td>Transformer.Stack</td>
-</tr>
-<tr>
-<td>Transformer.Tablet</td>
-</tr>
-<tr>
-<td>Transformer.ZoomIn</td>
-</tr>
-<tr>
-<td>Transformer.ZoomOut</td>
-</tr>
-<tr>
-<td>Transformer.ZoomOutSlide</td>
-</tr>
-</tbody>
-</table>
-<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><table>
-<thead>
-<tr>
-<th>方法名</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>setBannerStyle(int bannerStyle)</td>
-<td>设置轮播样式（默认为Banner.NOT_INDICATOR）</td>
-</tr>
-<tr>
-<td>setIndicatorGravity(int type)</td>
-<td>设置指示器位置（没有标题默认为右边,有标题时默认左边）</td>
-</tr>
-<tr>
-<td>isAutoPlay(boolean isAutoPlay)</td>
-<td>设置是否自动轮播（默认自动）</td>
-</tr>
-<tr>
-<td>setBannerTitle(String[] titles)</td>
-<td>设置轮播要显示的标题和图片对应（如果不传默认不显示标题）</td>
-</tr>
-<tr>
-<td>setBannerTitleList(List<string> titles)</string></td>
-<td>设置轮播要显示的标题和图片对应（如果不传默认不显示标题）</td>
-</tr>
-<tr>
-<td>setDelayTime(int time)</td>
-<td>设置轮播图片间隔时间（默认为2000）</td>
-</tr>
-<tr>
-<td>setImages(Object[]/List&lt;?&gt; imagesUrl)</td>
-<td>设置轮播图片(所有设置参数方法都放在此方法之前执行)</td>
-</tr>
-<tr>
-<td>setImages(Object[]/List&lt;?&gt; imagesUrl,OnLoadImageListener listener)</td>
-<td>设置轮播图片，并且自定义图片加载方式</td>
-</tr>
-<tr>
-<td>setOnBannerClickListener(this)</td>
-<td>设置点击事件，下标是从1开始</td>
-</tr>
-<tr>
-<td>setOnBannerImageListener(this)</td>
-<td>设置图片加载事件，可以自定义图片加载方式</td>
-</tr>
-<tr>
-<td>setOnPageChangeListener(this)</td>
-<td>viewpager的滑动监听</td>
-</tr>
-<tr>
-<td>setBannerAnimation(Class&lt;? extends PageTransformer&gt; transformer)</td>
-<td>设置viewpager的默认动画,传值见动画表</td>
-</tr>
-<tr>
-<td>setPageTransformer(boolean reverseDrawingOrder, ViewPager.PageTransformer transformer)</td>
-<td>设置viewpager的自定义动画</td>
-</tr>
-</tbody>
-</table>
-<h3 id="点击查看-ViewPager的PageTransformer用法"><a href="#点击查看-ViewPager的PageTransformer用法" class="headerlink" title=" [ 点击查看 ViewPager的PageTransformer用法 ]"></a><a href="http://www.springblog.top/2016/08/24/ViewPager%E5%88%87%E6%8D%A2%E5%8A%A8%E7%94%BBPageTransformer%E4%BD%BF%E7%94%A8/" target="_blank"> [ 点击查看 ViewPager的PageTransformer用法 ]</a></h3><h3 id="使用步骤"><a href="#使用步骤" class="headerlink" title="使用步骤"></a>使用步骤</h3><h4 id="在布局文件中添加Banner"><a href="#在布局文件中添加Banner" class="headerlink" title="在布局文件中添加Banner"></a>在布局文件中添加Banner</h4><h5 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.youth.banner.Banner</span></span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/banner"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"高度自己动态设置"</span> /&gt;</div></pre></td></tr></table></figure>
-<h5 id="xml自定义属性"><a href="#xml自定义属性" class="headerlink" title="xml自定义属性"></a>xml自定义属性</h5><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">com.youth.banner.Banner</span></span></div><div class="line">    <span class="attr">xmlns:app</span>=<span class="string">"http://schemas.android.com/apk/res-auto"</span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">"@+id/banner"</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">"match_parent"</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">"高度自己设置"</span></div><div class="line">    <span class="attr">app:default_image</span>=<span class="string">"默认加载图片"</span></div><div class="line">    <span class="attr">app:delay_time</span>=<span class="string">"轮播间隔时间"</span></div><div class="line">    <span class="attr">app:is_auto_play</span>=<span class="string">"是否自动轮播"</span></div><div class="line">    <span class="attr">app:indicator_margin</span>=<span class="string">"指示器之间的间距"</span></div><div class="line">    <span class="attr">app:indicator_drawable_selected</span>=<span class="string">"指示器选中效果"</span></div><div class="line">    <span class="attr">app:indicator_drawable_unselected</span>=<span class="string">"指示器未选中效果"</span></div><div class="line">    <span class="attr">app:indicator_height</span>=<span class="string">"指示器圆形按钮的高度"</span></div><div class="line">    <span class="attr">app:indicator_width</span>=<span class="string">"指示器圆形按钮的宽度"</span></div><div class="line">    <span class="attr">app:title_background</span>=<span class="string">"标题栏的背景色"</span></div><div class="line">    <span class="attr">app:title_height</span>=<span class="string">"标题栏高度"</span></div><div class="line">    <span class="attr">app:title_textcolor</span>=<span class="string">"标题字体颜色"</span></div><div class="line">    <span class="attr">app:title_textsize</span>=<span class="string">"标题字体大小"</span>/&gt;</div></pre></td></tr></table></figure>
-<h4 id="在Activity或者Fragment中配置Banner"><a href="#在Activity或者Fragment中配置Banner" class="headerlink" title="在Activity或者Fragment中配置Banner"></a>在Activity或者Fragment中配置Banner</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> Banner banner;</div><div class="line">String[] images= <span class="keyword">new</span> String[] &#123;<span class="string">"url"</span>&#125;;</div><div class="line">String[] titles=<span class="keyword">new</span> String[]&#123;<span class="string">"标题"</span>&#125;;</div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">    setContentView(R.layout.activity_main);</div><div class="line">    banner = (Banner) findViewById(R.id.banner);</div><div class="line">    <span class="comment">/**</span></div><div class="line">     *一步搞定，设置图片就行了(如果需要其他设置，请在setImages之前完成)</div><div class="line">     */</div><div class="line">    banner.setImages(images);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2016/04/13/Banner开源框架-Android轮播控件/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/04/13/Banner开源框架-Android轮播控件/" data-id="cit8bnver000lc859ysbwbgqv" data_title="Banner开源框架[Android轮播控件]" data_summary="描述现在的绝大数App都有banner界面,也就是轮播..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/04/13/Banner开源框架-Android轮播控件/" data-id="cit8c5dqm000hi859rnkfe8g3" data_title="Banner开源框架[Android轮播控件]" data_summary="现在的绝大数App都有banner界面,也就是轮播控件..." class="article-share-link">Share</a>
       
 
       
@@ -678,7 +390,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-09-08T03:18:08.373Z" itemprop="dateModified">2016-09-08</time>
+更新日期:<time datetime="2016-09-18T07:53:07.772Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 

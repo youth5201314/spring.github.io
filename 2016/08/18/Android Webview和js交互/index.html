@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
-<meta property="og:updated_time" content="2016-08-18T08:37:28.903Z">
+<meta property="og:updated_time" content="2016-09-18T07:53:25.705Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android Webview和js交互">
 <meta name="twitter:description" content="王兴春">
@@ -112,7 +112,7 @@
 		
 		</div>
 		
-        <p>有时我们有这样的需求：需要从app的网页中点击调用软件内部的页面，又或者是软件内部调用网页的js方法。</p>
+        <p>有时我们有这样的需求：需要从app的网页中点击调用软件内部的页面，又或者是软件内部调用网页的js方法。<br><a id="more"></a></p>
 <h3 id="js代码调用Android中的方法"><a href="#js代码调用Android中的方法" class="headerlink" title="js代码调用Android中的方法"></a>js代码调用Android中的方法</h3><p>addJavascriptInterface方法有两个参数：<br>第一个参数就是我们一般会实现一个自己的类，类里面提供我们要提供给javascript访问的方法；<br>第二个参数是访问我们在obj中声明的方法时候所用到的js对象；<br>调用模式为window.interfaceName.方法名()或者是javascript: interfaceName.方法名() 。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//启用webview对javascript支持</span></div><div class="line">webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</div><div class="line">webview.addJavascriptInterface(<span class="keyword">new</span> WebAppInterface(<span class="keyword">this</span>), <span class="string">"android"</span>);</div><div class="line"></div><div class="line"><span class="comment">//接口名称自定义</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppInterface</span> </span>&#123;</div><div class="line">	Context mContext;</div><div class="line"></div><div class="line">	WebAppInterface(Context c) &#123;</div><div class="line">	    mContext = c;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//参数名这个自己定义，和网页js传参对应即可</span></div><div class="line">	<span class="meta">@JavascriptInterface</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">	   <span class="comment">//这里就进行软件内部处理了，</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在网页中进行js调用<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">onClick</span>=<span class="string">"window.android.show('传参')"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
@@ -138,7 +138,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-18T08:37:28.903Z" itemprop="dateModified">2016-08-18</time>
+更新日期:<time datetime="2016-09-18T07:53:25.705Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 

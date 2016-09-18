@@ -115,7 +115,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/09/18/App界面设计经验/" data-id="cit8bnver000ec859xyp35d1e" data_title="App界面设计经验" data_summary="平时做过太多的项目，其实一直多对产品部门的东西很不认可..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/09/18/App界面设计经验/" data-id="cit8c5dqj000di859ufitx8xi" data_title="App界面设计经验" data_summary="平时做过太多的项目，其实一直多对产品部门的东西很不认可..." class="article-share-link">Share</a>
       
 
       
@@ -170,28 +170,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#如何实现Dialog样式的Activity"><span class="toc-number">1.</span> <span class="toc-text">如何实现Dialog样式的Activity</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？"><span class="toc-number">2.</span> <span class="toc-text">如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？</span></a></li></ol>
-		
-		</div>
-		
-        <p>Dialog除了使用Dialog类来实现之外，还可以使用Dialog样式的Activity来实现，只需要在注册Activity时指明theme为adnroid:Theme.Dialog就行，这样的Dialog因为实际上是个Activity而更加丰富灵活。在API11（如果没记错的话）之前的dialog样式Activity是模式的，点击对话框外部对话框不会消失，而API11之后虽然依然是模式的，但点击对话框外部后对话框消失，相当于点击了返回键。</p>
-<h3 id="如何实现Dialog样式的Activity"><a href="#如何实现Dialog样式的Activity" class="headerlink" title="如何实现Dialog样式的Activity"></a>如何实现Dialog样式的Activity</h3><p>values目录下创建一份style.xml文件，内容如下：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="utf-8"?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"dialog"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Theme.Dialog"</span>&gt;</span><span class="xml"></span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowFrame"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsFloating"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line">     <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:backgroundDimEnabled"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"> <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>在AndroidManifest.xml中，将以对话框形式显示的Activity设置 上面的样式<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">activity</span> <span class="attr">android:name</span>=<span class="string">".DialogActivity"</span> <span class="attr">android:theme</span>=<span class="string">"@style/dialog"</span>/&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？"><a href="#如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？" class="headerlink" title="如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？"></a>如何人为控制点击对话框（Activity）外部时窗口是否销毁呢？</h3><p>在API11之后添加了setFinishOnTouchOutside()方法，只需要在onCreate()方法中调用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.setFinishOnTouchOutside(<span class="keyword">false</span>);</div></pre></td></tr></table></figure></p>
-<p>或者在res\values\styles.xml样式里添加：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">resources</span>&gt;</span>    </div><div class="line">    <span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"Dialog"</span> <span class="attr">parent</span>=<span class="string">"@android:style/Theme.Holo.DialogWhenLarge"</span>&gt;</span><span class="xml">    </span></div><div class="line">        <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowCloseOnTouchOutside"</span>&gt;</span>false<span class="tag">&lt;/<span class="name">item</span>&gt;</span>    </div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span>    </div><div class="line"><span class="tag">&lt;/<span class="name">resources</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>就可以设置点击对话框外部是否消失，但API11之前没有这个方法，也就是说API11之前没有现成的方法能够实现点击dialog样式Activity外部对话框消失，所以真正监听这个点击事件才是根本解决方法。</p>
-<p>Stackoverflow上有人给出了一种非常有效的思路。首先在View创建之前设置两个Flag，一个设置窗口为非模式的，这样除窗口外的内容就可以获得touch事件，然后设置窗口外部touch事件发生时的通知。最后重写onTouchEvent，监听窗口外的Touch事件。这样就可以在监听方法中自定义窗口外点击事件的响应，是否关闭窗口或者其他操作。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</div><div class="line"></div><div class="line"> <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</div><div class="line">    <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line"></div><div class="line">    <span class="comment">// Make us non-modal, so that others can receive touch events.</span></div><div class="line">    getWindow().setFlags(LayoutParams.FLAG_NOT_TOUCH_MODAL, LayoutParams.FLAG_NOT_TOUCH_MODAL);</div><div class="line"></div><div class="line">    <span class="comment">// ...but notify us that it happened.</span></div><div class="line">    getWindow().setFlags(LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH, LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);</div><div class="line"></div><div class="line">    <span class="comment">// Note that flag changes must happen *before* the content view is set.</span></div><div class="line">    setContentView(R.layout.my_dialog_view);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">    <span class="comment">// If we've received a touch notification that the user has touched</span></div><div class="line">    <span class="comment">// outside the app, finish the activity.</span></div><div class="line">    <span class="keyword">if</span> (MotionEvent.ACTION_OUTSIDE == event.getAction()) &#123;</div><div class="line">      finish();</div><div class="line">      <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// Delegate everything else to Activity.</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(event);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
+        <p>Dialog除了使用Dialog类来实现之外，还可以使用Dialog样式的Activity来实现，只需要在注册Activity时指明theme为adnroid:Theme.Dialog就行，这样的Dialog因为实际上是个Activity而更加丰富灵活。在API11（如果没记错的话）之前的dialog样式Activity是模式的，点击对话框外部对话框不会消失，而API11之后虽然依然是模式的，但点击对话框外部后对话框消失，相当于点击了返回键。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/09/02/对话框样式的Activity获得窗口外点击事件/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/09/02/对话框样式的Activity获得窗口外点击事件/" data-id="cit8bnvf70010c859539aetm6" data_title="对话框样式的Activity获得窗口外点击事件" data_summary="Dialog除了使用Dialog类来实现之外，还可以使..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/09/02/对话框样式的Activity获得窗口外点击事件/" data-id="cit8c5dr1000xi859hoapa8k1" data_title="对话框样式的Activity获得窗口外点击事件" data_summary="Dialog除了使用Dialog类来实现之外，还可以使..." class="article-share-link">Share</a>
       
 
       
@@ -203,7 +192,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-09-02T08:30:14.362Z" itemprop="dateModified">2016-09-02</time>
+更新日期:<time datetime="2016-09-18T07:51:08.082Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -246,24 +235,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#自定义Scroller"><span class="toc-number">1.</span> <span class="toc-text">自定义Scroller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#调用方法"><span class="toc-number">2.</span> <span class="toc-text">调用方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#暴露的设置时间的方法"><span class="toc-number">3.</span> <span class="toc-text">暴露的设置时间的方法</span></a></li></ol>
-		
-		</div>
-		
-        <p>ViewPager的惯性效果（滑到一定距离自动平滑到另一个pager，或者调用setCurrentItem）是通过scroller来实现的， 其中有个变量为mScroller，为了修改这个滑动的速度，需要改变mScroller的一些值，但是mScroller是私有变量，所以在不直接修改ViewPager源码的情况下，只能用反射修改mScroller。</p>
-<h3 id="自定义Scroller"><a href="#自定义Scroller" class="headerlink" title="自定义Scroller"></a>自定义Scroller</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewPagerScroller</span> <span class="keyword">extends</span> <span class="title">Scroller</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mDuration = <span class="number">1000</span>;<span class="comment">//默认一个切换时间</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ViewPagerScroller</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ViewPagerScroller</span><span class="params">(Context context, Interpolator interpolator)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(context, interpolator);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startScroll</span><span class="params">(<span class="keyword">int</span> startX, <span class="keyword">int</span> startY, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy, <span class="keyword">int</span> duration)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startScroll(startX, startY, dx, dy, mDuration);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startScroll</span><span class="params">(<span class="keyword">int</span> startX, <span class="keyword">int</span> startY, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>.startScroll(startX, startY, dx, dy, mDuration);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setmDuration</span><span class="params">(<span class="keyword">int</span> time)</span> </span>&#123;</div><div class="line">        mDuration = time;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getmDuration</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mDuration;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span> &#123;</div><div class="line">    Field mField = ViewPager.class.getDeclaredField(<span class="string">"mScroller"</span>);</div><div class="line">    mField.setAccessible(<span class="keyword">true</span>);</div><div class="line">    mScroller = <span class="keyword">new</span> ViewPagerScroller(viewPager.getContext(), <span class="keyword">new</span> AccelerateInterpolator());</div><div class="line">    mField.set(viewPager, mScroller);</div><div class="line">&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">    e.printStackTrace();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="暴露的设置时间的方法"><a href="#暴露的设置时间的方法" class="headerlink" title="暴露的设置时间的方法"></a>暴露的设置时间的方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">viewPager.setCurrentItem(showPosition); </div><div class="line">mScroller.setmDuration(<span class="number">3</span>* <span class="number">1000</span>);<span class="comment">//设置是3秒</span></div></pre></td></tr></table></figure>
-
+        <p>ViewPager的惯性效果（滑到一定距离自动平滑到另一个pager，或者调用setCurrentItem）是通过scroller来实现的， 其中有个变量为mScroller，为了修改这个滑动的速度，需要改变mScroller的一些值，但是mScroller是私有变量，所以在不直接修改ViewPager源码的情况下，只能用反射修改mScroller。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/30/设置ViewPager的切换速度/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/30/设置ViewPager的切换速度/" data-id="cit8bnvf70013c8598kctr3ck" data_title="设置ViewPager的切换速度" data_summary="ViewPager的惯性效果（滑到一定距离自动平滑到另..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/30/设置ViewPager的切换速度/" data-id="cit8c5dr30010i859hnf3v5pf" data_title="设置ViewPager的切换速度" data_summary="ViewPager的惯性效果（滑到一定距离自动平滑到另..." class="article-share-link">Share</a>
       
 
       
@@ -275,7 +257,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-30T08:43:45.225Z" itemprop="dateModified">2016-08-30</time>
+更新日期:<time datetime="2016-09-18T07:51:12.833Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -318,28 +300,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#描述"><span class="toc-number">1.</span> <span class="toc-text">描述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#解决方法"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a></li></ol>
-		
-		</div>
-		
         <h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>Android Studio导入项目一直卡在Building gradle project info，实际上是因为你导入的这个项目使用的gradle与你已经拥有的gradle版本不一致，导致需要下载该项目需要的gradle版本，而下载需要翻墙，所以就一直卡在这：</p>
-<p><img src="http://oceh51kku.bkt.clouddn.com/345309534djtg.png" alt="运行截图"></p>
-<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>1.随便找一个你能运行的Android Studio项目</p>
-<p>2.打开gradle-wrapper.properties，文件目录：项目/gradle/wrapper/gradle-wrapper.properties</p>
-<p>3.复制distributionUrl这一整行的内容，eg: distributionUrl=https\://services.gradle.org/distributions/gradle-2.14.1-all.zip</p>
-<p>4.打开你要导入的项目的gradle-wrapper.properties，具体步骤与步骤2相同</p>
-<p>5.把步骤3复制的内容，替换你要导入的项目的gradle-wrapper.properties文件的distributionUrl这一行</p>
-<p>6.再重启Android Studio，导入项目就可以了</p>
-
+<p><img src="http://oceh51kku.bkt.clouddn.com/345309534djtg.png" alt="运行截图"><br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" data-id="cit8bnvec0008c859kntdzsey" data_title="Android Studio导入项目一直卡在Building gradle project info最快速解决方案" data_summary="描述Android Studio导入项目一直卡在Bui..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" data-id="cit8c5dq40005i859qqlqo7u5" data_title="Android Studio导入项目一直卡在Building gradle project info最快速解决方案" data_summary="描述Android Studio导入项目一直卡在Bui..." class="article-share-link">Share</a>
       
 
       
@@ -351,7 +323,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-26T03:00:15.491Z" itemprop="dateModified">2016-08-26</time>
+更新日期:<time datetime="2016-09-18T07:51:28.717Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -394,25 +366,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#方法一：用handler-onTouchEvent实现延时发送请求"><span class="toc-number">1.</span> <span class="toc-text">方法一：用handler+onTouchEvent实现延时发送请求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法二：通过PowerManager-WakeLock实现"><span class="toc-number">2.</span> <span class="toc-text">方法二：通过PowerManager.WakeLock实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法三：使用双线程来实现-时间超时或者在接收到锁屏广播的时候显示"><span class="toc-number">3.</span> <span class="toc-text">方法三：使用双线程来实现 (时间超时或者在接收到锁屏广播的时候显示)</span></a></li></ol>
-		
-		</div>
-		
-        <p>项目中遇见一个这样的需求，就是当软件在一定时间没有操作时候需要弹出广告页面，当点击广告页面时又进行软件操作，也就是广告要在软件打开并且处于未操作状态才会出来。</p>
-<h3 id="方法一：用handler-onTouchEvent实现延时发送请求"><a href="#方法一：用handler-onTouchEvent实现延时发送请求" class="headerlink" title="方法一：用handler+onTouchEvent实现延时发送请求"></a>方法一：用handler+onTouchEvent实现延时发送请求</h3><p>这个操作最好放到BaseActivity里进行。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> Handler handler = <span class="keyword">new</span> Handler();</div><div class="line"><span class="keyword">private</span> <span class="keyword">long</span> time=<span class="number">1000</span>*<span class="number">60</span>*<span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>&#123;</div><div class="line">    <span class="keyword">switch</span> (event.getAction()) &#123;</div><div class="line">        <span class="keyword">case</span> MotionEvent.ACTION_DOWN:</div><div class="line">            handler.removeCallbacks(runnable);</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        <span class="keyword">case</span> MotionEvent.ACTION_UP:</div><div class="line">            startAD();</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">super</span>.onTouchEvent(event);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> Runnable runnable = <span class="keyword">new</span> Runnable() &#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</div><div class="line">       跳转到广告页面</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">startAD</span><span class="params">()</span> </span>&#123;</div><div class="line">    handler.removeCallbacks(runnable);</div><div class="line">    handler.postDelayed(runnable, time);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="方法二：通过PowerManager-WakeLock实现"><a href="#方法二：通过PowerManager-WakeLock实现" class="headerlink" title="方法二：通过PowerManager.WakeLock实现"></a>方法二：通过PowerManager.WakeLock实现</h3><p>判断屏幕是否变暗的这个思路去实现。</p>
-<h3 id="方法三：使用双线程来实现-时间超时或者在接收到锁屏广播的时候显示"><a href="#方法三：使用双线程来实现-时间超时或者在接收到锁屏广播的时候显示" class="headerlink" title="方法三：使用双线程来实现 (时间超时或者在接收到锁屏广播的时候显示)"></a>方法三：使用双线程来实现 (时间超时或者在接收到锁屏广播的时候显示)</h3><p>可以在application或者activity的oncreated方法里面启动监听。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;  </div><div class="line">  </div><div class="line">    <span class="keyword">private</span> Handler mHandler01 = <span class="keyword">new</span> Handler();  </div><div class="line">    <span class="keyword">private</span> Handler mHandler02 = <span class="keyword">new</span> Handler();  </div><div class="line">      </div><div class="line">    <span class="comment">/* 上一次User有动作的Time Stamp */</span>  </div><div class="line">    <span class="keyword">private</span> Date lastUpdateTime;  </div><div class="line">    <span class="comment">/* 计算User有几秒没有动作的 */</span>  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> timePeriod;  </div><div class="line">      </div><div class="line">    <span class="comment">/* 静止超过N秒将自动进入屏保 */</span>  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">float</span> mHoldStillTime = <span class="number">10</span>;  </div><div class="line">    <span class="comment">/*标识当前是否进入了屏保*/</span>  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isRunScreenSaver;  </div><div class="line">      </div><div class="line">    <span class="comment">/*时间间隔*/</span>  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> intervalScreenSaver = <span class="number">1000</span>;  </div><div class="line">    <span class="keyword">private</span> <span class="keyword">long</span> intervalKeypadeSaver = <span class="number">1000</span>;  </div><div class="line">      </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;  </div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);  </div><div class="line">        setContentView(R.layout.activity_main);  </div><div class="line">        ((Button)findViewById(R.id.start_screen_Saver)).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() &#123;  </div><div class="line">              </div><div class="line">            <span class="meta">@Override</span>  </div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>&#123;  </div><div class="line">                <span class="comment">// TODO Auto-generated method stub  </span></div><div class="line">                Intent mService = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, ScreenService.class);  </div><div class="line">                mService.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  </div><div class="line">                startService(mService);  </div><div class="line">            &#125;  </div><div class="line">        &#125;);  </div><div class="line">          </div><div class="line">        <span class="comment">/* 初始取得User可触碰屏幕的时间 */</span>  </div><div class="line">        lastUpdateTime = <span class="keyword">new</span> Date(System.currentTimeMillis());  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 计时线程 </div><div class="line">     */  </div><div class="line">    <span class="keyword">private</span> Runnable mTask01 = <span class="keyword">new</span> Runnable() &#123;  </div><div class="line">          </div><div class="line">        <span class="meta">@Override</span>  </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </div><div class="line">            Date timeNow = <span class="keyword">new</span> Date(System.currentTimeMillis());  </div><div class="line">            <span class="comment">/* 计算User静止不动作的时间间距 */</span>  </div><div class="line">            <span class="comment">/**当前的系统时间 - 上次触摸屏幕的时间 = 静止不动的时间**/</span>  </div><div class="line">            timePeriod = (<span class="keyword">long</span>) timeNow.getTime() - (<span class="keyword">long</span>) lastUpdateTime.getTime();  </div><div class="line">              </div><div class="line">            <span class="comment">/*将静止时间毫秒换算成秒*/</span>  </div><div class="line">            <span class="keyword">float</span> timePeriodSecond = ((<span class="keyword">float</span>) timePeriod / <span class="number">1000</span>);  </div><div class="line">              </div><div class="line">            <span class="keyword">if</span>(timePeriodSecond &gt; mHoldStillTime)&#123;  </div><div class="line">                <span class="keyword">if</span>(isRunScreenSaver == <span class="keyword">false</span>)&#123;  <span class="comment">//说明没有进入屏保  </span></div><div class="line">                    <span class="comment">/* 启动线程去显示屏保 */</span>  </div><div class="line">                    mHandler02.postAtTime(mTask02, intervalScreenSaver);  </div><div class="line">                    <span class="comment">/*显示屏保置为true*/</span>  </div><div class="line">                    isRunScreenSaver = <span class="keyword">true</span>;  </div><div class="line">                &#125;<span class="keyword">else</span>&#123;  </div><div class="line">                    <span class="comment">/*屏保正在显示中*/</span>  </div><div class="line">                &#125;  </div><div class="line">            &#125;<span class="keyword">else</span>&#123;  </div><div class="line">                <span class="comment">/*说明静止之间没有超过规定时长*/</span>  </div><div class="line">                isRunScreenSaver = <span class="keyword">false</span>;  </div><div class="line">            &#125;  </div><div class="line">            <span class="comment">/*反复调用自己进行检查*/</span>  </div><div class="line">            mHandler01.postDelayed(mTask01, intervalKeypadeSaver);    </div><div class="line">        &#125;  </div><div class="line">    &#125;;  </div><div class="line">      </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 持续屏保显示线程 </div><div class="line">     */  </div><div class="line">    <span class="keyword">private</span> Runnable mTask02 = <span class="keyword">new</span> Runnable() &#123;  </div><div class="line">  </div><div class="line">        <span class="meta">@Override</span>  </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;  </div><div class="line">            <span class="comment">// TODO Auto-generated method stub  </span></div><div class="line">            <span class="keyword">if</span> (isRunScreenSaver == <span class="keyword">true</span>) &#123;  <span class="comment">//如果屏保正在显示，就计算不断持续显示    </span></div><div class="line"><span class="comment">//              hideOriginalLayout();  </span></div><div class="line">                showScreenSaver();  </div><div class="line">                mHandler02.postDelayed(mTask02, intervalScreenSaver);  </div><div class="line">            &#125; <span class="keyword">else</span> &#123;  </div><div class="line">                mHandler02.removeCallbacks(mTask02);  <span class="comment">//如果屏保没有显示则移除线程  </span></div><div class="line">            &#125;  </div><div class="line">        &#125;  </div><div class="line">    &#125;;  </div><div class="line">      </div><div class="line">    <span class="comment">/** </span></div><div class="line">     * 显示屏保 </div><div class="line">     */  </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">showScreenSaver</span><span class="params">()</span></span>&#123;  </div><div class="line">        Log.d(<span class="string">"danxx"</span>, <span class="string">"显示屏保------&gt;"</span>);  </div><div class="line">        Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, ScreenSaverActivity.class);  </div><div class="line">        startActivity(intent);  </div><div class="line">          </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dispatchKeyEvent</span><span class="params">(KeyEvent event)</span> </span>&#123;  </div><div class="line">        updateUserActionTime();  </div><div class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.dispatchKeyEvent(event);  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="comment">/*用户有操作的时候不断重置静止时间和上次操作的时间*/</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateUserActionTime</span><span class="params">()</span> </span>&#123;  </div><div class="line">        Date timeNow = <span class="keyword">new</span> Date(System.currentTimeMillis());  </div><div class="line">        timePeriod = timeNow.getTime() - lastUpdateTime.getTime();  </div><div class="line">        lastUpdateTime.setTime(timeNow.getTime());  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="comment">/*activity显示的时候启动线程*/</span>  </div><div class="line">        mHandler01.postAtTime(mTask01, intervalKeypadeSaver);  </div><div class="line">        <span class="keyword">super</span>.onResume();  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPause</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="comment">/*activity不可见的时候取消线程*/</span>  </div><div class="line">        mHandler01.removeCallbacks(mTask01);  </div><div class="line">        mHandler02.removeCallbacks(mTask02);  </div><div class="line">        <span class="keyword">super</span>.onPause();  </div><div class="line">    &#125;  </div><div class="line">      </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>下面是启动一个服务，当用户按锁屏键锁屏的时候会发送一个广播，我们在服务中接受到广播后可以屏蔽系统的锁屏，显示我们自己的锁屏：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScreenService</span> <span class="keyword">extends</span> <span class="title">Service</span> </span>&#123;  </div><div class="line">    KeyguardManager mKeyguardManager = <span class="keyword">null</span>;     </div><div class="line">    <span class="keyword">private</span> KeyguardLock mKeyguardLock = <span class="keyword">null</span>;    </div><div class="line">    BroadcastReceiver mMasterResetReciever;  </div><div class="line">    <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> IBinder <span class="title">onBind</span><span class="params">(Intent intent)</span> </span>&#123;  </div><div class="line">        <span class="comment">// TODO Auto-generated method stub  </span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;  </div><div class="line">    &#125;  </div><div class="line">     <span class="meta">@Override</span>     </div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;   </div><div class="line">             <span class="comment">//Log.e("ScreenService","onCreate()");  </span></div><div class="line">            <span class="comment">// TODO Auto-generated method stub   </span></div><div class="line">            startScreenService();  </div><div class="line">            <span class="keyword">super</span>.onCreate();     </div><div class="line">          &#125;     </div><div class="line">          </div><div class="line">     <span class="meta">@Override</span>     </div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStart</span><span class="params">(Intent intent, <span class="keyword">int</span> startId)</span> </span>&#123;    </div><div class="line">        <span class="comment">// Log.e("ScreenService","onStart");  </span></div><div class="line">        <span class="comment">// TODO Auto-generated method stub     </span></div><div class="line">         startScreenService();  </div><div class="line">      &#125;  </div><div class="line">           </div><div class="line">     <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">startScreenService</span><span class="params">()</span></span>&#123;  </div><div class="line">         mKeyguardManager = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);     </div><div class="line">         mKeyguardLock = mKeyguardManager.newKeyguardLock(<span class="string">""</span>);  </div><div class="line">           </div><div class="line">           </div><div class="line">         mKeyguardLock.disableKeyguard();     </div><div class="line">           </div><div class="line">         <span class="comment">//Intent.ACTION_SCREEN_OFF  </span></div><div class="line">         mMasterResetReciever = <span class="keyword">new</span> BroadcastReceiver() &#123;     </div><div class="line">             <span class="meta">@Override</span>  </div><div class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onReceive</span><span class="params">(Context context, Intent intent)</span> </span>&#123;     </div><div class="line">                 <span class="keyword">try</span> &#123;   </div><div class="line">                         Intent i = <span class="keyword">new</span> Intent();     </div><div class="line">                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);   </div><div class="line">                         i.setClass(context, ScreenSaverActivity.class);                          </div><div class="line">                         context.startActivity(i);   </div><div class="line">                 &#125; <span class="keyword">catch</span> (Exception e) &#123;                          </div><div class="line">                     Log.i(<span class="string">"mMasterResetReciever:"</span>, e.toString());     </div><div class="line">                 &#125;     </div><div class="line">             &#125;     </div><div class="line">         &#125;;             </div><div class="line">       registerReceiver(mMasterResetReciever, <span class="keyword">new</span> IntentFilter(Intent.ACTION_SCREEN_OFF));     </div><div class="line">     &#125;  </div><div class="line">       </div><div class="line">     <span class="meta">@Override</span>  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>&#123;  </div><div class="line">        <span class="comment">//Log.e("ScreenService","onDestroy()");  </span></div><div class="line">        <span class="keyword">super</span>.onDestroy();  </div><div class="line">        unregisterReceiver(mMasterResetReciever);    </div><div class="line">         ScreenService.<span class="keyword">this</span>.stopSelf();  </div><div class="line">     &#125;  </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
+        <p>项目中遇见一个这样的需求，就是当软件在一定时间没有操作时候需要弹出广告页面，当点击广告页面时又进行软件操作，也就是广告要在软件打开并且处于未操作状态才会出来。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/" data-id="cit8bnver000vc859tz1urbmz" data_title="如何实现android程序一段时间无操作后的功能自定义" data_summary="项目中遇见一个这样的需求，就是当软件在一定时间没有操作..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/" data-id="cit8c5dqv000ti8594c67p2d3" data_title="如何实现android程序一段时间无操作后的功能自定义" data_summary="项目中遇见一个这样的需求，就是当软件在一定时间没有操作..." class="article-share-link">Share</a>
       
 
       
@@ -424,7 +388,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-09-02T08:47:27.740Z" itemprop="dateModified">2016-09-02</time>
+更新日期:<time datetime="2016-09-18T07:51:01.477Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -467,25 +431,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#DepthPageTransformer"><span class="toc-number">1.</span> <span class="toc-text">DepthPageTransformer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ZoomOutPageTransformer"><span class="toc-number">2.</span> <span class="toc-text">ZoomOutPageTransformer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#设置动画"><span class="toc-number">3.</span> <span class="toc-text">设置动画</span></a></li></ol>
-		
-		</div>
-		
         <p>通过实现ViewPager.PageTransformer来做出完全不同的切换动画效果。<br>关键是要理解transformPage(View view, float position)的参数。<br>view理所当然就是滑动中的那个view，<br>position这里是float类型，不是平时理解的int位置，而是当前滑动状态的一个表示，比如当滑动到正全屏时，position是0，而向左滑动，使得右边刚好有一部被进入屏幕时，position是1，如果前一页和下一页基本各在屏幕占一半时，前一页的position是-0.5，后一页的posiotn是0.5，所以根据position的值我们就可以自行设置需要的alpha，x/y信息。</p>
-<p>Google给我们展示了两个动画例子：DepthPageTransformer和ZoomOutPageTransformer</p>
-<h3 id="DepthPageTransformer"><a href="#DepthPageTransformer" class="headerlink" title="DepthPageTransformer"></a>DepthPageTransformer</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DepthPageTransformer</span> <span class="keyword">implements</span> <span class="title">PageTransformer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> MIN_SCALE = <span class="number">0.75f</span>;</div><div class="line">                         </div><div class="line">    <span class="meta">@SuppressLint</span>(<span class="string">"NewApi"</span>)</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transformPage</span><span class="params">(View view, <span class="keyword">float</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> pageWidth = view.getWidth();</div><div class="line">        <span class="keyword">if</span> (position &lt; -<span class="number">1</span>) &#123; <span class="comment">// [-Infinity,-1)</span></div><div class="line">                                <span class="comment">// This page is way off-screen to the left.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">0</span>) &#123; <span class="comment">// [-1,0]</span></div><div class="line">                                    <span class="comment">// Use the default slide transition when</span></div><div class="line">                                    <span class="comment">// moving to the left page</span></div><div class="line">            view.setAlpha(<span class="number">1</span>);</div><div class="line">            view.setTranslationX(<span class="number">0</span>);</div><div class="line">            view.setScaleX(<span class="number">1</span>);</div><div class="line">            view.setScaleY(<span class="number">1</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">1</span>) &#123; <span class="comment">// (0,1]</span></div><div class="line">                                    <span class="comment">// Fade the page out.</span></div><div class="line">            view.setAlpha(<span class="number">1</span> - position);</div><div class="line">            <span class="comment">// Counteract the default slide transition</span></div><div class="line">            view.setTranslationX(pageWidth * -position);</div><div class="line">            <span class="comment">// Scale the page down (between MIN_SCALE and 1)</span></div><div class="line">            <span class="keyword">float</span> scaleFactor = MIN_SCALE + (<span class="number">1</span> - MIN_SCALE)</div><div class="line">                    * (<span class="number">1</span> - Math.abs(position));</div><div class="line">            view.setScaleX(scaleFactor);</div><div class="line">            view.setScaleY(scaleFactor);</div><div class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// (1,+Infinity]</span></div><div class="line">                    <span class="comment">// This page is way off-screen to the right.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">                         </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">                         </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="ZoomOutPageTransformer"><a href="#ZoomOutPageTransformer" class="headerlink" title="ZoomOutPageTransformer"></a>ZoomOutPageTransformer</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZoomOutPageTransformer</span> <span class="keyword">implements</span> <span class="title">PageTransformer</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> MIN_SCALE = <span class="number">0.85f</span>;</div><div class="line">                 </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">float</span> MIN_ALPHA = <span class="number">0.5f</span>;</div><div class="line">                 </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">transformPage</span><span class="params">(View view, <span class="keyword">float</span> position)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> pageWidth = view.getWidth();</div><div class="line">        <span class="keyword">int</span> pageHeight = view.getHeight();</div><div class="line">                 </div><div class="line">        <span class="keyword">if</span> (position &lt; -<span class="number">1</span>) &#123; <span class="comment">// [-Infinity,-1)</span></div><div class="line">                                <span class="comment">// This page is way off-screen to the left.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (position &lt;= <span class="number">1</span>) &#123; <span class="comment">// [-1,1]</span></div><div class="line">                                    <span class="comment">// Modify the default slide transition to</span></div><div class="line">                                    <span class="comment">// shrink the page as well</span></div><div class="line">            <span class="keyword">float</span> scaleFactor = Math.max(MIN_SCALE, <span class="number">1</span> - Math.abs(position));</div><div class="line">            <span class="keyword">float</span> vertMargin = pageHeight * (<span class="number">1</span> - scaleFactor) / <span class="number">2</span>;</div><div class="line">            <span class="keyword">float</span> horzMargin = pageWidth * (<span class="number">1</span> - scaleFactor) / <span class="number">2</span>;</div><div class="line">            <span class="keyword">if</span> (position &lt; <span class="number">0</span>) &#123;</div><div class="line">                view.setTranslationX(horzMargin - vertMargin / <span class="number">2</span>);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                view.setTranslationX(-horzMargin + vertMargin / <span class="number">2</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// Scale the page down (between MIN_SCALE and 1)</span></div><div class="line">            view.setScaleX(scaleFactor);</div><div class="line">            view.setScaleY(scaleFactor);</div><div class="line">            <span class="comment">// Fade the page relative to its size.</span></div><div class="line">            view.setAlpha(MIN_ALPHA + (scaleFactor - MIN_SCALE)</div><div class="line">                    / (<span class="number">1</span> - MIN_SCALE) * (<span class="number">1</span> - MIN_ALPHA));</div><div class="line">        &#125; <span class="keyword">else</span> &#123; <span class="comment">// (1,+Infinity]</span></div><div class="line">                    <span class="comment">// This page is way off-screen to the right.</span></div><div class="line">            view.setAlpha(<span class="number">0</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="设置动画"><a href="#设置动画" class="headerlink" title="设置动画"></a>设置动画</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setPageTransformer(<span class="keyword">true</span>, <span class="keyword">new</span> DepthPageTransformer());</div></pre></td></tr></table></figure>
-
+<p>Google给我们展示了两个动画例子：DepthPageTransformer和ZoomOutPageTransformer<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/24/ViewPager切换动画PageTransformer使用/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/24/ViewPager切换动画PageTransformer使用/" data-id="cit8bnver000tc859nkcme0dr" data_title="ViewPager切换动画PageTransformer使用" data_summary="通过实现ViewPager.PageTransform..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/24/ViewPager切换动画PageTransformer使用/" data-id="cit8c5dqu000si859dztzdsub" data_title="ViewPager切换动画PageTransformer使用" data_summary="通过实现ViewPager.PageTransform..." class="article-share-link">Share</a>
       
 
       
@@ -497,7 +454,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-24T09:27:56.681Z" itemprop="dateModified">2016-08-24</time>
+更新日期:<time datetime="2016-09-18T07:51:19.329Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -540,23 +497,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			
-		
-		</div>
-		
-        <p>升级完Android Studio 2.1.3 后编译时出现Error:No service of type Factory available in ProjectScopeServices.</p>
-<p><img src="http://oceh51kku.bkt.clouddn.com/1649122197105153.png" alt="错误截图"><br>解决方法：<br>修改根目录的build.gradle文件</p>
-<p><img src="http://oceh51kku.bkt.clouddn.com/16480313463666.png" alt="修改方法"></p>
-
+        <p>升级完Android Studio 2.1.3 后编译时出现Error:No service of type Factory available in ProjectScopeServices.<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" data-id="cit8bnvdw0002c8594oi653zx" data_title="Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices." data_summary="升级完Android Studio 2.1.3 后编译..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" data-id="cit8c5dpx0002i859wees4phh" data_title="Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices." data_summary="升级完Android Studio 2.1.3 后编译..." class="article-share-link">Share</a>
       
 
       
@@ -568,7 +519,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-26T03:00:28.089Z" itemprop="dateModified">2016-08-26</time>
+更新日期:<time datetime="2016-09-18T07:53:19.822Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -611,28 +562,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			
-		
-		</div>
-		
-        <p>关于 Android SDK Manager 的无法更新的设置</p>
-<ul>
-<li><p>启动 Android SDK Manager ，打开主界面，依次选择「Tools」、「Options…」，弹出『Android SDK Manager - Settings』窗口；</p>
-</li>
-<li><p>在『Android SDK Manager - Settings』窗口中，在「HTTP Proxy Server」和「HTTP Proxy Port」输入框内填入 mirrors.neusoft.edu.cn 和 80，并且选中「Force https://… sources to be fetched using <a href="http://...」复选框。设置完成后单击「Close」按钮关闭『Android" target="_blank" rel="external">http://...」复选框。设置完成后单击「Close」按钮关闭『Android</a> SDK Manager - Settings』窗口返回到主界面；</p>
-</li>
-<li>依次选择「Packages」、「Reload」。<br><img src="http://oceh51kku.bkt.clouddn.com/AndroidSDKManager.png" alt="Android SDK Manager"></li>
-</ul>
-
+        <p>关于 Android SDK Manager 的无法更新的设置<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/24/Android SDK Manager 更新代理配置/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/" data-id="cit8bnvdw0000c8595fzljk6l" data_title="Android SDK Manager 更新代理配置" data_summary="关于 Android SDK Manager 的无法更..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/" data-id="cit8c5dpr0000i859mq3ecjk4" data_title="Android SDK Manager 更新代理配置" data_summary="关于 Android SDK Manager 的无法更..." class="article-share-link">Share</a>
       
 
       
@@ -644,7 +584,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-26T03:00:07.063Z" itemprop="dateModified">2016-08-26</time>
+更新日期:<time datetime="2016-09-18T07:53:51.148Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -687,125 +627,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#proguard-配置"><span class="toc-number">1.</span> <span class="toc-text">proguard 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不能混淆的代码"><span class="toc-number">2.</span> <span class="toc-text">不能混淆的代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#混淆配置"><span class="toc-number">3.</span> <span class="toc-text">混淆配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#proguard-参数"><span class="toc-number">3.1.</span> <span class="toc-text">proguard 参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#保留选项"><span class="toc-number">3.2.</span> <span class="toc-text">保留选项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#压缩"><span class="toc-number">3.3.</span> <span class="toc-text">压缩</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#优化"><span class="toc-number">3.4.</span> <span class="toc-text">优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#混淆"><span class="toc-number">3.5.</span> <span class="toc-text">混淆</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proguard-cfg配置项模板"><span class="toc-number">4.</span> <span class="toc-text">proguard.cfg配置项模板</span></a></li></ol>
-		
-		</div>
-		
-        <h3 id="proguard-配置"><a href="#proguard-配置" class="headerlink" title="proguard 配置"></a>proguard 配置</h3><ul>
-<li>-keepclasseswithmembers 指定的类和类成员被保留，假如指定的类成员存在的话。</li>
-<li>-dontwarn 缺省proguard 会检查每一个引用是否正确，但是第三方库里面往往有些不会用到的类，没有正确引用。如果不配置的话，系统就会报错。</li>
-<li>-keep 指定的类和类成员被保留作为 入口 。</li>
-<li>-keepclassmembers 指定的类成员被保留。</li>
-</ul>
-<h3 id="不能混淆的代码"><a href="#不能混淆的代码" class="headerlink" title="不能混淆的代码"></a>不能混淆的代码</h3><ul>
-<li>Android系统组件，系统组件有固定的方法被系统调用。</li>
-<li><p>被Android Resource 文件引用到的。名字已经固定，也不能混淆，比如自定义的View </p>
-</li>
-<li><p>Android Parcelable ，需要使用android 序列化的。</p>
-</li>
-<li><p>Java序列化方法，系统序列化需要固定的方法。</p>
-</li>
-<li><p>枚举 ，系统需要处理枚举的固定方法</p>
-</li>
-<li><p>本地方法，不能修改本地方法名</p>
-</li>
-<li><p>annotations 注释</p>
-</li>
-<li><p>数据库驱动</p>
-</li>
-<li><p>有些resource 文件</p>
-</li>
-<li><p>用到反射的地方</p>
-</li>
-<li><p>其他Anroid 官方建议 不混淆的，如</p>
-</li>
-</ul>
-<p>android.app.backup.BackupAgentHelper</p>
-<p>android.preference.Preference</p>
-<p>com.android.vending.licensing.ILicensingService</p>
-<h3 id="混淆配置"><a href="#混淆配置" class="headerlink" title="混淆配置"></a>混淆配置</h3><h4 id="proguard-参数"><a href="#proguard-参数" class="headerlink" title="proguard 参数"></a>proguard 参数</h4><ul>
-<li><p>-include {filename}    从给定的文件中读取配置参数 </p>
-</li>
-<li><p>-basedirectory {directoryname}    指定基础目录为以后相对的档案名称 </p>
-</li>
-<li><p>-injars {class_path}    指定要处理的应用程序jar,war,ear和目录 </p>
-</li>
-<li><p>-outjars {class_path}    指定处理完后要输出的jar,war,ear和目录的名称 </p>
-</li>
-<li><p>-libraryjars {classpath}    指定要处理的应用程序jar,war,ear和目录所需要的程序库文件 </p>
-</li>
-<li><p>-dontskipnonpubliclibraryclasses    指定不去忽略非公共的库类。 </p>
-</li>
-<li><p>-dontskipnonpubliclibraryclassmembers    指定不去忽略包可见的库类的成员。 </p>
-</li>
-</ul>
-<h4 id="保留选项"><a href="#保留选项" class="headerlink" title="保留选项"></a>保留选项</h4><ul>
-<li><p>-keep {Modifier} {class_specification}    保护指定的类文件和类的成员 </p>
-</li>
-<li><p>-keepclassmembers {modifier} {class_specification}    保护指定类的成员，如果此类受到保护他们会保护的更好</p>
-</li>
-<li><p>-keepclasseswithmembers {class_specification}    保护指定的类和类的成员，但条件是所有指定的类和类成员是要存在。 </p>
-</li>
-<li><p>-keepnames {class_specification}    保护指定的类和类的成员的名称（如果他们不会压缩步骤中删除） </p>
-</li>
-<li><p>-keepclassmembernames {class_specification}    保护指定的类的成员的名称（如果他们不会压缩步骤中删除） </p>
-</li>
-<li><p>-keepclasseswithmembernames {class_specification}    保护指定的类和类的成员的名称，如果所有指定的类成员出席（在压缩步骤之后） </p>
-</li>
-<li><p>-printseeds {filename}    列出类和类的成员-keep选项的清单，标准输出到给定的文件 </p>
-</li>
-</ul>
-<h4 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h4><ul>
-<li><p>-dontshrink    不压缩输入的类文件 </p>
-</li>
-<li><p>-printusage {filename} </p>
-</li>
-<li><p>-whyareyoukeeping {class_specification}    </p>
-</li>
-</ul>
-<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><ul>
-<li><p>-dontoptimize    不优化输入的类文件 </p>
-</li>
-<li><p>-assumenosideeffects {class_specification}    优化时假设指定的方法，没有任何副作用 </p>
-</li>
-<li><p>-allowaccessmodification    优化时允许访问并修改有修饰符的类和类的成员 </p>
-</li>
-</ul>
-<h4 id="混淆"><a href="#混淆" class="headerlink" title="混淆"></a>混淆</h4><ul>
-<li><p>-dontobfuscate    不混淆输入的类文件 </p>
-</li>
-<li><p>-printmapping {filename} </p>
-</li>
-<li><p>-applymapping {filename}    重用映射增加混淆 </p>
-</li>
-<li><p>-obfuscationdictionary {filename}    使用给定文件中的关键字作为要混淆方法的名称 </p>
-</li>
-<li><p>-overloadaggressively    混淆时应用侵入式重载 </p>
-</li>
-<li><p>-useuniqueclassmembernames    确定统一的混淆类的成员名称来增加混淆 </p>
-</li>
-<li><p>-flattenpackagehierarchy {package_name}    重新包装所有重命名的包并放在给定的单一包中 </p>
-</li>
-<li><p>-repackageclass {package_name}    重新包装所有重命名的类文件中放在给定的单一包中 </p>
-</li>
-<li><p>-dontusemixedcaseclassnames    混淆时不会产生形形色色的类名 </p>
-</li>
-<li><p>-keepattributes {attribute_name,…}    保护给定的可选属性，例如LineNumberTable, LocalVariableTable, SourceFile, Deprecated, Synthetic, Signature, and InnerClasses. </p>
-</li>
-<li><p>-renamesourcefileattribute {string}    设置源文件中给定的字符串常量</p>
-</li>
-</ul>
-<h3 id="proguard-cfg配置项模板"><a href="#proguard-cfg配置项模板" class="headerlink" title="proguard.cfg配置项模板"></a>proguard.cfg配置项模板</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div></pre></td><td class="code"><pre><div class="line">#指定代码的压缩级别</div><div class="line">-optimizationpasses 5</div><div class="line"></div><div class="line">#包明不混合大小写</div><div class="line">-dontusemixedcaseclassnames</div><div class="line"></div><div class="line">#不去忽略非公共的库类</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line"></div><div class="line">#优化  不优化输入的类文件</div><div class="line">-dontoptimize</div><div class="line"></div><div class="line">#预校验</div><div class="line">-dontpreverify</div><div class="line"></div><div class="line">#混淆时是否记录日志</div><div class="line">-verbose</div><div class="line"></div><div class="line"># 混淆时所采用的算法</div><div class="line">-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*</div><div class="line"></div><div class="line">#保护注解</div><div class="line">-keepattributes *Annotation*</div><div class="line"></div><div class="line"># 保持哪些类不被混淆</div><div class="line">-keep public class * extends android.app.Fragment</div><div class="line">-keep public class * extends android.app.Activity</div><div class="line">-keep public class * extends android.app.Application</div><div class="line">-keep public class * extends android.app.Service</div><div class="line">-keep public class * extends android.content.BroadcastReceiver</div><div class="line">-keep public class * extends android.content.ContentProvider</div><div class="line">-keep public class * extends android.app.backup.BackupAgentHelper</div><div class="line">-keep public class * extends android.preference.Preference</div><div class="line">-keep public class com.android.vending.licensing.ILicensingService</div><div class="line">#如果有引用v4包可以添加下面这行</div><div class="line">-keep public class * extends android.support.v4.app.Fragment</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">#忽略警告</div><div class="line">-ignorewarning</div><div class="line"></div><div class="line">##记录生成的日志数据,gradle build时在本项目根目录输出##</div><div class="line"></div><div class="line">#apk 包内所有 class 的内部结构</div><div class="line">-dump class_files.txt</div><div class="line">#未混淆的类和成员</div><div class="line">-printseeds seeds.txt</div><div class="line">#列出从 apk 中删除的代码</div><div class="line">-printusage unused.txt</div><div class="line">#混淆前后的映射</div><div class="line">-printmapping mapping.txt</div><div class="line"></div><div class="line">########记录生成的日志数据，gradle build时 在本项目根目录输出-end######</div><div class="line"></div><div class="line"></div><div class="line">#####混淆保护自己项目的部分代码以及引用的第三方jar包library#######</div><div class="line"></div><div class="line">#-libraryjars libs/umeng-analytics-v5.2.4.jar</div><div class="line"></div><div class="line">#三星应用市场需要添加:sdk-v1.0.0.jar,look-v1.0.1.jar</div><div class="line">#-libraryjars libs/sdk-v1.0.0.jar</div><div class="line">#-libraryjars libs/look-v1.0.1.jar</div><div class="line"></div><div class="line">#如果不想混淆 keep 掉</div><div class="line">-keep class com.lippi.recorder.iirfilterdesigner.** &#123;*; &#125;</div><div class="line">#友盟</div><div class="line">-keep class com.umeng.**&#123;*;&#125;</div><div class="line">#项目特殊处理代码</div><div class="line"></div><div class="line">#忽略警告</div><div class="line">-dontwarn com.lippi.recorder.utils**</div><div class="line">#保留一个完整的包</div><div class="line">-keep class com.lippi.recorder.utils.** &#123;</div><div class="line">    *;</div><div class="line"> &#125;</div><div class="line"></div><div class="line">-keep class  com.lippi.recorder.utils.AudioRecorder&#123;*;&#125;</div><div class="line"></div><div class="line"></div><div class="line">#如果引用了v4或者v7包</div><div class="line">-dontwarn android.support.**</div><div class="line"></div><div class="line">####混淆保护自己项目的部分代码以及引用的第三方jar包library-end####</div><div class="line"></div><div class="line">-keep public class * extends android.view.View &#123;</div><div class="line">    public &lt;init&gt;(android.content.Context);</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet, int);</div><div class="line">    public void set*(...);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持 native 方法不被混淆</div><div class="line">-keepclasseswithmembernames class * &#123;</div><div class="line">    native &lt;methods&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持自定义控件类不被混淆</div><div class="line">-keepclasseswithmembers class * &#123;</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持自定义控件类不被混淆</div><div class="line">-keepclassmembers class * extends android.app.Activity &#123;</div><div class="line">   public void *(android.view.View);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持 Parcelable 不被混淆</div><div class="line">-keep class * implements android.os.Parcelable &#123;</div><div class="line">  public static final android.os.Parcelable$Creator *;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持 Serializable 不被混淆</div><div class="line">-keepnames class * implements java.io.Serializable</div><div class="line"></div><div class="line">#保持 Serializable 不被混淆并且enum 类也不被混淆</div><div class="line">-keepclassmembers class * implements java.io.Serializable &#123;</div><div class="line">    static final long serialVersionUID;</div><div class="line">    private static final java.io.ObjectStreamField[] serialPersistentFields;</div><div class="line">    !static !transient &lt;fields&gt;;</div><div class="line">    !private &lt;fields&gt;;</div><div class="line">    !private &lt;methods&gt;;</div><div class="line">    private void writeObject(java.io.ObjectOutputStream);</div><div class="line">    private void readObject(java.io.ObjectInputStream);</div><div class="line">    java.lang.Object writeReplace();</div><div class="line">    java.lang.Object readResolve();</div><div class="line">&#125;</div><div class="line"></div><div class="line">#保持枚举 enum 类不被混淆 如果混淆报错，建议直接使用上面的 -keepclassmembers class * implements java.io.Serializable即可</div><div class="line">#-keepclassmembers enum * &#123;</div><div class="line">#  public static **[] values();</div><div class="line">#  public static ** valueOf(java.lang.String);</div><div class="line">#&#125;</div><div class="line"></div><div class="line">-keepclassmembers class * &#123;</div><div class="line">    public void *ButtonClicked(android.view.View);</div><div class="line">&#125;</div><div class="line"></div><div class="line">#不混淆资源类</div><div class="line">-keepclassmembers class **.R$* &#123;</div><div class="line">    public static &lt;fields&gt;;</div><div class="line">&#125;</div><div class="line"></div><div class="line">#避免混淆泛型 如果混淆报错建议关掉</div><div class="line">#–keepattributes Signature</div><div class="line"></div><div class="line">#移除log 测试了下没有用还是建议自己定义一个开关控制是否输出日志</div><div class="line">#-assumenosideeffects class android.util.Log &#123;</div><div class="line">#    public static boolean isLoggable(java.lang.String, int);</div><div class="line">#    public static int v(...);</div><div class="line">#    public static int i(...);</div><div class="line">#    public static int w(...);</div><div class="line">#    public static int d(...);</div><div class="line">#    public static int e(...);</div><div class="line">#&#125;</div><div class="line"></div><div class="line">#如果用用到Gson解析包的，直接添加下面这几行就能成功混淆，不然会报错。</div><div class="line">#gson</div><div class="line">#-libraryjars libs/gson-2.2.2.jar</div><div class="line">-keepattributes Signature</div><div class="line"># Gson specific classes</div><div class="line">-keep class sun.misc.Unsafe &#123; *; &#125;</div><div class="line"># Application classes that will be serialized/deserialized over Gson</div><div class="line">-keep class com.google.gson.examples.android.model.** &#123; *; &#125;</div></pre></td></tr></table></figure>
+        <p>虽然混淆的作用不是特别大，反编译也能看见代码，但是为了增加被人的反编译成本，还是最好混淆了，一般人也不会去看你混淆的代码，当然最好在加固下、监听下渠道也就差不多了。如果C语言很好的话，还是可以考虑把核心算法放到C语言里完成打包成so库等方式更为安全。下面就总结下混淆的配置。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/22/Android代码混淆详解/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/22/Android代码混淆详解/" data-id="cit8bnvec0006c859h1ijd72n" data_title="Android代码混淆详解" data_summary="proguard 配置
--keepclasseswit..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/22/Android代码混淆详解/" data-id="cit8c5dqb0008i859mtdxxwfm" data_title="Android代码混淆详解" data_summary="虽然混淆的作用不是特别大，反编译也能看见代码，但是为了..." class="article-share-link">Share</a>
       
 
       
@@ -817,7 +649,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-24T07:04:30.476Z" itemprop="dateModified">2016-08-24</time>
+更新日期:<time datetime="2016-09-18T08:02:44.644Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -860,31 +692,21 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#折线图高亮坐标线的显示隐藏"><span class="toc-number">1.</span> <span class="toc-text">折线图高亮坐标线的显示隐藏</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#X轴坐标线显示不全问题"><span class="toc-number">2.</span> <span class="toc-text">X轴坐标线显示不全问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#同一图中，两条折线，根据不同的Y轴坐标画出效果"><span class="toc-number">3.</span> <span class="toc-text">同一图中，两条折线，根据不同的Y轴坐标画出效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控制X轴显示格式"><span class="toc-number">4.</span> <span class="toc-text">控制X轴显示格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MarkView的样式自定义"><span class="toc-number">5.</span> <span class="toc-text">MarkView的样式自定义</span></a></li></ol>
-		
-		</div>
-		
         <p>MPAndroidChart是一款基于Android的开源图表库，MPAndroidChart不仅可以在Android设备上绘制各种统计图表，而且可以对图表进行拖动和缩放操作，应用起来非常灵活。MPAndroidChart同样拥有常用的图表类型：线型图、饼图、柱状图和散点图。</p>
 <blockquote>
-<p><a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="external">https://github.com/PhilJay/MPAndroidChart</a></p>
+<p><a href="https://github.com/PhilJay/MPAndroidChart">https://github.com/PhilJay/MPAndroidChart</a></p>
 </blockquote>
-<p>由于MPAndroidChart网上收到的都是一些常见的方法属性，虽然有api文档，但是找起来也麻烦，为了方便大家我就将我遇到的问题说一下。</p>
-<h3 id="折线图高亮坐标线的显示隐藏"><a href="#折线图高亮坐标线的显示隐藏" class="headerlink" title="折线图高亮坐标线的显示隐藏"></a>折线图高亮坐标线的显示隐藏</h3><p>说实话这个高亮有点丑，当我们想隐藏时肯定会想到[LineChart]应该有方法设置，结果设置方法在[LineDataSet]里；然后我们调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LineDataSet set = <span class="keyword">new</span> LineDataSet(yVals, <span class="string">""</span>);</div><div class="line">set.setHighlightEnabled(<span class="keyword">false</span>)</div></pre></td></tr></table></figure></p>
-<p>结果MarkView和高亮坐标系一起不见了，于是只有另辟捷径将坐标系弄成透明的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LineDataSet set = <span class="keyword">new</span> LineDataSet(yVals, <span class="string">""</span>);</div><div class="line">set.setHighLightColor(Color.TRANSPARENT)</div></pre></td></tr></table></figure></p>
-<h3 id="X轴坐标线显示不全问题"><a href="#X轴坐标线显示不全问题" class="headerlink" title="X轴坐标线显示不全问题"></a>X轴坐标线显示不全问题</h3><p>你在使用中坑的会遇见X轴的数量过多，而屏幕过小又显示不全，而MPAndroidChart直接在最小化默认不显示，怎么办呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">XAxis xl = lineChart.getXAxis();</div><div class="line">xl.setSpaceBetweenLabels(<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
-<h3 id="同一图中，两条折线，根据不同的Y轴坐标画出效果"><a href="#同一图中，两条折线，根据不同的Y轴坐标画出效果" class="headerlink" title="同一图中，两条折线，根据不同的Y轴坐标画出效果"></a>同一图中，两条折线，根据不同的Y轴坐标画出效果</h3><p>两条线，相同的X轴，那么X轴的DATA肯定是相同，不同的Y轴数据，两个LineDataSet。那么关键的一个属性设置来了，它就是让Y轴左右两边显示两级不同的value关键，就是红色框内的setAxisDependency这个方法。默认情况下，两边都显示左边Y轴数据，而方法设置为AxisDependency.RIGHT就把Y轴左右显示不同数据的功能解决了。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">LineDataSet left = <span class="keyword">new</span> LineDataSet(yVals1, <span class="string">"左边y轴标注"</span>);</div><div class="line">LineDataSet right = <span class="keyword">new</span> LineDataSet(yVals2, <span class="string">"右边y轴标注"</span>);</div><div class="line">right.setAxisDependency(AxisDependency.RIGHT);</div><div class="line">LineData data = <span class="keyword">new</span> LineData(xVals, dataSets);</div><div class="line">List&lt;ILineDataSet&gt; dataSets =<span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">dataSets.add(left);</div><div class="line">dataSets.add(right);</div><div class="line">LineData data = <span class="keyword">new</span> LineData(<span class="string">"x轴数据"</span>, dataSets);</div></pre></td></tr></table></figure></p>
-<h3 id="控制X轴显示格式"><a href="#控制X轴显示格式" class="headerlink" title="控制X轴显示格式"></a>控制X轴显示格式</h3><p>api没有提供相关的方法，我们只能变相的解决了，比如我们想实现下面显示双数的月份<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">ArrayList&lt;String&gt; xVals = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">12</span>; i++) &#123;</div><div class="line">    <span class="keyword">if</span> (i%<span class="number">2</span>==<span class="number">0</span>)</div><div class="line">	xVals.add(i+<span class="string">""</span>);</div><div class="line">    <span class="keyword">else</span></div><div class="line">	xVals.add(<span class="string">""</span>);</div><div class="line">&#125;</div><div class="line">LineData data = <span class="keyword">new</span> LineData(xVals, <span class="string">"y轴数据"</span>);</div></pre></td></tr></table></figure></p>
-<h3 id="MarkView的样式自定义"><a href="#MarkView的样式自定义" class="headerlink" title="MarkView的样式自定义"></a>MarkView的样式自定义</h3><p>继承MarkerView，给它一个自定义布局。就OK了</p>
-
+<p>由于MPAndroidChart网上收到的都是一些常见的方法属性，虽然有api文档，但是找起来也麻烦，为了方便大家我就将我遇到的问题说一下。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/#more">阅读更多</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/" data-id="cit8bnver000oc85924cmzpof" data_title="MPAndroidChart的一些问题解决方法" data_summary="MPAndroidChart是一款基于Android的..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/" data-id="cit8c5dqs000pi859sxxccl52" data_title="MPAndroidChart的一些问题解决方法" data_summary="MPAndroidChart是一款基于Android的..." class="article-share-link">Share</a>
       
 
       
@@ -896,7 +718,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-22T03:11:54.700Z" itemprop="dateModified">2016-08-22</time>
+更新日期:<time datetime="2016-09-18T07:51:34.962Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 

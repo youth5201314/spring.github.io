@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://youth5201314.github.io/2016/08/19/MPAndroidChart使用详解与一些问题解决方法/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
-<meta property="og:updated_time" content="2016-08-22T03:11:54.700Z">
+<meta property="og:updated_time" content="2016-09-18T07:51:34.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MPAndroidChart的一些问题解决方法">
 <meta name="twitter:description" content="王兴春">
@@ -116,7 +116,7 @@
 <blockquote>
 <p><a href="https://github.com/PhilJay/MPAndroidChart" target="_blank" rel="external">https://github.com/PhilJay/MPAndroidChart</a></p>
 </blockquote>
-<p>由于MPAndroidChart网上收到的都是一些常见的方法属性，虽然有api文档，但是找起来也麻烦，为了方便大家我就将我遇到的问题说一下。</p>
+<p>由于MPAndroidChart网上收到的都是一些常见的方法属性，虽然有api文档，但是找起来也麻烦，为了方便大家我就将我遇到的问题说一下。<br><a id="more"></a></p>
 <h3 id="折线图高亮坐标线的显示隐藏"><a href="#折线图高亮坐标线的显示隐藏" class="headerlink" title="折线图高亮坐标线的显示隐藏"></a>折线图高亮坐标线的显示隐藏</h3><p>说实话这个高亮有点丑，当我们想隐藏时肯定会想到[LineChart]应该有方法设置，结果设置方法在[LineDataSet]里；然后我们调用<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LineDataSet set = <span class="keyword">new</span> LineDataSet(yVals, <span class="string">""</span>);</div><div class="line">set.setHighlightEnabled(<span class="keyword">false</span>)</div></pre></td></tr></table></figure></p>
 <p>结果MarkView和高亮坐标系一起不见了，于是只有另辟捷径将坐标系弄成透明的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">LineDataSet set = <span class="keyword">new</span> LineDataSet(yVals, <span class="string">""</span>);</div><div class="line">set.setHighLightColor(Color.TRANSPARENT)</div></pre></td></tr></table></figure></p>
 <h3 id="X轴坐标线显示不全问题"><a href="#X轴坐标线显示不全问题" class="headerlink" title="X轴坐标线显示不全问题"></a>X轴坐标线显示不全问题</h3><p>你在使用中坑的会遇见X轴的数量过多，而屏幕过小又显示不全，而MPAndroidChart直接在最小化默认不显示，怎么办呢？<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">XAxis xl = lineChart.getXAxis();</div><div class="line">xl.setSpaceBetweenLabels(<span class="number">1</span>)</div></pre></td></tr></table></figure></p>
@@ -137,7 +137,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2016-08-22T03:11:54.700Z" itemprop="dateModified">2016-08-22</time>
+更新日期:<time datetime="2016-09-18T07:51:34.962Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
