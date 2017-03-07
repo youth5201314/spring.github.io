@@ -109,12 +109,11 @@
 		<div id="toc" class="toc-article">
 			<h2 class="toc-title"><span>文章目录</span></h2>
 		
-			
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#谈谈你对Application类的理解"><span class="toc-number">1.</span> <span class="toc-text">谈谈你对Application类的理解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更多参考资料"><span class="toc-number">2.</span> <span class="toc-text">更多参考资料</span></a></li></ol>
 		
 		</div>
 		
-        <p>#谈谈你对Application类的理解</p>
-<p>其实说对什么的理解，就是考察你对这个东西会不会用，重点是有没有什么坑！</p>
+        <h1 id="谈谈你对Application类的理解"><a href="#谈谈你对Application类的理解" class="headerlink" title="谈谈你对Application类的理解"></a>谈谈你对Application类的理解</h1><p>其实说对什么的理解，就是考察你对这个东西会不会用，重点是有没有什么坑！</p>
 <hr>
 <p>首先，Application在一个Dalvik虚拟机里面只会存在一个实例，所以你不要傻傻的去弄什么单例模式，来静态获取Application了，你把Application构造函数设置成privete都不可能实现(我年轻的时候就这么傻傻的试过，想着如果可以通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">那么为什么强调说是一个Dalvik虚拟机，而不是说一个App呢？</div><div class="line"></div><div class="line">因为一个App有可能有多个Dalvik虚拟机，也就是传说中的多进程模式。在这种模式下，每一个Dalvik都会存在一个Application实例，他们之间没有关系，在A进程Application里面保存的数据不能在B进程的Application获取，因为他们根本不是一个对象，而且被隔离在了两个进程里面，所以这里强调是一个Dalvik虚拟机，而不是一个App。</div><div class="line"></div><div class="line">---</div><div class="line"></div><div class="line">其次，Application的实质是一个Context，它继承自ContextWrapper。</div></pre></td></tr></table></figure></p>
 <pre><code>android.content.Context
@@ -135,8 +134,7 @@
 <p>另外，在Application中存在着几个有用的方法，比如onLowMemory()和onTrimMemory()，在这两个方法里面，我们可以实现自己的内存回收逻辑，比如关闭数据库连接、移除图片内存缓存等操作来降低内存消耗，从而降低被系统回收的风险。</p>
 <hr>
 <p>最后，就是要注意Application的生命周期，他和Dalvik虚拟机生命周期一样长，所以在进行单例或者是静态变量的初始化操作时，一定要用Application作为Context进行初始化，否则会造成内存泄露的发生。使用Dialog的时候一般使用Activity作为Context，但是也可以使用Application作为上下文，前提是你必须设置Window类型为TYPE_SYSTEM_DIALOG，并且申请相关权限。这个时候弹出的Dialog是属于整个Application的，弹出这个Dialog的Activity销毁时也不会回收Dialog，只有在Application销毁时，这个Dialog才会自动消失。</p>
-<p>#更多参考资料</p>
-<ul>
+<h1 id="更多参考资料"><a href="#更多参考资料" class="headerlink" title="更多参考资料"></a>更多参考资料</h1><ul>
 <li><a href="http://zmywly8866.github.io/2014/12/26/android-do-not-store-data-in-the-application-object.html" target="_blank" rel="external">不要在Android的Application对象中缓存数据!</a></li>
 <li><a href="http://blog.csdn.net/feiduclear_up/article/details/47356289" target="_blank" rel="external">Android Context 是什么？</a></li>
 </ul>
@@ -145,8 +143,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2017/03/07/谈谈你对Application类的理解/" data-id="cizyxulf80019w859dqb4zf3e" data_title="谈谈你对Application类的理解" data_summary="#谈谈你对Application类的理解
-其实说对什么..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2017/03/07/谈谈你对Application类的理解/" data-id="cizyxulf80019w859dqb4zf3e" data_title="谈谈你对Application类的理解" data_summary="谈谈你对Application类的理解其实说对什么的理..." class="article-share-link">Share</a>
       
 
       
@@ -158,7 +155,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2017-03-07T01:39:02.416Z" itemprop="dateModified">2017-03-07</time>
+更新日期:<time datetime="2017-03-07T02:52:10.586Z" itemprop="dateModified">2017-03-07</time>
 </span>
 
 
