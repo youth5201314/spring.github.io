@@ -79,8 +79,8 @@
     <article id="post-谈谈你对Application类的理解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
-<a href="/2017/03/07/谈谈你对Application类的理解/" class="article-date">
-  <time datetime="2017-03-07T01:32:50.000Z" itemprop="datePublished">2017-03-07</time>
+<a href="/2017/01/07/谈谈你对Application类的理解/" class="article-date">
+  <time datetime="2017-01-07T01:32:50.000Z" itemprop="datePublished">2017-01-07</time>
 </a>
 
 
@@ -97,7 +97,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/07/谈谈你对Application类的理解/">谈谈你对Application类的理解</a>
+      <a class="article-title" href="/2017/01/07/谈谈你对Application类的理解/">谈谈你对Application类的理解</a>
     </h1>
   
 
@@ -113,7 +113,7 @@
 		
 		</div>
 		
-        <h1 id="对Application理解"><a href="#对Application理解" class="headerlink" title="对Application理解"></a>对Application理解</h1><p>首先，Application在一个Dalvik虚拟机里面只会存在一个实例，所以你不要傻傻的去弄什么单例模式，来静态获取Application了，你把Application构造函数设置成privete都不可能实现(我年轻的时候就这么傻傻的试过，想着如果可以通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">那么为什么强调说是一个Dalvik虚拟机，而不是说一个App呢？</div><div class="line"></div><div class="line">因为一个App有可能有多个Dalvik虚拟机，也就是传说中的多进程模式。在这种模式下，每一个Dalvik都会存在一个Application实例，他们之间没有关系，在A进程Application里面保存的数据不能在B进程的Application获取，因为他们根本不是一个对象，而且被隔离在了两个进程里面，所以这里强调是一个Dalvik虚拟机，而不是一个App。</div><div class="line"></div><div class="line">其次，Application的实质是一个Context，它继承自ContextWrapper。</div></pre></td></tr></table></figure></p>
+        <h1 id="对Application理解"><a href="#对Application理解" class="headerlink" title="对Application理解"></a>对Application理解</h1><p>首先，Application在一个Dalvik虚拟机里面只会存在一个实例，所以你不要傻傻的去弄什么单例模式，来静态获取Application了，你把Application构造函数设置成privete都不可能实现(我年轻的时候就这么傻傻的试过，想着如果可以通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">那么为什么强调说是一个Dalvik虚拟机，而不是说一个App呢？</div><div class="line"></div><div class="line">因为一个App有可能有多个Dalvik虚拟机，也就是传说中的多进程模式。在这种模式下，每一个Dalvik都会存在一个Application实例，他们之间没有关系，在A进程Application里面保存的数据不能在B进程的Application获取，因为他们根本不是一个对象，而且被隔离在了两个进程里面，所以这里强调是一个Dalvik虚拟机，而不是一个App。</div><div class="line"></div><div class="line">其次，Application的实质是一个Context，它继承自ContextWrapper。</div><div class="line"></div><div class="line">&lt;!--more--&gt;</div></pre></td></tr></table></figure></p>
 <pre><code>android.content.Context
     ↳    android.content.ContextWrapper
         ↳    android.app.Application           
@@ -141,11 +141,11 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2017/03/07/谈谈你对Application类的理解/" data-id="cizyxulf80019w859dqb4zf3e" data_title="谈谈你对Application类的理解" data_summary="对Application理解首先，Applicatio..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2017/01/07/谈谈你对Application类的理解/" data-id="cj0ucvk9n00146k59shqs3jmy" data_title="谈谈你对Application类的理解" data_summary="对Application理解首先，Applicatio..." class="article-share-link">Share</a>
       
 
       
-        <a href="https://youth5201314.github.io/2017/03/07/谈谈你对Application类的理解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2017/03/07/谈谈你对Application类的理解/">暂无评论</a>
+        <a href="https://youth5201314.github.io/2017/01/07/谈谈你对Application类的理解/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2017/01/07/谈谈你对Application类的理解/">暂无评论</a>
       
 	  
       
@@ -153,7 +153,7 @@
 
 	  
 <span>
-更新日期:<time datetime="2017-03-07T03:02:39.531Z" itemprop="dateModified">2017-03-07</time>
+更新日期:<time datetime="2017-03-29T02:16:43.082Z" itemprop="dateModified">2017-03-29</time>
 </span>
 
 
@@ -206,7 +206,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/09/18/App界面设计经验/" data-id="cizyxulej000ow85938qz9d3f" data_title="App界面设计经验" data_summary="平时做过太多的项目，其实一直多对产品部门的东西很不认可..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/09/18/App界面设计经验/" data-id="cj0ucvk8w000g6k59buhkay3t" data_title="App界面设计经验" data_summary="平时做过太多的项目，其实一直多对产品部门的东西很不认可..." class="article-share-link">Share</a>
       
 
       
@@ -271,7 +271,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/09/02/对话框样式的Activity获得窗口外点击事件/" data-id="cizyxulfc001cw859fr4vvo45" data_title="对话框样式的Activity获得窗口外点击事件" data_summary="Dialog除了使用Dialog类来实现之外，还可以使..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/09/02/对话框样式的Activity获得窗口外点击事件/" data-id="cj0ucvk9k00116k599451726d" data_title="对话框样式的Activity获得窗口外点击事件" data_summary="Dialog除了使用Dialog类来实现之外，还可以使..." class="article-share-link">Share</a>
       
 
       
@@ -284,71 +284,6 @@
 	  
 <span>
 更新日期:<time datetime="2016-09-18T07:51:08.082Z" itemprop="dateModified">2016-09-18</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
-    <article id="post-Android Studio中有六种依赖" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/30/Android Studio中有六种依赖/" class="article-date">
-  <time datetime="2016-08-30T08:33:58.000Z" itemprop="datePublished">2016-08-30</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Gradle/">Gradle</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/30/Android Studio中有六种依赖/">Android Studio中有六种依赖</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在Android Studio中有六种依赖：Compile，Provided，APK，Test compile，Debug compile，Release compile<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/30/Android Studio中有六种依赖/#more">阅读更多</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="https://youth5201314.github.io/2016/08/30/Android Studio中有六种依赖/" data-id="cizyxuldf0001w859i9kpecmr" data_title="Android Studio中有六种依赖" data_summary="在Android Studio中有六种依赖：Compi..." class="article-share-link">Share</a>
-      
-
-      
-        <a href="https://youth5201314.github.io/2016/08/30/Android Studio中有六种依赖/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/30/Android Studio中有六种依赖/">暂无评论</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
-
-	  
-<span>
-更新日期:<time datetime="2016-10-09T02:47:14.312Z" itemprop="dateModified">2016-10-09</time>
 </span>
 
 
@@ -401,7 +336,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/30/设置ViewPager的切换速度/" data-id="cizyxulf40016w859edpmd15j" data_title="设置ViewPager的切换速度" data_summary="ViewPager的惯性效果（滑到一定距离自动平滑到另..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/30/设置ViewPager的切换速度/" data-id="cj0ucvk9p00176k5902sqtmep" data_title="设置ViewPager的切换速度" data_summary="ViewPager的惯性效果（滑到一定距离自动平滑到另..." class="article-share-link">Share</a>
       
 
       
@@ -414,6 +349,71 @@
 	  
 <span>
 更新日期:<time datetime="2016-09-18T07:51:12.833Z" itemprop="dateModified">2016-09-18</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-Android Studio中有六种依赖" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/30/Android Studio中有六种依赖/" class="article-date">
+  <time datetime="2016-08-30T08:33:58.000Z" itemprop="datePublished">2016-08-30</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Gradle/">Gradle</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/30/Android Studio中有六种依赖/">Android Studio中有六种依赖</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Android Studio中有六种依赖：Compile，Provided，APK，Test compile，Debug compile，Release compile<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/30/Android Studio中有六种依赖/#more">阅读更多</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/30/Android Studio中有六种依赖/" data-id="cj0ucvk8p000c6k594hel8lk3" data_title="Android Studio中有六种依赖" data_summary="在Android Studio中有六种依赖：Compi..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/30/Android Studio中有六种依赖/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/30/Android Studio中有六种依赖/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-10-09T02:47:14.312Z" itemprop="dateModified">2016-10-09</time>
 </span>
 
 
@@ -467,7 +467,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" data-id="cizyxules000tw859b0bln5bs" data_title="Android Studio导入项目一直卡在Building gradle project info最快速解决方案" data_summary="描述Android Studio导入项目一直卡在Bui..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" data-id="cj0ucvk90000k6k59at8obuj1" data_title="Android Studio导入项目一直卡在Building gradle project info最快速解决方案" data_summary="描述Android Studio导入项目一直卡在Bui..." class="article-share-link">Share</a>
       
 
       
@@ -532,7 +532,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/" data-id="cizyxuley000zw859u2gj88xf" data_title="如何实现android程序一段时间无操作后的功能自定义" data_summary="项目中遇见一个这样的需求，就是当软件在一定时间没有操作..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/" data-id="cj0ucvk9g000x6k5923239gd5" data_title="如何实现android程序一段时间无操作后的功能自定义" data_summary="项目中遇见一个这样的需求，就是当软件在一定时间没有操作..." class="article-share-link">Share</a>
       
 
       
@@ -598,7 +598,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/24/ViewPager切换动画PageTransformer使用/" data-id="cizyxulf10011w859p31w9s9i" data_title="ViewPager切换动画PageTransformer使用" data_summary="通过实现ViewPager.PageTransform..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/24/ViewPager切换动画PageTransformer使用/" data-id="cj0ucvk9c000u6k59s1nzc2vw" data_title="ViewPager切换动画PageTransformer使用" data_summary="通过实现ViewPager.PageTransform..." class="article-share-link">Share</a>
       
 
       
@@ -663,7 +663,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" data-id="cizyxuldj0002w8599oru1z3b" data_title="Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices." data_summary="升级完Android Studio 2.1.3 后编译..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" data-id="cj0ucvk7t00006k59j8o2eyww" data_title="Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices." data_summary="升级完Android Studio 2.1.3 后编译..." class="article-share-link">Share</a>
       
 
       
@@ -728,7 +728,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/" data-id="cizyxuldt0006w8595f8tanzd" data_title="Android SDK Manager 更新代理配置" data_summary="关于 Android SDK Manager 的无法更..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/" data-id="cj0ucvk8s000d6k59fa50ilrk" data_title="Android SDK Manager 更新代理配置" data_summary="关于 Android SDK Manager 的无法更..." class="article-share-link">Share</a>
       
 
       
@@ -816,7 +816,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -836,7 +836,7 @@
       <ul>
         
           <li>
-            <a href="/2017/03/07/谈谈你对Application类的理解/">谈谈你对Application类的理解</a>
+            <a href="/2017/01/07/谈谈你对Application类的理解/">谈谈你对Application类的理解</a>
           </li>
         
           <li>
@@ -848,11 +848,11 @@
           </li>
         
           <li>
-            <a href="/2016/08/30/Android Studio中有六种依赖/">Android Studio中有六种依赖</a>
+            <a href="/2016/08/30/设置ViewPager的切换速度/">设置ViewPager的切换速度</a>
           </li>
         
           <li>
-            <a href="/2016/08/30/设置ViewPager的切换速度/">设置ViewPager的切换速度</a>
+            <a href="/2016/08/30/Android Studio中有六种依赖/">Android Studio中有六种依赖</a>
           </li>
         
       </ul>

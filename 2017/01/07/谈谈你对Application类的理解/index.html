@@ -3,16 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: 异常 | Spring&#39;s Blog</title>
+  <title>谈谈你对Application类的理解 | Spring&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="王兴春">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Spring's Blog">
-<meta property="og:url" content="https://youth5201314.github.io/tags/异常/index.html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谈谈你对Application类的理解">
+<meta property="og:url" content="https://youth5201314.github.io/2017/01/07/谈谈你对Application类的理解/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
+<meta property="og:updated_time" content="2017-03-29T02:16:43.082Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring's Blog">
+<meta name="twitter:title" content="谈谈你对Application类的理解">
 <meta name="twitter:description" content="王兴春">
   
     <link rel="alternate" href="http://weibo.com/youth0819/home" title="Spring&#39;s Blog" type="application/atom+xml">
@@ -74,48 +75,122 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
+        <section id="main"><article id="post-谈谈你对Application类的理解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      
-<a href="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" class="archive-article-date">
-  <time datetime="2016-08-24T08:03:46.000Z" itemprop="datePublished">8月 24</time>
+<a href="/2017/01/07/谈谈你对Application类的理解/" class="article-date">
+  <time datetime="2017-01-07T01:32:50.000Z" itemprop="datePublished">2017-01-07</time>
 </a>
 
 
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/">Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices.</a>
+    <h1 class="article-title" itemprop="name">
+      谈谈你对Application类的理解
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+		
+		<div id="toc" class="toc-article">
+			<h2 class="toc-title"><span>文章目录</span></h2>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#对Application理解"><span class="toc-number">1.</span> <span class="toc-text">对Application理解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更多参考资料"><span class="toc-number">2.</span> <span class="toc-text">更多参考资料</span></a></li></ol>
+		
+		</div>
+		
+        <h1 id="对Application理解"><a href="#对Application理解" class="headerlink" title="对Application理解"></a>对Application理解</h1><p>首先，Application在一个Dalvik虚拟机里面只会存在一个实例，所以你不要傻傻的去弄什么单例模式，来静态获取Application了，你把Application构造函数设置成privete都不可能实现(我年轻的时候就这么傻傻的试过，想着如果可以通过<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">那么为什么强调说是一个Dalvik虚拟机，而不是说一个App呢？</div><div class="line"></div><div class="line">因为一个App有可能有多个Dalvik虚拟机，也就是传说中的多进程模式。在这种模式下，每一个Dalvik都会存在一个Application实例，他们之间没有关系，在A进程Application里面保存的数据不能在B进程的Application获取，因为他们根本不是一个对象，而且被隔离在了两个进程里面，所以这里强调是一个Dalvik虚拟机，而不是一个App。</div><div class="line"></div><div class="line">其次，Application的实质是一个Context，它继承自ContextWrapper。</div><div class="line"></div><div class="line">&lt;!--more--&gt;</div></pre></td></tr></table></figure></p>
+<pre><code>android.content.Context
+    ↳    android.content.ContextWrapper
+        ↳    android.app.Application           
+</code></pre><p>```</p>
+<p>ContextWrapper是什么玩意？就是对Context的一个包装而已。</p>
+<p>Application有两个子类，一个是MultiDexApplication，如果你遇到了”65535”问题，可以选择继承自他，完成多Dex打包配置的相关工作。</p>
+<p>另外一个是在TDD(测试用例驱动)开发模式中使用Moke进行测试的时候用到的，可以来代替Application的Moke类MockApplication。</p>
+<hr>
+<p>在应用启动的时候，会首先调用<code>Application.attach()</code>，当然，这个方法是隐藏的，开发者能接触到的第一个被调用的方法其实是<code>Application.onCreate()</code>，我们通常会在这个方法里面完成各种初始化，比如图片加载库、Http请求库的默认配置初始化操作等等。但是最好别在这个方法里面进行太多耗时操作，因为这会影响App的启动速度，所以对于不必要的操作可以使用异步操作、懒加载、延时加载等策略来减少对UI线程的影响。</p>
+<hr>
+<p>除此之外，由于在Context中可以通过getApplicationContext()获取到Application对象，或者是通过<code>Activity.getApplication()</code>、<code>Service.getApplication()</code>获取到Application，所以可以在Application保存全局的数据，供所有的Activity或者是Service使用。</p>
+<p>PS：使用上面的三种方法获取到的都是同一个Application对象，getApplicationContext()是在Context的实现类ContextImpl中具体实现的，而getApplication()则是在Activity和Service中单独实现的，所以他们的作用域不同，但是获取到的都是同一个Application对象，因为一个Dalvik虚拟机只有一个Application对象。</p>
+<p>但是这里存在着一个坑，那就是在低内存情况下，Application有可能被销毁，从而导致保存在Application里面的数据信息丢失，最后程序错乱，甚至是Crash。</p>
+<p>所以当你想在Application保存数据的时候，请做好为空判断，或者是选择其他方式保存你的数据信息。</p>
+<hr>
+<p>另外，在Application中存在着几个有用的方法，比如onLowMemory()和onTrimMemory()，在这两个方法里面，我们可以实现自己的内存回收逻辑，比如关闭数据库连接、移除图片内存缓存等操作来降低内存消耗，从而降低被系统回收的风险。</p>
+<hr>
+<p>最后，就是要注意Application的生命周期，他和Dalvik虚拟机生命周期一样长，所以在进行单例或者是静态变量的初始化操作时，一定要用Application作为Context进行初始化，否则会造成内存泄露的发生。使用Dialog的时候一般使用Activity作为Context，但是也可以使用Application作为上下文，前提是你必须设置Window类型为TYPE_SYSTEM_DIALOG，并且申请相关权限。这个时候弹出的Dialog是属于整个Application的，弹出这个Dialog的Activity销毁时也不会回收Dialog，只有在Application销毁时，这个Dialog才会自动消失。</p>
+<h1 id="更多参考资料"><a href="#更多参考资料" class="headerlink" title="更多参考资料"></a>更多参考资料</h1><ul>
+<li><a href="http://zmywly8866.github.io/2014/12/26/android-do-not-store-data-in-the-application-object.html" target="_blank" rel="external">不要在Android的Application对象中缓存数据!</a></li>
+<li><a href="http://blog.csdn.net/feiduclear_up/article/details/47356289" target="_blank" rel="external">Android Context 是什么？</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <!-- 百度分享 Start -->
+	  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+	  <!-- 百度分享 End -->
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Application/">Application</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2017-03-29T02:16:43.082Z" itemprop="dateModified">2017-03-29</time>
+</span>
+
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/09/18/App界面设计经验/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">App界面设计经验</div>
+    </a>
+  
+</nav>
+
+  
 </article>
 
-  
-  
-    </div></section>
-  
 
+
+
+<!-- 多说评论框 start -->
+<section id="comments">
+  <div class="ds-thread"  data-thread-key="/2017/01/07/谈谈你对Application类的理解/" data-title="谈谈你对Application类的理解" data-url="https://youth5201314.github.io/2017/01/07/谈谈你对Application类的理解/" id="ds_thread">
+    <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
+  </div>
+</section>
+<!-- 多说评论框 end -->
 
 </section>
         
           
+  <div id="toc" class="toc-aside">
+  <h2 class="toc-title">文章目录</h2>
+    
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#对Application理解"><span class="toc-number">1.</span> <span class="toc-text">对Application理解</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#更多参考资料"><span class="toc-number">2.</span> <span class="toc-text">更多参考资料</span></a></li></ol>
+    
+  </div>
+
 <aside id="sidebar">
 
   
@@ -295,6 +370,10 @@
 
 
 
+<!-- 百度分享 start -->
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","douban","bdysc","sqq","qq","hi","baidu","huaban","youdao","sdo","mail","xg","diandian","fx","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!-- 百度分享 end -->
+
 
 <script src="/js/jquery.min.js"></script>
 
@@ -311,6 +390,11 @@
 	<script src="/js/gotop.js"></script>
 	-->
 
+
+	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
+	<!--
+	<script src="/js/toc_aside_toggle.js"></script>
+	-->
 
 </div>
 <script src="/js/toc_aside_toggle.js"></script>
