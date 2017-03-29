@@ -76,6 +76,202 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-ViewPager切换动画PageTransformer使用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/24/ViewPager切换动画PageTransformer使用/" class="article-date">
+  <time datetime="2016-08-24T09:01:45.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/24/ViewPager切换动画PageTransformer使用/">ViewPager切换动画PageTransformer使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>通过实现ViewPager.PageTransformer来做出完全不同的切换动画效果。<br>关键是要理解transformPage(View view, float position)的参数。<br>view理所当然就是滑动中的那个view，<br>position这里是float类型，不是平时理解的int位置，而是当前滑动状态的一个表示，比如当滑动到正全屏时，position是0，而向左滑动，使得右边刚好有一部被进入屏幕时，position是1，如果前一页和下一页基本各在屏幕占一半时，前一页的position是-0.5，后一页的posiotn是0.5，所以根据position的值我们就可以自行设置需要的alpha，x/y信息。</p>
+<p>Google给我们展示了两个动画例子：DepthPageTransformer和ZoomOutPageTransformer<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/24/ViewPager切换动画PageTransformer使用/#more">阅读更多</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/24/ViewPager切换动画PageTransformer使用/" data-id="cj0ucvk9c000u6k59s1nzc2vw" data_title="ViewPager切换动画PageTransformer使用" data_summary="通过实现ViewPager.PageTransform..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/24/ViewPager切换动画PageTransformer使用/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/24/ViewPager切换动画PageTransformer使用/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PageTransformer/">PageTransformer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ViewPager/">ViewPager</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-09-18T07:51:19.329Z" itemprop="dateModified">2016-09-18</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" class="article-date">
+  <time datetime="2016-08-24T08:03:46.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android-Studio/">Android Studio</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/">Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices.</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>升级完Android Studio 2.1.3 后编译时出现Error:No service of type Factory available in ProjectScopeServices.<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/#more">阅读更多</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/" data-id="cj0ucvk7t00006k59j8o2eyww" data_title="Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices." data_summary="升级完Android Studio 2.1.3 后编译..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/24/Android Studio出现ErrorNo service of type Factory available in ProjectScopeServices/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/异常/">异常</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-09-18T07:53:19.822Z" itemprop="dateModified">2016-09-18</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-Android SDK Manager 更新代理配置" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/24/Android SDK Manager 更新代理配置/" class="article-date">
+  <time datetime="2016-08-24T03:34:10.000Z" itemprop="datePublished">2016-08-24</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android-Studio/">Android Studio</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/24/Android SDK Manager 更新代理配置/">Android SDK Manager 更新代理配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于 Android SDK Manager 的无法更新的设置<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/24/Android SDK Manager 更新代理配置/#more">阅读更多</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/" data-id="cj0ucvk8s000d6k59fa50ilrk" data_title="Android SDK Manager 更新代理配置" data_summary="关于 Android SDK Manager 的无法更..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/24/Android SDK Manager 更新代理配置/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/24/Android SDK Manager 更新代理配置/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android-Studio/">Android Studio</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-09-18T07:53:51.148Z" itemprop="dateModified">2016-09-18</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-Android代码混淆详解" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -210,71 +406,6 @@
 
 
   
-    <article id="post-Android文件和base64互转" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/18/Android文件和base64互转/" class="article-date">
-  <time datetime="2016-08-18T07:42:13.000Z" itemprop="datePublished">2016-08-18</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/18/Android文件和base64互转/">Android文件和base64互转</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在项目中需要用到文件传输入，有时需要将文件转成base64字串，再将base64字串转成字节流保存在文件了。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/18/Android文件和base64互转/#more">阅读更多</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/" data-id="cj0ucvk8y000h6k59vk4lrrat" data_title="Android文件和base64互转" data_summary="在项目中需要用到文件传输入，有时需要将文件转成base..." class="article-share-link">Share</a>
-      
-
-      
-        <a href="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/18/Android文件和base64互转/">暂无评论</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Base64/">Base64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/File/">File</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件/">文件</a></li></ul>
-
-	  
-<span>
-更新日期:<time datetime="2016-09-18T07:53:33.071Z" itemprop="dateModified">2016-09-18</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
     <article id="post-Android Webview和js交互" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -327,6 +458,71 @@
 	  
 <span>
 更新日期:<time datetime="2016-09-18T07:53:25.705Z" itemprop="dateModified">2016-09-18</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
+    <article id="post-Android文件和base64互转" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2016/08/18/Android文件和base64互转/" class="article-date">
+  <time datetime="2016-08-18T07:42:13.000Z" itemprop="datePublished">2016-08-18</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/18/Android文件和base64互转/">Android文件和base64互转</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在项目中需要用到文件传输入，有时需要将文件转成base64字串，再将base64字串转成字节流保存在文件了。<br>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/18/Android文件和base64互转/#more">阅读更多</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/" data-id="cj0ucvk8y000h6k59vk4lrrat" data_title="Android文件和base64互转" data_summary="在项目中需要用到文件传输入，有时需要将文件转成base..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2016/08/18/Android文件和base64互转/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/18/Android文件和base64互转/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Base64/">Base64</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/File/">File</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件/">文件</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2016-09-18T07:53:33.071Z" itemprop="dateModified">2016-09-18</time>
 </span>
 
 
@@ -570,7 +766,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -580,7 +776,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Activity/">Activity</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Application/">Application</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageTransformer/">PageTransformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewPager/">ViewPager</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Activity/">Activity</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Application/">Application</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bundle/">Bundle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageTransformer/">PageTransformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewPager/">ViewPager</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View触摸事件/">View触摸事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -590,7 +786,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Activity/" style="font-size: 16.5px; color: #4dbc6f">Activity</a> <a href="/tags/Android/" style="font-size: 13px; color: #7dc3de">Android</a> <a href="/tags/Android-Studio/" style="font-size: 20px; color: #1db400">Android Studio</a> <a href="/tags/Application/" style="font-size: 13px; color: #7dc3de">Application</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 16.5px; color: #4dbc6f">Glide</a> <a href="/tags/Gradle/" style="font-size: 13px; color: #7dc3de">Gradle</a> <a href="/tags/Handler/" style="font-size: 13px; color: #7dc3de">Handler</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/PageTransformer/" style="font-size: 13px; color: #7dc3de">PageTransformer</a> <a href="/tags/ViewPager/" style="font-size: 20px; color: #1db400">ViewPager</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/动画/" style="font-size: 13px; color: #7dc3de">动画</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/设计/" style="font-size: 13px; color: #7dc3de">设计</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
+      <a href="/tags/Activity/" style="font-size: 20px; color: #1db400">Activity</a> <a href="/tags/Android/" style="font-size: 13px; color: #7dc3de">Android</a> <a href="/tags/Android-Studio/" style="font-size: 20px; color: #1db400">Android Studio</a> <a href="/tags/Application/" style="font-size: 13px; color: #7dc3de">Application</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/Bundle/" style="font-size: 13px; color: #7dc3de">Bundle</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 16.5px; color: #4dbc6f">Glide</a> <a href="/tags/Gradle/" style="font-size: 13px; color: #7dc3de">Gradle</a> <a href="/tags/Handler/" style="font-size: 13px; color: #7dc3de">Handler</a> <a href="/tags/HashMap/" style="font-size: 13px; color: #7dc3de">HashMap</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/PageTransformer/" style="font-size: 13px; color: #7dc3de">PageTransformer</a> <a href="/tags/ViewPager/" style="font-size: 20px; color: #1db400">ViewPager</a> <a href="/tags/View触摸事件/" style="font-size: 13px; color: #7dc3de">View触摸事件</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/动画/" style="font-size: 13px; color: #7dc3de">动画</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/设计/" style="font-size: 13px; color: #7dc3de">设计</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
     </div>
   </div>
 
@@ -600,7 +796,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -620,23 +816,23 @@
       <ul>
         
           <li>
+            <a href="/2017/03/29/Android中View的触摸事件涉及到哪些方法？他们之间有什么关系？/">Android中View的触摸事件涉及到哪些方法？他们之间有什么关系？</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/25/Android为什么要设计出Bundle而不是直接使用HashMap来进行数据传递？/">Android为什么要设计出Bundle而不是直接使用HashMap来进行数据传递？</a>
+          </li>
+        
+          <li>
             <a href="/2017/01/07/谈谈你对Application类的理解/">谈谈你对Application类的理解</a>
           </li>
         
           <li>
+            <a href="/2016/10/29/有什么便捷的方式实现activity变暗的效果/">有什么便捷的方式实现activity变暗的效果</a>
+          </li>
+        
+          <li>
             <a href="/2016/09/18/App界面设计经验/">App界面设计经验</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/02/对话框样式的Activity获得窗口外点击事件/">对话框样式的Activity获得窗口外点击事件</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/30/设置ViewPager的切换速度/">设置ViewPager的切换速度</a>
-          </li>
-        
-          <li>
-            <a href="/2016/08/30/Android Studio中有六种依赖/">Android Studio中有六种依赖</a>
           </li>
         
       </ul>
