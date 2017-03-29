@@ -76,6 +76,72 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-让多个Fragment-切换时不重新实例化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    
+<a href="/2017/03/29/让多个Fragment-切换时不重新实例化/" class="article-date">
+  <time datetime="2017-03-29T02:43:19.000Z" itemprop="datePublished">2017-03-29</time>
+</a>
+
+
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Android/">Android</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/29/让多个Fragment-切换时不重新实例化/">让多个Fragment 切换时不重新实例化</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在项目中需要进行Fragment的切换，一直都是用replace()方法来替换Fragment：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">public void switchContent(Fragment fragment) &#123;</div><div class="line">    if(mContent != fragment) &#123;</div><div class="line">        mContent = fragment;</div><div class="line">        mFragmentMan.beginTransaction()</div><div class="line">            .setCustomAnimations(android.R.anim.fade_in, R.anim.slide_out)</div><div class="line">            .replace(R.id.content_frame, fragment) // 替换Fragment，实现切换</div><div class="line">            .commit();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2017/03/29/让多个Fragment-切换时不重新实例化/#more">阅读更多</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+	  
+	  <a data-url="https://youth5201314.github.io/2017/03/29/让多个Fragment-切换时不重新实例化/" data-id="cj0udfurg001cyc59jsazlwkn" data_title="让多个Fragment 切换时不重新实例化" data_summary="在项目中需要进行Fragment的切换，一直都是用re..." class="article-share-link">Share</a>
+      
+
+      
+        <a href="https://youth5201314.github.io/2017/03/29/让多个Fragment-切换时不重新实例化/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2017/03/29/让多个Fragment-切换时不重新实例化/">暂无评论</a>
+      
+	  
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Fragment/">Fragment</a></li></ul>
+
+	  
+<span>
+更新日期:<time datetime="2017-03-29T02:47:51.787Z" itemprop="dateModified">2017-03-29</time>
+</span>
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+
+  
     <article id="post-Android中View的触摸事件涉及到哪些方法？他们之间有什么关系？" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     
@@ -119,7 +185,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2017/03/29/Android中View的触摸事件涉及到哪些方法？他们之间有什么关系？/" data-id="cj0ucxem40000io59r21qu67g" data_title="Android中View的触摸事件涉及到哪些方法？他们之间有什么关系？" data_summary="在Android中的View触摸事件处理主要涉及以下三..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2017/03/29/Android中View的触摸事件涉及到哪些方法？他们之间有什么关系？/" data-id="cj0udfuqf000ayc5919v438fh" data_title="Android中View的触摸事件涉及到哪些方法？他们之间有什么关系？" data_summary="在Android中的View触摸事件处理主要涉及以下三..." class="article-share-link">Share</a>
       
 
       
@@ -187,7 +253,7 @@
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2017/03/25/Android为什么要设计出Bundle而不是直接使用HashMap来进行数据传递？/" data-id="cj0ucxema0001io59i1wen3nk" data_title="Android为什么要设计出Bundle而不是直接使用HashMap来进行数据传递？" data_summary="
+	  <a data-url="https://youth5201314.github.io/2017/03/25/Android为什么要设计出Bundle而不是直接使用HashMap来进行数据传递？/" data-id="cj0udfuqj000cyc590737ku3w" data_title="Android为什么要设计出Bundle而不是直接使用HashMap来进行数据传递？" data_summary="
 Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share</a>
       
 
@@ -279,7 +345,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2017/01/07/谈谈你对Application类的理解/" data-id="cj0ucvk9n00146k59shqs3jmy" data_title="谈谈你对Application类的理解" data_summary="对Application理解首先，Applicatio..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2017/01/07/谈谈你对Application类的理解/" data-id="cj0udfurl001kyc59lr67iope" data_title="谈谈你对Application类的理解" data_summary="对Application理解首先，Applicatio..." class="article-share-link">Share</a>
       
 
       
@@ -348,7 +414,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/10/29/有什么便捷的方式实现activity变暗的效果/" data-id="cj0ucxena000aio59pjbajecg" data_title="有什么便捷的方式实现activity变暗的效果" data_summary="需求说明
+	  <a data-url="https://youth5201314.github.io/2016/10/29/有什么便捷的方式实现activity变暗的效果/" data-id="cj0udfure0019yc59y6o83cvs" data_title="有什么便捷的方式实现activity变暗的效果" data_summary="需求说明
 不要新开启Activity的方式
 也不要使用..." class="article-share-link">Share</a>
       
@@ -415,7 +481,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/09/18/App界面设计经验/" data-id="cj0ucvk8w000g6k59buhkay3t" data_title="App界面设计经验" data_summary="平时做过太多的项目，其实一直多对产品部门的东西很不认可..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/09/18/App界面设计经验/" data-id="cj0udfuqs000nyc5956dw254c" data_title="App界面设计经验" data_summary="平时做过太多的项目，其实一直多对产品部门的东西很不认可..." class="article-share-link">Share</a>
       
 
       
@@ -480,7 +546,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/09/02/对话框样式的Activity获得窗口外点击事件/" data-id="cj0ucvk9k00116k599451726d" data_title="对话框样式的Activity获得窗口外点击事件" data_summary="Dialog除了使用Dialog类来实现之外，还可以使..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/09/02/对话框样式的Activity获得窗口外点击事件/" data-id="cj0udfura0015yc5930feg679" data_title="对话框样式的Activity获得窗口外点击事件" data_summary="Dialog除了使用Dialog类来实现之外，还可以使..." class="article-share-link">Share</a>
       
 
       
@@ -545,7 +611,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/30/Android Studio中有六种依赖/" data-id="cj0ucvk8p000c6k594hel8lk3" data_title="Android Studio中有六种依赖" data_summary="在Android Studio中有六种依赖：Compi..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/30/Android Studio中有六种依赖/" data-id="cj0udfupu0000yc59edxigdx2" data_title="Android Studio中有六种依赖" data_summary="在Android Studio中有六种依赖：Compi..." class="article-share-link">Share</a>
       
 
       
@@ -610,7 +676,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/30/设置ViewPager的切换速度/" data-id="cj0ucvk9p00176k5902sqtmep" data_title="设置ViewPager的切换速度" data_summary="ViewPager的惯性效果（滑到一定距离自动平滑到另..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/30/设置ViewPager的切换速度/" data-id="cj0udfuri001gyc59bd2bxc2q" data_title="设置ViewPager的切换速度" data_summary="ViewPager的惯性效果（滑到一定距离自动平滑到另..." class="article-share-link">Share</a>
       
 
       
@@ -676,7 +742,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
     </div>
     <footer class="article-footer">
 	  
-	  <a data-url="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" data-id="cj0ucvk90000k6k59at8obuj1" data_title="Android Studio导入项目一直卡在Building gradle project info最快速解决方案" data_summary="描述Android Studio导入项目一直卡在Bui..." class="article-share-link">Share</a>
+	  <a data-url="https://youth5201314.github.io/2016/08/26/Android Studio导入项目一直卡在Building gradle project info最快速解决方案/" data-id="cj0udfuq70005yc59cjbdr3va" data_title="Android Studio导入项目一直卡在Building gradle project info最快速解决方案" data_summary="描述Android Studio导入项目一直卡在Bui..." class="article-share-link">Share</a>
       
 
       
@@ -702,76 +768,11 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
 
 
   
-    <article id="post-如何实现android程序一段时间无操作后的功能自定义" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-<a href="/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/" class="article-date">
-  <time datetime="2016-08-25T03:36:36.000Z" itemprop="datePublished">2016-08-25</time>
-</a>
-
-
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/">如何实现android程序一段时间无操作后的功能自定义</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>项目中遇见一个这样的需求，就是当软件在一定时间没有操作时候需要弹出广告页面，当点击广告页面时又进行软件操作，也就是广告要在软件打开并且处于未操作状态才会出来。<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/#more">阅读更多</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <a data-url="https://youth5201314.github.io/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/" data-id="cj0ucvk9g000x6k5923239gd5" data_title="如何实现android程序一段时间无操作后的功能自定义" data_summary="项目中遇见一个这样的需求，就是当软件在一定时间没有操作..." class="article-share-link">Share</a>
-      
-
-      
-        <a href="https://youth5201314.github.io/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/#ds-thread" class="ds-thread-count article-comment-link" data-thread-key="/2016/08/25/如何实现android程序一段时间无操作后的功能自定义/">暂无评论</a>
-      
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Activity/">Activity</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Handler/">Handler</a></li></ul>
-
-	  
-<span>
-更新日期:<time datetime="2016-09-18T07:51:01.477Z" itemprop="dateModified">2016-09-18</time>
-</span>
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-
-  
 
 
   <nav id="page-nav">
     
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -799,7 +800,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Android/">Android</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Android-Studio/">Android Studio</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Gradle/">Gradle</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/开源框架/">开源框架</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/第三方框架使用/">第三方框架使用</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/设计/">设计</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -809,7 +810,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Activity/">Activity</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Application/">Application</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bundle/">Bundle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageTransformer/">PageTransformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewPager/">ViewPager</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View触摸事件/">View触摸事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Activity/">Activity</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android-Studio/">Android Studio</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Application/">Application</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Base64/">Base64</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Bundle/">Bundle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/File/">File</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Fragment/">Fragment</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Glide/">Glide</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gradle/">Gradle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Handler/">Handler</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HashMap/">HashMap</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MPAndroidChart/">MPAndroidChart</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PageTransformer/">PageTransformer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ViewPager/">ViewPager</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/View触摸事件/">View触摸事件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webview/">Webview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/banner/">banner</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代码混淆/">代码混淆</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动画/">动画</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开源框架/">开源框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计/">设计</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/轮播控件/">轮播控件</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -819,7 +820,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Activity/" style="font-size: 20px; color: #1db400">Activity</a> <a href="/tags/Android/" style="font-size: 13px; color: #7dc3de">Android</a> <a href="/tags/Android-Studio/" style="font-size: 20px; color: #1db400">Android Studio</a> <a href="/tags/Application/" style="font-size: 13px; color: #7dc3de">Application</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/Bundle/" style="font-size: 13px; color: #7dc3de">Bundle</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Glide/" style="font-size: 16.5px; color: #4dbc6f">Glide</a> <a href="/tags/Gradle/" style="font-size: 13px; color: #7dc3de">Gradle</a> <a href="/tags/Handler/" style="font-size: 13px; color: #7dc3de">Handler</a> <a href="/tags/HashMap/" style="font-size: 13px; color: #7dc3de">HashMap</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/PageTransformer/" style="font-size: 13px; color: #7dc3de">PageTransformer</a> <a href="/tags/ViewPager/" style="font-size: 20px; color: #1db400">ViewPager</a> <a href="/tags/View触摸事件/" style="font-size: 13px; color: #7dc3de">View触摸事件</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/动画/" style="font-size: 13px; color: #7dc3de">动画</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/设计/" style="font-size: 13px; color: #7dc3de">设计</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
+      <a href="/tags/Activity/" style="font-size: 20px; color: #1db400">Activity</a> <a href="/tags/Android/" style="font-size: 13px; color: #7dc3de">Android</a> <a href="/tags/Android-Studio/" style="font-size: 20px; color: #1db400">Android Studio</a> <a href="/tags/Application/" style="font-size: 13px; color: #7dc3de">Application</a> <a href="/tags/Base64/" style="font-size: 13px; color: #7dc3de">Base64</a> <a href="/tags/Bundle/" style="font-size: 13px; color: #7dc3de">Bundle</a> <a href="/tags/File/" style="font-size: 13px; color: #7dc3de">File</a> <a href="/tags/Fragment/" style="font-size: 13px; color: #7dc3de">Fragment</a> <a href="/tags/Glide/" style="font-size: 16.5px; color: #4dbc6f">Glide</a> <a href="/tags/Gradle/" style="font-size: 13px; color: #7dc3de">Gradle</a> <a href="/tags/Handler/" style="font-size: 13px; color: #7dc3de">Handler</a> <a href="/tags/HashMap/" style="font-size: 13px; color: #7dc3de">HashMap</a> <a href="/tags/MPAndroidChart/" style="font-size: 13px; color: #7dc3de">MPAndroidChart</a> <a href="/tags/PageTransformer/" style="font-size: 13px; color: #7dc3de">PageTransformer</a> <a href="/tags/ViewPager/" style="font-size: 20px; color: #1db400">ViewPager</a> <a href="/tags/View触摸事件/" style="font-size: 13px; color: #7dc3de">View触摸事件</a> <a href="/tags/Webview/" style="font-size: 13px; color: #7dc3de">Webview</a> <a href="/tags/banner/" style="font-size: 13px; color: #7dc3de">banner</a> <a href="/tags/js/" style="font-size: 13px; color: #7dc3de">js</a> <a href="/tags/代码混淆/" style="font-size: 13px; color: #7dc3de">代码混淆</a> <a href="/tags/动画/" style="font-size: 13px; color: #7dc3de">动画</a> <a href="/tags/开源框架/" style="font-size: 13px; color: #7dc3de">开源框架</a> <a href="/tags/异常/" style="font-size: 13px; color: #7dc3de">异常</a> <a href="/tags/文件/" style="font-size: 13px; color: #7dc3de">文件</a> <a href="/tags/设计/" style="font-size: 13px; color: #7dc3de">设计</a> <a href="/tags/轮播控件/" style="font-size: 13px; color: #7dc3de">轮播控件</a>
     </div>
   </div>
 
@@ -829,7 +830,7 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">十月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">九月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">12</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -849,6 +850,10 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
       <ul>
         
           <li>
+            <a href="/2017/03/29/让多个Fragment-切换时不重新实例化/">让多个Fragment 切换时不重新实例化</a>
+          </li>
+        
+          <li>
             <a href="/2017/03/29/Android中View的触摸事件涉及到哪些方法？他们之间有什么关系？/">Android中View的触摸事件涉及到哪些方法？他们之间有什么关系？</a>
           </li>
         
@@ -862,10 +867,6 @@ Bundle内部是由ArrayMap实现的，Arra..." class="article-share-link">Share<
         
           <li>
             <a href="/2016/10/29/有什么便捷的方式实现activity变暗的效果/">有什么便捷的方式实现activity变暗的效果</a>
-          </li>
-        
-          <li>
-            <a href="/2016/09/18/App界面设计经验/">App界面设计经验</a>
           </li>
         
       </ul>

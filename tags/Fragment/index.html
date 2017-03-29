@@ -3,17 +3,16 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Android Webview和js交互 | Spring&#39;s Blog</title>
+  <title>Tag: Fragment | Spring&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="王兴春">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Android Webview和js交互">
-<meta property="og:url" content="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/index.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Spring's Blog">
+<meta property="og:url" content="https://youth5201314.github.io/tags/Fragment/index.html">
 <meta property="og:site_name" content="Spring's Blog">
 <meta property="og:description" content="王兴春">
-<meta property="og:updated_time" content="2016-09-18T07:53:25.705Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Android Webview和js交互">
+<meta name="twitter:title" content="Spring's Blog">
 <meta name="twitter:description" content="王兴春">
   
     <link rel="alternate" href="http://weibo.com/youth0819/home" title="Spring&#39;s Blog" type="application/atom+xml">
@@ -75,120 +74,48 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Android Webview和js交互" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
+        <section id="main">
+  
+  
     
-<a href="/2016/08/18/Android Webview和js交互/" class="article-date">
-  <time datetime="2016-08-18T07:42:13.000Z" itemprop="datePublished">2016-08-18</time>
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      
+<a href="/2017/03/29/让多个Fragment-切换时不重新实例化/" class="archive-article-date">
+  <time datetime="2017-03-29T02:43:19.000Z" itemprop="datePublished">3月 29</time>
 </a>
 
 
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Android/">Android</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+      
   
-    <h1 class="article-title" itemprop="name">
-      Android Webview和js交互
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/03/29/让多个Fragment-切换时不重新实例化/">让多个Fragment 切换时不重新实例化</a>
     </h1>
   
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-		
-		<div id="toc" class="toc-article">
-			<h2 class="toc-title"><span>文章目录</span></h2>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#js代码调用Android中的方法"><span class="toc-number">1.</span> <span class="toc-text">js代码调用Android中的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android代码调用js方法"><span class="toc-number">2.</span> <span class="toc-text">Android代码调用js方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA和JS交互注意事项"><span class="toc-number">3.</span> <span class="toc-text">JAVA和JS交互注意事项</span></a></li></ol>
-		
-		</div>
-		
-        <p>有时我们有这样的需求：需要从app的网页中点击调用软件内部的页面，又或者是软件内部调用网页的js方法。<br><a id="more"></a></p>
-<h3 id="js代码调用Android中的方法"><a href="#js代码调用Android中的方法" class="headerlink" title="js代码调用Android中的方法"></a>js代码调用Android中的方法</h3><p>addJavascriptInterface方法有两个参数：<br>第一个参数就是我们一般会实现一个自己的类，类里面提供我们要提供给javascript访问的方法；<br>第二个参数是访问我们在obj中声明的方法时候所用到的js对象；<br>调用模式为window.interfaceName.方法名()或者是javascript: interfaceName.方法名() 。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//启用webview对javascript支持</span></div><div class="line">webview.getSettings().setJavaScriptEnabled(<span class="keyword">true</span>);</div><div class="line">webview.addJavascriptInterface(<span class="keyword">new</span> WebAppInterface(<span class="keyword">this</span>), <span class="string">"android"</span>);</div><div class="line"></div><div class="line"><span class="comment">//接口名称自定义</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebAppInterface</span> </span>&#123;</div><div class="line">	Context mContext;</div><div class="line"></div><div class="line">	WebAppInterface(Context c) &#123;</div><div class="line">	    mContext = c;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//参数名这个自己定义，和网页js传参对应即可</span></div><div class="line">	<span class="meta">@JavascriptInterface</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">show</span><span class="params">(String url)</span> </span>&#123;</div><div class="line">	   <span class="comment">//这里就进行软件内部处理了，</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在网页中进行js调用<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">onClick</span>=<span class="string">"window.android.show('传参')"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="Android代码调用js方法"><a href="#Android代码调用js方法" class="headerlink" title="Android代码调用js方法"></a>Android代码调用js方法</h3><p>很简单通过WebView的loadUrl方法去调用的就行、只是改变下参数url的写法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 无参数调用</span></div><div class="line">webView.loadUrl(<span class="string">"javascript:androidtojs()"</span>);</div><div class="line"><span class="comment">// 传递参数调用</span></div><div class="line">webView.loadUrl(<span class="string">"javascript:androidtojsargs("</span>传参<span class="string">")"</span>);</div></pre></td></tr></table></figure></p>
-<p>在网页中创建js方法<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></div><div class="line">function androidtojs()&#123;</div><div class="line">	 //自己实现处理</div><div class="line">&#125;</div><div class="line"></div><div class="line">function androidtojsargs(arg)&#123;</div><div class="line">	//自己实现处理</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<h3 id="JAVA和JS交互注意事项"><a href="#JAVA和JS交互注意事项" class="headerlink" title="JAVA和JS交互注意事项"></a>JAVA和JS交互注意事项</h3><p>1、尽量用js调用Android方法：</p>
-<ul>
-<li>Android调用js里面的函数的效率远远低于js调用Android</li>
-<li>Android调用js的函数，没有返回值，调用了就控制不到了</li>
-</ul>
-<p>2、Js调用Android的方法，返回值如果是native字符串，必须使用toLocaleString()转成locale的才能正常使用，但是有的耗时<br>3、网页中尽量使用原生的js写业务脚本、以提升加载速度</p>
-
-      
-    </div>
-    <footer class="article-footer">
-	  
-	  <!-- 百度分享 Start -->
-	  <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
-	  <!-- 百度分享 End -->
-	  
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webview/">Webview</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/js/">js</a></li></ul>
-
-	  
-<span>
-更新日期:<time datetime="2016-09-18T07:53:25.705Z" itemprop="dateModified">2016-09-18</time>
-</span>
-
-
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2016/08/18/Android文件和base64互转/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Android文件和base64互转
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/08/09/Glide加载自定义图形形状/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Glide加载自定义图形形状</div>
-    </a>
-  
-</nav>
-
-  
 </article>
 
+  
+  
+    </div></section>
+  
 
-
-
-<!-- 多说评论框 start -->
-<section id="comments">
-  <div class="ds-thread"  data-thread-key="/2016/08/18/Android Webview和js交互/" data-title="Android Webview和js交互" data-url="https://youth5201314.github.io/2016/08/18/Android Webview和js交互/" id="ds_thread">
-    <noscript>Please enable JavaScript to view the <a href="//duoshuo.com/?ref_noscript">comments powered by duoshuo.</a></noscript>
-  </div>
-</section>
-<!-- 多说评论框 end -->
 
 </section>
         
           
-  <div id="toc" class="toc-aside">
-  <h2 class="toc-title">文章目录</h2>
-    
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#js代码调用Android中的方法"><span class="toc-number">1.</span> <span class="toc-text">js代码调用Android中的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Android代码调用js方法"><span class="toc-number">2.</span> <span class="toc-text">Android代码调用js方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JAVA和JS交互注意事项"><span class="toc-number">3.</span> <span class="toc-text">JAVA和JS交互注意事项</span></a></li></ol>
-    
-  </div>
-
 <aside id="sidebar">
 
   
@@ -368,10 +295,6 @@
 
 
 
-<!-- 百度分享 start -->
-<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":["mshare","douban","bdysc","sqq","qq","hi","baidu","huaban","youdao","sdo","mail","xg","diandian","fx","copy","print"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-<!-- 百度分享 end -->
-
 
 <script src="/js/jquery.min.js"></script>
 
@@ -388,11 +311,6 @@
 	<script src="/js/gotop.js"></script>
 	-->
 
-
-	<a class="icon-toc-toggle" href="javascript:void(0)" title="文章目录"></a>
-	<!--
-	<script src="/js/toc_aside_toggle.js"></script>
-	-->
 
 </div>
 <script src="/js/toc_aside_toggle.js"></script>
